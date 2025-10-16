@@ -37,6 +37,13 @@ const transitionVariants = {
     },
 }
 
+/**
+ * Render the marketing hero section containing the header, animated headline and subtext, CTAs, device mockup, and customer logos.
+ *
+ * The component is purely presentational and includes layered background visuals, staggered entrance animations, light/dark hero images, and a responsive logos grid.
+ *
+ * @returns A JSX.Element representing the complete hero section markup
+ */
 export default function HeroSection() {
     return (
         <>

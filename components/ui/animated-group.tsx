@@ -100,6 +100,17 @@ const addDefaultVariants = (variants: Variants) => ({
   visible: { ...defaultItemVariants.visible, ...variants.visible },
 });
 
+/**
+ * Renders a motion-enabled container that staggers and animates its children using configurable presets and variant overrides.
+ *
+ * @param children - Child nodes to be wrapped and animated
+ * @param className - Optional CSS class applied to the outer container
+ * @param variants - Optional overrides for `container` and `item` motion variants
+ * @param preset - Optional predefined animation preset applied to each item
+ * @param as - HTML tag or component type to render for the outer container (defaults to `'div'`)
+ * @param asChild - HTML tag or component type to render for each wrapped child (defaults to `'div'`)
+ * @returns A JSX element containing the motion-enabled container with its animated children
+ */
 function AnimatedGroup({
   children,
   className,
