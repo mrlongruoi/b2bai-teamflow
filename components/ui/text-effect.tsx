@@ -206,6 +206,27 @@ const createVariantsWithTransition = (
   };
 };
 
+/**
+ * Animates text by splitting it into segments (characters, words, or lines) and applying motion variants to each segment.
+ *
+ * @param children - The text content to animate.
+ * @param per - Segmentation strategy: 'char', 'word', or 'line'.
+ * @param as - HTML tag used as the wrapper (e.g., 'p', 'div', 'span').
+ * @param variants - Optional custom container and item variant overrides.
+ * @param className - CSS class applied to the outer wrapper.
+ * @param preset - Built-in animation preset to use when `variants` are not provided.
+ * @param delay - Delay before the container animation starts (in seconds).
+ * @param speedReveal - Multiplier that speeds up or slows down stagger timing.
+ * @param speedSegment - Multiplier that adjusts the base duration of segment animations.
+ * @param trigger - Whether the animation should be rendered/played.
+ * @param onAnimationComplete - Callback invoked when the animation completes.
+ * @param onAnimationStart - Callback invoked when the animation starts.
+ * @param segmentWrapperClassName - Optional class applied to each segment wrapper.
+ * @param containerTransition - Additional transition properties merged into the container variant.
+ * @param segmentTransition - Additional transition properties merged into each segment (item) variant.
+ * @param style - Inline styles applied to the outer wrapper.
+ * @returns The motion-enabled React element that renders the animated text.
+ */
 export function TextEffect({
   children,
   per = 'word',
