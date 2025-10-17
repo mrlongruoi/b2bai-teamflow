@@ -1,11 +1,13 @@
 'use client'
 import Link from 'next/link'
 import { Menu, X } from 'lucide-react'
-import { Button } from '@/components/ui/button'
+import { buttonVariants } from '@/components/ui/button'
 import React from 'react'
 import { cn } from '@/lib/utils'
 import Logo from '@/public/logo.png'
 import Image from 'next/image'
+import { RegisterLink, LoginLink, LogoutLink } from "@kinde-oss/kinde-auth-nextjs/components";
+import { useKindeBrowserClient } from '@kinde-oss/kinde-auth-nextjs'
 
 const menuItems = [
     { name: 'Tính Năng', href: '#link' },
@@ -17,6 +19,8 @@ const menuItems = [
 export const HeroHeader = () => {
     const [menuState, setMenuState] = React.useState(false)
     const [isScrolled, setIsScrolled] = React.useState(false)
+    const { getUser, isLoading } = useKindeBrowserClient();
+    const user = getUser();
 
     React.useEffect(() => {
         const handleScroll = () => {
@@ -37,14 +41,14 @@ export const HeroHeader = () => {
                                 href="/"
                                 aria-label="home"
                                 className="flex items-center space-x-2">
-                                <Image 
+                                <Image
                                     src={Logo}
-                                    alt="Logo" 
-                                    width={32} 
-                                    height={32}                                
+                                    alt="Logo"
+                                    width={32}
+                                    height={32}
                                 />
                                 <h1 className="text-2xl font-bold">
-                                    Luồng <span className='text-primary'>Quy Trình</span>
+                                    Process <span className='text-primary'>Flow</span>
                                 </h1>
                             </Link>
 
@@ -85,33 +89,62 @@ export const HeroHeader = () => {
                                     ))}
                                 </ul>
                             </div>
-                            <div className="flex w-full flex-col space-y-3 sm:flex-row sm:gap-3 sm:space-y-0 md:w-fit">
-                                <Button
-                                    asChild
-                                    variant="outline"
-                                    size="sm"
-                                    className={cn(isScrolled && 'lg:hidden')}>
-                                    <Link href="#">
-                                        <span>Đăng nhập</span>
-                                    </Link>
-                                </Button>
-                                <Button
-                                    asChild
-                                    size="sm"
-                                    className={cn(isScrolled && 'lg:hidden')}>
-                                    <Link href="#">
-                                        <span>Đăng ký</span>
-                                    </Link>
-                                </Button>
-                                <Button
-                                    asChild
-                                    size="sm"
-                                    className={cn(isScrolled ? 'lg:inline-flex' : 'hidden')}>
-                                    <Link href="#">
-                                        <span>Bắt Đầu</span>
-                                    </Link>
-                                </Button>
-                            </div>
+
+                            {isLoading ? null : (
+                                <div className="flex w-full flex-col space-y-3 sm:flex-row sm:gap-3 sm:space-y-0 md:w-fit">
+                                    {user ? (
+                                        <>
+                                            <Link
+                                                className={buttonVariants({
+                                                    size: "sm",
+                                                })}
+                                                href="/workspace">
+                                                <span>Trang Chủ</span>
+                                            </Link>
+
+                                            <LogoutLink
+                                                className={buttonVariants({
+                                                    size: "sm",
+                                                    variant: "outline",
+                                                })}
+                                            >
+                                                <span>Đăng Xuất</span>
+                                            </LogoutLink>
+                                        </>
+                                    ) : (
+                                        <>
+                                            <LoginLink
+                                                className={buttonVariants({
+                                                    variant: 'outline',
+                                                    size: 'sm',
+                                                    className: cn(isScrolled && 'lg:hidden'),
+                                                })}
+                                            >
+                                                Đăng Nhập
+                                            </LoginLink>
+
+                                            <RegisterLink
+                                                className={buttonVariants({
+                                                    size: 'sm',
+                                                    className: cn(isScrolled && 'lg:hidden'),
+                                                })}
+                                            >
+                                                Đăng Ký
+                                            </RegisterLink>
+
+                                            <div className={cn(isScrolled ? 'lg:inline-flex' : 'hidden')}>
+                                                <RegisterLink
+                                                    className={buttonVariants({
+                                                        size: 'sm',
+                                                    })}
+                                                >
+                                                    Bắt Đầu Ngay Bây Giờ
+                                                </RegisterLink>
+                                            </div>
+                                        </>
+                                    )}
+                                </div>
+                            )}
                         </div>
                     </div>
                 </div>
@@ -119,3 +152,5 @@ export const HeroHeader = () => {
         </header>
     )
 }
+
+
