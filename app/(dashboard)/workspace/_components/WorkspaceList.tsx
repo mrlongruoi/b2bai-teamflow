@@ -41,6 +41,13 @@ const getWorkspaceColor = (id: string) => {
     return colorCombinations[colorIndex];
 };
 
+/**
+ * Render a vertical list of workspace avatar buttons with tooltips.
+ *
+ * Each workspace is displayed as a colored circular icon button showing its avatar; hovering or focusing a button reveals a tooltip with the workspace name.
+ *
+ * @returns A React element containing a vertically stacked list of workspace avatar buttons, each wrapped in a tooltip that displays the workspace name.
+ */
 export function WorkspaceList() {
     return (
         <TooltipProvider>

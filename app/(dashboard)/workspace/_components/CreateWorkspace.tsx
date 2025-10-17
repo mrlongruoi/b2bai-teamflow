@@ -11,6 +11,15 @@ import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, Di
 import { Input } from "@/components/ui/input";
 import { workspaceSchema } from "@/app/schemas/workspace";
 
+/**
+ * Renders a dialog-based UI for creating a workspace.
+ *
+ * The component provides a tooltip-wrapped trigger button that opens a modal containing a form
+ * with a single `name` field validated by `workspaceSchema`. Submitting the form invokes the
+ * component's `onSubmit` handler (currently logs `"data"` to the console).
+ *
+ * @returns The React element for the CreateWorkspace component.
+ */
 export function CreateWorkspace() {
     const [open, setOpen] = useState(false);
 

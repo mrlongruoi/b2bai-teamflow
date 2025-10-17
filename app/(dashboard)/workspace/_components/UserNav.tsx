@@ -9,6 +9,15 @@ const user = {
     given_name: 'mrlongruoi',
 }
 
+/**
+ * Render a user profile dropdown menu anchored to an avatar button.
+ *
+ * The menu shows a larger avatar with the user's name and a static email, provides links to
+ * account and payment pages, and exposes a logout action. Avatar fallbacks display the first
+ * two uppercase letters of the user's given name when an image is unavailable.
+ *
+ * @returns A React element containing the avatar-triggered dropdown menu with profile, navigation, and logout items.
+ */
 export function UserNav() {
     return (
         <DropdownMenu>
