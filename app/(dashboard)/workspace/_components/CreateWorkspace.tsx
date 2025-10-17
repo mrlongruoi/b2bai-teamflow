@@ -1,6 +1,7 @@
 "use client";
 
 import { useForm } from "react-hook-form";
+import { toast } from "sonner";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
 import { Plus } from "lucide-react";
@@ -9,10 +10,14 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
-import { workspaceSchema } from "@/app/schemas/workspace";
+import { workspaceSchema, WorkspaceSchemaType } from "@/app/schemas/workspace";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { orpc } from "@/lib/orpc";
 
 export function CreateWorkspace() {
     const [open, setOpen] = useState(false);
+
+    const queryClient = useQueryClient();
 
     const form = useForm({
         resolver: zodResolver(workspaceSchema),
@@ -21,8 +26,26 @@ export function CreateWorkspace() {
         },
     })
 
-    function onSubmit() {
-        console.log("data")
+    const createWorkspaceMutation = useMutation(
+        orpc.workspace.create.mutationOptions({
+            onSuccess: (newWorkspace) => {
+                toast.success(`Không gian làm việc ${newWorkspace.workspaceName} đã tạo thành công!`)
+
+                queryClient.invalidateQueries({
+                    queryKey: orpc.workspace.list.queryKey(),
+                });
+
+                form.reset();
+                setOpen(false);
+            },
+            onError: () => {
+                toast.error("Không tạo được không gian làm việc. Vui lòng thử lại!")
+            }
+        })
+    )
+
+    function onSubmit(values: WorkspaceSchemaType) {
+        createWorkspaceMutation.mutate(values)
     }
 
     return (
@@ -48,7 +71,7 @@ export function CreateWorkspace() {
                 <DialogHeader>
                     <DialogTitle>Tạo không gian làm việc</DialogTitle>
                     <DialogDescription>
-                        Tạo không gian làm việc mới để bắt đầu
+                        Không gian làm việc mới để bắt đầu
                     </DialogDescription>
                 </DialogHeader>
 
@@ -56,7 +79,7 @@ export function CreateWorkspace() {
                     <form
                         className="space-y-6"
                         onSubmit={form.handleSubmit(onSubmit)}
-                    >                        
+                    >
                         <FormField
                             control={form.control}
                             name="name"
@@ -74,8 +97,8 @@ export function CreateWorkspace() {
                             )}
                         />
 
-                        <Button type="submit">
-                            Tạo không gian làm việc
+                        <Button disabled={createWorkspaceMutation.isPending} type="submit">
+                            {createWorkspaceMutation.isPending ? "Đang tạo..." : "Tạo không gian"}
                         </Button>
                     </form>
                 </Form>
