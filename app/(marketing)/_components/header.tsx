@@ -48,7 +48,7 @@ export const HeroHeader = () => {
                                     height={32}
                                 />
                                 <h1 className="text-2xl font-bold">
-                                    Process <span className='text-primary'>Flow</span>
+                                    Process<span className='text-primary'>Flow</span>
                                 </h1>
                             </Link>
 
