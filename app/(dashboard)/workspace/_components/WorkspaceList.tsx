@@ -28,6 +28,13 @@ const getWorkspaceColor = (id: string) => {
     return colorCombinations[colorIndex];
 };
 
+/**
+ * Render a vertical list of workspace icon buttons with login links and tooltips.
+ *
+ * Fetches workspaces and the current workspace via the suspense query and displays each workspace as a colored icon button that navigates using `LoginLink`; the current workspace is visually highlighted and annotated in its tooltip.
+ *
+ * @returns A React element containing a stacked list of tooltip-wrapped workspace icon buttons where the active workspace is highlighted and labeled "(Hoạt động)" in its tooltip.
+ */
 export function WorkspaceList() {
     const { data: { workspaces, currentWorkspace } } = useSuspenseQuery(orpc.workspace.list.queryOptions());
 
