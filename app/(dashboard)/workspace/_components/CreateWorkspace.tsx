@@ -13,6 +13,7 @@ import { Input } from "@/components/ui/input";
 import { workspaceSchema, WorkspaceSchemaType } from "@/app/schemas/workspace";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { orpc } from "@/lib/orpc";
+import { isDefinedError } from "@orpc/client";
 
 export function CreateWorkspace() {
     const [open, setOpen] = useState(false);
@@ -38,7 +39,15 @@ export function CreateWorkspace() {
                 form.reset();
                 setOpen(false);
             },
-            onError: () => {
+            onError: (error) => {
+                if (isDefinedError(error)) {
+                    if (error.code === "RATE_LIMITED") {
+                        toast.message(error.message);
+                        return;
+                    }
+                    toast.error(error.message);
+                    return;
+                }
                 toast.error("Không tạo được không gian làm việc. Vui lòng thử lại!")
             }
         })
