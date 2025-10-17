@@ -6,6 +6,10 @@ import { requiredAuthMiddleware } from "../middlewares/auth";
 import { requiredWorkspaceMiddleware } from "../middlewares/workspace";
 import { workspaceSchema } from "../schemas/workspace";
 import { init, Organizations } from "@kinde/management-api-js";
+import { standardSecurityMiddleware } from "../middlewares/arcjet/standard";
+import { heavyWriteSecurityMiddleware } from "../middlewares/arcjet/heavy-write";
+import { writeSecurityMiddleware } from "../middlewares/arcjet/write";
+import { readSecurityMiddleware } from "../middlewares/arcjet/read";
 
 export const listWorkspaces = base
   .use(requiredAuthMiddleware)
@@ -53,6 +57,10 @@ export const listWorkspaces = base
 export const createWorkspaces = base
   .use(requiredAuthMiddleware)
   .use(requiredWorkspaceMiddleware)
+  .use(standardSecurityMiddleware)
+  .use(heavyWriteSecurityMiddleware)
+  .use(writeSecurityMiddleware)
+  .use(readSecurityMiddleware)
   .route({
     method: "POST",
     path: "/workspace",
@@ -103,7 +111,7 @@ export const createWorkspaces = base
       throw errors.FORBIDDEN();
     }
 
-    const {refreshTokens} = getKindeServerSession();
+    const { refreshTokens } = getKindeServerSession();
 
     await refreshTokens();
 
