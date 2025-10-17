@@ -9,6 +9,14 @@ import { useSuspenseQuery } from "@tanstack/react-query";
 import { orpc } from "@/lib/orpc";
 import { getAvatar } from "@/lib/get-avatar";
 
+/**
+ * Renders a user navigation dropdown showing the current user's avatar, name, and account-related links.
+ *
+ * The component displays a button with the user's avatar (or initials) that opens a menu containing the user's name,
+ * a static email/label, links for account and billing, and a logout action.
+ *
+ * @returns The dropdown menu element containing the user avatar trigger and menu items for account, billing, and logout.
+ */
 export function UserNav() {
     const {data: {user}} = useSuspenseQuery(orpc.workspace.list.queryOptions());
 

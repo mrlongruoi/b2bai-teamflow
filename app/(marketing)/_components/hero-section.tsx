@@ -37,6 +37,11 @@ const transitionVariants = {
     },
 }
 
+/**
+ * Render the landing page hero section with header, animated background, headline, CTAs, hero imagery, and partner logos.
+ *
+ * @returns A JSX element containing the complete hero area: decorative backgrounds, introductory badge, main headline and supporting paragraph, primary and secondary call-to-action buttons, framed hero screenshots (light/dark variants), and a partner logo grid.
+ */
 export default function HeroSection() {
     return (
         <>

@@ -14,6 +14,13 @@ import { workspaceSchema, WorkspaceSchemaType } from "@/app/schemas/workspace";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { orpc } from "@/lib/orpc";
 
+/**
+ * Renders a dialog containing a form to create a new workspace.
+ *
+ * The component manages form state and a create-workspace mutation; on successful creation it shows a success toast, invalidates the workspace list query, resets the form, and closes the dialog. On failure it shows an error toast. The submit button reflects the mutation's pending state to prevent duplicate submissions.
+ *
+ * @returns The dialog UI for creating a workspace.
+ */
 export function CreateWorkspace() {
     const [open, setOpen] = useState(false);
 

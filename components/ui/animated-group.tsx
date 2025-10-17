@@ -99,6 +99,17 @@ const addDefaultVariants = (variants: Variants) => ({
   visible: { ...defaultItemVariants.visible, ...variants.visible },
 });
 
+/**
+ * Renders a motion-enabled container that animates its children using configurable container and item variants with staggered children.
+ *
+ * @param children - Child nodes to be wrapped and animated
+ * @param className - Optional class name applied to the container element
+ * @param variants - Optional overrides for container and item `Variants` objects
+ * @param preset - Optional preset name to select built-in item animation variants (e.g., 'fade', 'slide', 'scale', etc.)
+ * @param as - Element type used for the container wrapper (defaults to 'div')
+ * @param asChild - Element type used for each child wrapper (defaults to 'div')
+ * @returns A React element that wraps `children` with motion components applying the resolved container and item variants
+ */
 function AnimatedGroup({
   children,
   className,
