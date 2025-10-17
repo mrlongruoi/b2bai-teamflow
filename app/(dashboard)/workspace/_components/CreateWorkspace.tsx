@@ -15,6 +15,13 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { orpc } from "@/lib/orpc";
 import { isDefinedError } from "@orpc/client";
 
+/**
+ * Render a dialog-based UI that validates a workspace name and creates a new workspace.
+ *
+ * Manages the form lifecycle, displays success or error feedback, and closes the dialog when creation succeeds.
+ *
+ * @returns The component UI containing the trigger button and the create-workspace dialog
+ */
 export function CreateWorkspace() {
     const [open, setOpen] = useState(false);
 
