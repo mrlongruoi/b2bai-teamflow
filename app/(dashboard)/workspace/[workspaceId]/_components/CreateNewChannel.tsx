@@ -98,7 +98,7 @@ export function CreateNewChannel() {
                             disabled={createChannelMutation.isPending}
                             type="submit"
                         >
-                            {createChannelMutation.isPending ? "Đang tạo..." : "Tạo kênh"}
+                            {createChannelMutation.isPending ? "Đang tạo..." : "Tạo"}
                         </Button>
                     </form>
                 </Form>
