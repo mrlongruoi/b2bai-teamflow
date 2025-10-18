@@ -59,6 +59,7 @@ const ChannelListLayout = async ({ children }: { children: React.ReactNode }) =>
           </Collapsible>
         </div>
       </div>
+      {children}
     </>
   )
 }

@@ -19,7 +19,7 @@ export function UserNav() {
                 <Button
                     variant="outline"
                     size="icon"
-                    className="size-12 rounded-xl hover:rounded-lg transition-all duration-200 bg-background/50 border-boder/50 hover:bg-accent hover:text-accent-foreground"
+                    className="size-12 rounded-xl hover:rounded-lg transition-all duration-200 bg-background/50 border-border/50 hover:bg-accent hover:text-accent-foreground"
                 >
                     <Avatar>
                         <Image src={getAvatar(user.picture, user.email!)} alt="Hình ảnh người dùng" className="object-cover" fill />
