@@ -5,6 +5,11 @@ import { MessageItem } from "./message/MessageItem"
 import { orpc } from "@/lib/orpc"
 import { useParams } from "next/navigation";
 
+/**
+ * Renders a scrollable list of messages for the current channel route.
+ *
+ * @returns A JSX element containing message items for the channel; renders an empty container when there are no messages.
+ */
 export function MessageList() {
     const { channelId } = useParams<{ channelId: string }>();
 
