@@ -208,7 +208,7 @@ export default function HeroSection() {
                             <Link
                                 href="/"
                                 className="block text-sm duration-150 hover:opacity-75">
-                                <span> GẶP GÓI KHÁCH HÀNG CỦA CHÚNG TÔI</span>
+                                <span> GẶP GỠ KHÁCH HÀNG CỦA CHÚNG TÔI</span>
 
                                 <ChevronRight className="ml-1 inline-block size-3" />
                             </Link>

@@ -49,6 +49,7 @@ export function MessageInputForm({ channelId }: iAppProps) {
                                 <MessageComposer
                                     value={field.value}
                                     onChange={field.onChange}
+                                    onSubmit={() => onSubmit(form.getValues())}
                                 />
                             </FormControl>
                             <FormMessage />

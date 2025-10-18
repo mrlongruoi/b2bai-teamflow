@@ -1,24 +1,29 @@
 "use client";
 
 import { useForm } from "react-hook-form";
+import { toast } from "sonner";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
 import { Plus } from "lucide-react";
+import { useParams, useRouter } from "next/navigation";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { isDefinedError } from "@orpc/client";
+import { orpc } from "@/lib/orpc";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { ChannelNameSchema, transformChannelName } from "@/app/schemas/channel";
+import { ChannelNameSchema, ChannelSchemaNameType, transformChannelName } from "@/app/schemas/channel";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { orpc } from "@/lib/orpc";
-import { toast } from "sonner";
-import { isDefinedError } from "@orpc/client";
-import { ChannelSchemaNameType } from "@/app/router/channel";
+
 
 export function CreateNewChannel() {
     const [open, setOpen] = useState(false)
 
     const queryClient = useQueryClient();
+
+    const router = useRouter();
+
+    const { workspaceId } = useParams<{ workspaceId: string }>();
 
     const form = useForm({
         resolver: zodResolver(ChannelNameSchema),
@@ -35,7 +40,10 @@ export function CreateNewChannel() {
                     queryKey: orpc.channel.list.queryKey(),
                 });
                 form.reset();
+
                 setOpen(false);
+
+                router.push(`/workspace/${workspaceId}/channel/${newChannel.id}`);
             },
             onError: (error) => {
                 if (isDefinedError(error)) {
