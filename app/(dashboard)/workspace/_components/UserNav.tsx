@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { LogoutLink, PortalLink } from "@kinde-oss/kinde-auth-nextjs/components";
 import { CreditCard, LogOut, User } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -10,7 +11,7 @@ import { orpc } from "@/lib/orpc";
 import { getAvatar } from "@/lib/get-avatar";
 
 export function UserNav() {
-    const {data: {user}} = useSuspenseQuery(orpc.workspace.list.queryOptions());
+    const { data: { user } } = useSuspenseQuery(orpc.workspace.list.queryOptions());
 
     return (
         <DropdownMenu>
@@ -21,11 +22,7 @@ export function UserNav() {
                     className="size-12 rounded-xl hover:rounded-lg transition-all duration-200 bg-background/50 border-boder/50 hover:bg-accent hover:text-accent-foreground"
                 >
                     <Avatar>
-                        <AvatarImage
-                            src={getAvatar(user.picture, user.email!)}
-                            alt="Hình ảnh người dùng"
-                            className="object-cover"
-                        />
+                        <Image src={getAvatar(user.picture, user.email!)} alt="Hình ảnh người dùng" className="object-cover" fill />
                         <AvatarFallback>{user.given_name?.slice(0, 2).toUpperCase()}</AvatarFallback>
                     </Avatar>
                 </Button>
@@ -59,7 +56,7 @@ export function UserNav() {
                             <User /> Tài khoản
                         </PortalLink>
                     </DropdownMenuItem>
-                    
+
                     <DropdownMenuItem asChild>
                         <PortalLink>
                             <CreditCard /> Thanh toán

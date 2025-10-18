@@ -1,16 +1,13 @@
+"use client";
+
 import Image from "next/image"
 import { Avatar, AvatarFallback } from "@/components/ui/avatar"
-
-const members = [
-    {
-        id: "1",
-        name: "Pham Long",
-        imageUrl: "https://avatars.githubusercontent.com/u/59387761?v=4",
-        email: "idevndesign@applications.dev"
-    }
-]
+import { useSuspenseQuery } from "@tanstack/react-query";
+import { orpc } from "@/lib/orpc";
+import { getAvatar } from "@/lib/get-avatar";
 
 export function WorkspaceMemberList() {
+    const { data: { members } } = useSuspenseQuery(orpc.channel.list.queryOptions())
 
     return (
         <div className="space-y-0.5 py-1">
@@ -19,19 +16,19 @@ export function WorkspaceMemberList() {
                     <div className="relative">
                         <Avatar className="size-8 relative">
                             <Image
-                                src={member.imageUrl}
+                                src={getAvatar(member.picture ?? null, member.email!)}
                                 alt="Hình ảnh người dùng"
                                 className="object-cover"
                                 fill
                             />
                             <AvatarFallback>
-                                {member.name.charAt(0).toUpperCase()}
+                                {member.full_name?.charAt(0).toUpperCase()}
                             </AvatarFallback>
                         </Avatar>
                     </div>
 
                     <div className="flex-1 min-w-0">
-                        <p className="text-sm font-medium truncate">{member.name}</p>
+                        <p className="text-sm font-medium truncate">{member.full_name}</p>
                         <p className="text-xs text-muted-foreground truncate">{member.email}</p>
                     </div>
                 </div>

@@ -9,7 +9,7 @@ import { Button } from "@/components/ui/button";
 import { ChannelNameSchema, transformChannelName } from "@/app/schemas/channel";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { orpc } from "@/lib/orpc";
 import { toast } from "sonner";
 import { isDefinedError } from "@orpc/client";
@@ -17,6 +17,8 @@ import { ChannelSchemaNameType } from "@/app/router/channel";
 
 export function CreateNewChannel() {
     const [open, setOpen] = useState(false)
+
+    const queryClient = useQueryClient();
 
     const form = useForm({
         resolver: zodResolver(ChannelNameSchema),
@@ -29,6 +31,9 @@ export function CreateNewChannel() {
         orpc.channel.create.mutationOptions({
             onSuccess: (newChannel) => {
                 toast.success(`Kênh "${newChannel.name}" đã được tạo thành công!`);
+                queryClient.invalidateQueries({
+                    queryKey: orpc.channel.list.queryKey(),
+                });
                 form.reset();
                 setOpen(false);
             },

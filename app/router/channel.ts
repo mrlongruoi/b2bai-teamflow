@@ -7,6 +7,12 @@ import { standardSecurityMiddleware } from "../middlewares/arcjet/standard";
 import { heavyWriteSecurityMiddleware } from "../middlewares/arcjet/heavy-write";
 import prisma from "@/lib/db";
 import { Channel } from "@/lib/generated/prisma";
+import {
+  init,
+  organization_user,
+  Organizations,
+} from "@kinde/management-api-js";
+import { KindeOrganization } from "@kinde-oss/kinde-auth-nextjs";
 
 export const createChannel = base
   .use(requiredAuthMiddleware)
@@ -33,4 +39,51 @@ export const createChannel = base
     return channel;
   });
 
-  export type ChannelSchemaNameType = z.infer<typeof ChannelNameSchema>;
+export type ChannelSchemaNameType = z.infer<typeof ChannelNameSchema>;
+
+export const listChannels = base
+  .use(requiredAuthMiddleware)
+  .use(requiredWorkspaceMiddleware)
+  .route({
+    method: "GET",
+    path: "/channels",
+    summary: "Danh sách tất cả các kênh",
+    tags: ["channels"],
+  })
+  .input(z.void())
+  .output(
+    z.object({
+      channels: z.array(z.custom<Channel>()),
+      currentWorkspace: z.custom<KindeOrganization<unknown>>(),
+      members: z.array(z.custom<organization_user>()),
+    })
+  )
+  .handler(async ({ context }) => {
+    const [channels, members] = await Promise.all([
+      prisma.channel.findMany({
+        where: {
+          workspaceId: context.workspace.orgCode,
+        },
+        orderBy: {
+          createdAt: "desc",
+        },
+      }),
+
+      (async () => {
+        init();
+
+        const usersInOrg = await Organizations.getOrganizationUsers({
+          orgCode: context.workspace.orgCode,
+          sort: "name_desc",
+        });
+
+        return usersInOrg.organization_users ?? [];
+      })(),
+    ]);
+
+    return {
+      channels,
+      members,
+      currentWorkspace: context.workspace,
+    };
+  });
