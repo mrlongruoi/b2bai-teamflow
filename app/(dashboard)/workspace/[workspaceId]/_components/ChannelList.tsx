@@ -8,6 +8,14 @@ import { Hash } from "lucide-react"
 import Link from "next/link"
 import { useParams } from "next/navigation";
 
+/**
+ * Render a vertical list of workspace channels as navigation links, highlighting the active channel.
+ *
+ * Each channel is rendered as a link to /workspace/{workspaceId}/channel/{channel.id} and receives
+ * active styling when its id matches the current route's channelId.
+ *
+ * @returns A React element containing the channel link list; active channel links include accent styling.
+ */
 export function ChannelList() {
     const { data: { channels } } = useSuspenseQuery(orpc.channel.list.queryOptions());
 

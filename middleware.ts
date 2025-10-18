@@ -17,6 +17,11 @@ const aj = arcjet({
   ],
 });
 
+/**
+ * Redirects requests under `/workspace` to the organization-specific workspace path when the session's `org_code` claim is not present in the request path.
+ *
+ * @returns A `NextResponse` that redirects to `/workspace/{org_code}` if the path starts with `/workspace` and does not include the organization code; `NextResponse.next()` otherwise.
+ */
 async function existingMiddleware(req: NextRequest) {
   const { getClaim } = getKindeServerSession();
 

@@ -13,6 +13,12 @@ interface iAppProps {
     channelId: string;
 }
 
+/**
+ * Renders a message input form bound to a channel and handles creating messages, showing success or error toasts.
+ *
+ * @param channelId - The ID of the target channel for new messages
+ * @returns The rendered message input form element
+ */
 export function MessageInputForm({ channelId }: iAppProps) {
     const form = useForm({
         resolver: zodResolver(createMessageSchema),

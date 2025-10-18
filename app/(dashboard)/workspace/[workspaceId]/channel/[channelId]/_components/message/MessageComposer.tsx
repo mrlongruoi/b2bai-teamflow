@@ -9,6 +9,17 @@ interface iAppProps {
     isSubmitting?: boolean;
 }
 
+/**
+ * Render a rich-text message composer with send and attach controls.
+ *
+ * The send button invokes `onSubmit` and is disabled while `isSubmitting` is true.
+ *
+ * @param value - Current editor content as an HTML or plain-text string
+ * @param onChange - Callback invoked with the updated editor content
+ * @param onSubmit - Callback invoked when the send button is clicked
+ * @param isSubmitting - When `true`, disables the send button to prevent duplicate submits
+ * @returns The message composer React element
+ */
 export function MessageComposer({ value, onChange, onSubmit, isSubmitting }: iAppProps) {
 
     return (
