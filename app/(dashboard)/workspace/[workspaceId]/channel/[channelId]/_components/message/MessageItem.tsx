@@ -1,19 +1,18 @@
+import { SafeContent } from "@/components/rich-text-editor/SafeContent";
+import { Message } from "@/lib/generated/prisma";
+import { getAvatar } from "@/lib/get-avatar";
 import Image from "next/image";
 
 interface iAppProps {
-    id: number,
-    message: string,
-    date: Date,
-    avatar: string,
-    userName: string
+    message: Message
 }
 
-export function MessageItem({ id, message, date, avatar, userName }: iAppProps) {
+export function MessageItem({ message }: iAppProps) {
 
     return (
         <div className="flex space-x-3 relative p-3 rounded-lg group hover:bg-muted/50">
             <Image
-                src={avatar}
+                src={getAvatar(message.authorAvatar, message.authorEmail)}
                 alt="Hình đại diện của người dùng"
                 width={32}
                 height={32}
@@ -22,23 +21,26 @@ export function MessageItem({ id, message, date, avatar, userName }: iAppProps) 
 
             <div className="flex-1 space-y-1 min-w-0">
                 <div className="flex items-center gap-x-2">
-                    <p className="font-medium leading-none">{userName}</p>
+                    <p className="font-medium leading-none">{message.authorName}</p>
                     <p className="text-xs text-muted-foreground">
                         {new Intl.DateTimeFormat('vi-VN', {
                             day: 'numeric',
                             month: 'short',
                             year: 'numeric',
-                        }).format(date)}
+                        }).format(message.createdAt)}
                         {' '}
                         {new Intl.DateTimeFormat('vi-VN', {
                             hour12: false,
                             hour: '2-digit',
                             minute: '2-digit',
-                        }).format(date)}
+                        }).format(message.createdAt)}
                     </p>
                 </div>
 
-                <p className="text-sm break-words max-w-none">{message}</p>
+                <SafeContent
+                    className="text-sm break-words prose dark:prose-invert max-w-none mark:text-primary"
+                    content={JSON.parse(message.content)}
+                />
             </div>
         </div>
     )
