@@ -1,3 +1,4 @@
+import { createChannel } from "./channel";
 import { createWorkspaces, listWorkspaces } from "./workspace";
 
 export const router = {
@@ -6,7 +7,7 @@ export const router = {
     create: createWorkspaces,
   },
 
-  // channel: {
-  //   create: 
-  // }
+  channel: {
+    create: createChannel,
+  },
 };
