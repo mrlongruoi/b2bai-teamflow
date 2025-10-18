@@ -1,5 +1,12 @@
 import { ThemeToggle } from "@/components/ui/theme-toggle";
 
+/**
+ * Renders the channel header containing the channel title and a theme toggle control.
+ *
+ * Displays the channel name "# super-cool-channel" on the left and a ThemeToggle aligned to the right.
+ *
+ * @returns A JSX element representing the channel header bar.
+ */
 export function ChannelHeader() {
 
     return (

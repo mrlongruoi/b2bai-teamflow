@@ -10,6 +10,16 @@ import { useSuspenseQuery } from "@tanstack/react-query";
 import { orpc } from "@/lib/orpc";
 import { getAvatar } from "@/lib/get-avatar";
 
+/**
+ * Render the user profile dropdown for the current authenticated user.
+ *
+ * Displays an avatar trigger button and a dropdown panel that shows a larger avatar,
+ * the user's display name, a static email label, and menu items for "Tài khoản" (Account),
+ * "Thanh toán" (Payments), and "Đăng xuất" (Logout). The avatar uses the resolved image
+ * source and falls back to the user's initials when the image is unavailable.
+ *
+ * @returns The dropdown menu element for the authenticated user.
+ */
 export function UserNav() {
     const { data: { user } } = useSuspenseQuery(orpc.workspace.list.queryOptions());
 
