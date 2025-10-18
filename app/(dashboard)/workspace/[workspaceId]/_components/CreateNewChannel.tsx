@@ -15,6 +15,13 @@ import { toast } from "sonner";
 import { isDefinedError } from "@orpc/client";
 import { ChannelSchemaNameType } from "@/app/router/channel";
 
+/**
+ * Renders a "Create New Channel" trigger and dialog that let the user enter a channel name and create a channel.
+ *
+ * On successful creation, shows a success toast, resets the form, and closes the dialog; on failure shows an error toast.
+ *
+ * @returns The JSX element containing the trigger button and the create-channel dialog.
+ */
 export function CreateNewChannel() {
     const [open, setOpen] = useState(false)
 
