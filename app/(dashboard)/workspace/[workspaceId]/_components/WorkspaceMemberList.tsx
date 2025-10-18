@@ -10,6 +10,14 @@ const members = [
     }
 ]
 
+/**
+ * Render a vertical list of workspace members showing each member's avatar, name, and email.
+ *
+ * Renders an interactive row for each member containing an avatar (with image and fallback initial),
+ * a single-line truncated name, and a muted truncated email.
+ *
+ * @returns A JSX element representing the rendered members list UI.
+ */
 export function WorkspaceMemberList() {
 
     return (

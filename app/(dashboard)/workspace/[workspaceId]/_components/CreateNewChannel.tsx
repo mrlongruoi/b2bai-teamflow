@@ -10,6 +10,11 @@ import { ChannelNameSchema, transformChannelName } from "@/app/schemas/channel";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 
+/**
+ * Renders a trigger button and a dialog for creating a new channel, including a validated name input and a live preview of the transformed channel name.
+ *
+ * @returns The React element for the create-channel UI (trigger button, dialog, form, and submit control).
+ */
 export function CreateNewChannel() {
     const [open, setOpen] = useState(false)
 
