@@ -39,8 +39,6 @@ export const createChannel = base
     return channel;
   });
 
-export type ChannelSchemaNameType = z.infer<typeof ChannelNameSchema>;
-
 export const listChannels = base
   .use(requiredAuthMiddleware)
   .use(requiredWorkspaceMiddleware)
