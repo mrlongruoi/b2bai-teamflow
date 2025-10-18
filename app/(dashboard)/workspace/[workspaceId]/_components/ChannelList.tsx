@@ -7,6 +7,11 @@ import { useSuspenseQuery } from "@tanstack/react-query";
 import { Hash } from "lucide-react"
 import Link from "next/link"
 
+/**
+ * Render a vertical list of channel links populated from the channel API.
+ *
+ * @returns A React element containing a stacked list of links, one per channel.
+ */
 export function ChannelList() {
     const { data: { channels } } = useSuspenseQuery(orpc.channel.list.queryOptions())
 

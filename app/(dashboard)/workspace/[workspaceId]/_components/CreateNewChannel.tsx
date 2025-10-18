@@ -15,6 +15,13 @@ import { toast } from "sonner";
 import { isDefinedError } from "@orpc/client";
 import { ChannelSchemaNameType } from "@/app/router/channel";
 
+/**
+ * Renders a dialog UI that lets the user create a new channel.
+ *
+ * The component manages form state and validation for the channel name, displays a transformed-name preview when applicable, and invokes the create-channel mutation. On successful creation it shows a success toast, invalidates the channel list query, resets the form, and closes the dialog; on error it shows an error toast.
+ *
+ * @returns The dialog's JSX element.
+ */
 export function CreateNewChannel() {
     const [open, setOpen] = useState(false)
 

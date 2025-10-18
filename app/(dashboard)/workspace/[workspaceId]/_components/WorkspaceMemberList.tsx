@@ -6,6 +6,13 @@ import { useSuspenseQuery } from "@tanstack/react-query";
 import { orpc } from "@/lib/orpc";
 import { getAvatar } from "@/lib/get-avatar";
 
+/**
+ * Renders a list of workspace members with avatars and contact information.
+ *
+ * The component displays each member's avatar (or initial fallback), full name, and email in a vertically stacked list.
+ *
+ * @returns A React element containing the members list with avatars, names, and emails.
+ */
 export function WorkspaceMemberList() {
     const { data: { members } } = useSuspenseQuery(orpc.channel.list.queryOptions())
 
