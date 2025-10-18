@@ -22,6 +22,11 @@ const channelList = [
     },
 ]
 
+/**
+ * Render a vertical list of channel links styled as ghost buttons.
+ *
+ * @returns A React element containing a vertical list of channel items; each item is a full-width ghost-styled link showing a hash icon and the channel name (truncated when necessary).
+ */
 export function ChannelList() {
 
     return (

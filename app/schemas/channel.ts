@@ -1,5 +1,11 @@
 import z from "zod";
 
+/**
+ * Normalize a channel name into a lowercase slug containing only letters, digits, and dashes.
+ *
+ * @param name - The original channel name to normalize
+ * @returns The normalized channel name: lowercase, whitespace replaced with single dashes, all characters except `a`–`z`, `0`–`9`, and dashes removed, consecutive dashes collapsed, and no leading or trailing dash
+ */
 export function transformChannelName(name: string): string {
   return name
     .toLowerCase()
