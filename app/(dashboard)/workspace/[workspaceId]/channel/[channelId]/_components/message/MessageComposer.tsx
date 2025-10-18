@@ -7,6 +7,13 @@ interface iAppProps {
     onChange: (next: string) => void;
 }
 
+/**
+ * Renders a controlled rich text message composer with send and attach buttons.
+ *
+ * @param value - The current editor content.
+ * @param onChange - Callback invoked with the next editor content when it changes.
+ * @returns A React element containing a RichTextEditor wired to `value`/`onChange`, a send button, and an attach button.
+ */
 export function MessageComposer({ value, onChange }: iAppProps) {
 
     return (

@@ -9,6 +9,12 @@ interface MenuBarProps {
     editor: Editor | null;
 }
 
+/**
+ * Render a rich-text formatting toolbar bound to a TipTap editor instance.
+ *
+ * @param editor - The TipTap `Editor` instance to control; when `null`, the component renders `null`.
+ * @returns A toolbar JSX element with formatting toggles (bold, italic, strike, code block, lists) and undo/redo controls, or `null` if `editor` is `null`.
+ */
 export function MenuBar({ editor }: MenuBarProps) {
     const editorState = useEditorState({
         editor,

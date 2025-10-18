@@ -13,6 +13,12 @@ interface iAppProps {
     channelId: string;
 }
 
+/**
+ * Renders a controlled message input bound to a channel and handles message creation.
+ *
+ * @param channelId - ID of the channel to attach newly created messages to
+ * @returns The message input form component wired to validation and the create-message mutation
+ */
 export function MessageInputForm({ channelId }: iAppProps) {
     const form = useForm({
         resolver: zodResolver(createMessageSchema),
