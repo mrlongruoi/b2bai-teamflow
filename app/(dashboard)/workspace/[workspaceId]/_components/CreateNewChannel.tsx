@@ -9,6 +9,11 @@ import { Button } from "@/components/ui/button";
 import { ChannelNameSchema, transformChannelName } from "@/app/schemas/channel";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import { useMutation } from "@tanstack/react-query";
+import { orpc } from "@/lib/orpc";
+import { toast } from "sonner";
+import { isDefinedError } from "@orpc/client";
+import { ChannelSchemaNameType } from "@/app/router/channel";
 
 export function CreateNewChannel() {
     const [open, setOpen] = useState(false)
@@ -19,6 +24,27 @@ export function CreateNewChannel() {
             name: "",
         }
     })
+
+    const createChannelMutation = useMutation(
+        orpc.channel.create.mutationOptions({
+            onSuccess: (newChannel) => {
+                toast.success(`Kênh "${newChannel.name}" đã được tạo thành công!`);
+                form.reset();
+                setOpen(false);
+            },
+            onError: (error) => {
+                if (isDefinedError(error)) {
+                    toast.error(error.message);
+                    return;
+                }
+                toast.error("Không tạo được kênh. Vui lòng thử lại!");
+            }
+        })
+    )
+
+    function onSubmit(values: ChannelSchemaNameType) {
+        createChannelMutation.mutate(values)
+    }
 
     const watchedName = form.watch("name");
 
@@ -43,7 +69,7 @@ export function CreateNewChannel() {
                 </DialogHeader>
 
                 <Form {...form}>
-                    <form className="space-y-6">
+                    <form className="space-y-6" onSubmit={form.handleSubmit(onSubmit)}>
                         <FormField
                             control={form.control}
                             name="name"
@@ -64,9 +90,10 @@ export function CreateNewChannel() {
                         />
 
                         <Button
+                            disabled={createChannelMutation.isPending}
                             type="submit"
                         >
-                            Tạo
+                            {createChannelMutation.isPending ? "Đang tạo..." : "Tạo kênh"}
                         </Button>
                     </form>
                 </Form>
