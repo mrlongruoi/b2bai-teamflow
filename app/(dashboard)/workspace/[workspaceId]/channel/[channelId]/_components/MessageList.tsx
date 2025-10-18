@@ -7,6 +7,16 @@ import { orpc } from "@/lib/orpc"
 import { MessageItem } from "./message/MessageItem"
 import { Button } from "@/components/ui/button";
 
+/**
+ * Render a scrollable message list for the current channel with cursor-based infinite pagination,
+ * automatic initial scroll to the bottom, automatic scrolling for new messages when the user is at
+ * (or near) the bottom, and a visible "new message" button when messages arrive while the user is away from the bottom.
+ *
+ * - Fetches older messages when the user scrolls near the top and preserves the visible scroll position.
+ * - Tracks whether the view is at the bottom to decide auto-scrolling vs. showing the new-message indicator.
+ *
+ * @returns A React element containing the scrollable list of messages and a conditional new-message button.
+ */
 export function MessageList() {
     const { channelId } = useParams<{ channelId: string }>();
 
