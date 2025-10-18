@@ -37,6 +37,13 @@ const transitionVariants = {
     },
 }
 
+/**
+ * Render the hero section containing the header, animated introductory content, primary and secondary CTAs, a theme-adaptive hero image, and the trusted-by customer logos grid.
+ *
+ * The component includes decorative, aria-hidden background elements and responsive layout/animation variants for entrance and staggered reveals.
+ *
+ * @returns The hero section React element to be mounted in the page layout
+ */
 export default function HeroSection() {
     return (
         <>

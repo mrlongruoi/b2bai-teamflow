@@ -16,6 +16,15 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 
 
+/**
+ * Renders a dialog UI for creating a new channel within the current workspace.
+ *
+ * Handles channel name validation, displays a transformed-name preview, submits creation requests,
+ * shows success or error toasts, invalidates the channel list cache on success, resets the form,
+ * closes the dialog, and navigates to the newly created channel.
+ *
+ * @returns A React element that renders the create-channel dialog and its form controls
+ */
 export function CreateNewChannel() {
     const [open, setOpen] = useState(false)
 
