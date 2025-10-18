@@ -10,6 +10,17 @@ interface iAppProps {
     footerLeft?: React.ReactNode;
 }
 
+/**
+ * Render a TipTap-based rich text editor with a menu bar, editable content area, and a footer for action controls.
+ *
+ * Initializes editor content from `field.value` (parsed as JSON; falls back to empty content on missing/invalid JSON).
+ * When the editor updates, calls `field.onChange` with the editor state serialized to a JSON string, if that callback exists.
+ *
+ * @param field - Object representing the form field. Expected shape includes `value` (a JSON string of editor content) and optional `onChange` callback that receives the editor state as a JSON string.
+ * @param sendButton - Node rendered on the right side of the footer (typically an action or submit control).
+ * @param footerLeft - Optional node rendered on the left side of the footer (e.g., status or helper content).
+ * @returns The RichTextEditor React element.
+ */
 export function RichTextEditor({ field, sendButton, footerLeft }: iAppProps) {
     const editor = useEditor({
         immediatelyRender: false,
