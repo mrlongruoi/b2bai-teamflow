@@ -10,6 +10,13 @@ import { useSuspenseQuery } from "@tanstack/react-query";
 import { orpc } from "@/lib/orpc";
 import { getAvatar } from "@/lib/get-avatar";
 
+/**
+ * Render a user navigation dropdown with an avatar trigger and account actions.
+ *
+ * Displays the current user's avatar in a button trigger. The dropdown content shows the user's name and a static email, and exposes actions for account, payment, and logout.
+ *
+ * @returns A dropdown menu element presenting the user's avatar trigger and account-related menu items.
+ */
 export function UserNav() {
     const { data: { user } } = useSuspenseQuery(orpc.workspace.list.queryOptions());
 
