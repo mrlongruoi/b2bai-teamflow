@@ -7,6 +7,15 @@ interface iAppProps {
     message: Message
 }
 
+/**
+ * Render a chat message item with avatar, author name, localized timestamp, and parsed content.
+ *
+ * The component derives the avatar from `message.authorAvatar` and `message.authorEmail`, formats
+ * `message.createdAt` using the Vietnamese locale, and parses `message.content` as JSON for rendering.
+ *
+ * @param message - The Message object to render; expected to include `authorAvatar`, `authorEmail`, `authorName`, `createdAt`, and `content` (JSON string).
+ * @returns The JSX element representing the message item.
+ */
 export function MessageItem({ message }: iAppProps) {
 
     return (

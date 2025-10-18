@@ -13,6 +13,14 @@ interface iAppProps {
     channelId: string;
 }
 
+/**
+ * Renders a message composition form bound to the given channel and handles creating messages.
+ *
+ * The form uses Zod validation and a mutation to create messages; on success it invalidates the message list cache and shows a success toast, and on error shows an error toast.
+ *
+ * @param channelId - ID of the channel to associate new messages with; used as the form's default `channelId`
+ * @returns The JSX form for composing and submitting a message for the specified channel
+ */
 export function MessageInputForm({ channelId }: iAppProps) {
     const queryClient = useQueryClient();
 

@@ -8,6 +8,13 @@ interface iAppProps {
     className?: string;
 }
 
+/**
+ * Renders JSONContent as sanitized HTML inside a container element.
+ *
+ * @param content - Rich text content in TipTap's `JSONContent` format to render.
+ * @param className - Optional CSS class(es) applied to the outer container `div`.
+ * @returns A React element containing the sanitized markup produced from `content`.
+ */
 export function SafeContent({ content, className }: iAppProps) {
     const html = convertJsonToHtml(content);
 
