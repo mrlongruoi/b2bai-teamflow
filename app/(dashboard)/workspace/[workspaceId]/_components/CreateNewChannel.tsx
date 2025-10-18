@@ -15,6 +15,16 @@ import { toast } from "sonner";
 import { isDefinedError } from "@orpc/client";
 import { ChannelSchemaNameType } from "@/app/router/channel";
 
+/**
+ * Render a dialog UI for creating a new channel with validated input and server mutation.
+ *
+ * The component displays a button that opens a dialog containing a form for the channel name.
+ * It validates the name using the configured schema, shows a preview of the transformed channel name when different,
+ * and performs a create-channel mutation on submit. On success it shows a success toast, invalidates the channel list query,
+ * resets the form, and closes the dialog; on error it shows an appropriate error toast.
+ *
+ * @returns A React element that renders the channel creation dialog and its associated form and controls.
+ */
 export function CreateNewChannel() {
     const [open, setOpen] = useState(false)
 

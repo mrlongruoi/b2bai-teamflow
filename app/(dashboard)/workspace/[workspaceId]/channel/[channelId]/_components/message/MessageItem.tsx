@@ -8,6 +8,16 @@ interface iAppProps {
     userName: string
 }
 
+/**
+ * Render a chat message row with avatar, username, localized date/time, and message text.
+ *
+ * @param id - Unique identifier for the message
+ * @param message - The message text to display
+ * @param date - The message timestamp; rendered using the 'vi-VN' locale for date and 24-hour time
+ * @param avatar - URL or path to the user's avatar image
+ * @param userName - Display name of the message author
+ * @returns The JSX element representing the message item
+ */
 export function MessageItem({ id, message, date, avatar, userName }: iAppProps) {
 
     return (

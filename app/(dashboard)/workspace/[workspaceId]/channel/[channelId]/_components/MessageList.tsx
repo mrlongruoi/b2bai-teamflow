@@ -10,6 +10,14 @@ const messages = [
     }
 ]
 
+/**
+ * Render a vertically scrollable list of message items.
+ *
+ * Renders a full-height container with a vertically scrollable area that maps the local `messages` array
+ * to a sequence of `MessageItem` components (each keyed by its `id`).
+ *
+ * @returns A JSX.Element containing the scrollable list of `MessageItem` components
+ */
 export function MessageList() {
 
     return (
