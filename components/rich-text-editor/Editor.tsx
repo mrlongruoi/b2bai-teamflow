@@ -10,6 +10,16 @@ interface iAppProps {
     footerLeft?: React.ReactNode;
 }
 
+/**
+ * Renders a rich-text editor with a formatting toolbar and configurable footer.
+ *
+ * The editor initializes its content by parsing `field.value` as JSON and falls back to an empty document on missing or invalid JSON. When the editor content changes, `field.onChange` (if provided) is called with the editor document serialized as a JSON string.
+ *
+ * @param field - Controlled field object containing `value` (string) and optional `onChange` callback invoked with the serialized editor content
+ * @param sendButton - Element rendered on the right side of the footer (typically an action button)
+ * @param footerLeft - Optional element rendered on the left side of the footer
+ * @returns The rendered rich-text editor React element
+ */
 export function RichTextEditor({ field, sendButton, footerLeft }: iAppProps) {
     const editor = useEditor({
         immediatelyRender: false,

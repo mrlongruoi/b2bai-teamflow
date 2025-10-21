@@ -8,6 +8,14 @@ interface ImageUploadModalProps {
     onUploaded: (url: string) => void;
 }
 
+/**
+ * Render a modal dialog that lets the user upload an image and passes the uploaded image URL to a callback.
+ *
+ * @param open - Whether the modal is visible
+ * @param onOpenChange - Called when the modal open state changes
+ * @param onUploaded - Called with the uploaded image URL after a successful upload
+ * @returns A React element containing the image upload modal
+ */
 export function ImageUploadModal({ open, onOpenChange, onUploaded }: ImageUploadModalProps) {
 
     return (
