@@ -1,13 +1,14 @@
 "use client";
 
 import { useForm } from "react-hook-form";
+import { toast } from "sonner";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useState } from "react";
 import { Form, FormControl, FormField, FormItem, FormMessage } from "@/components/ui/form";
 import { createMessageSchema, CreateMessageSchemaType } from "@/app/schemas/message";
 import { MessageComposer } from "./MessageComposer";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { orpc } from "@/lib/orpc";
-import { toast } from "sonner";
 
 interface iAppProps {
     channelId: string;
@@ -15,6 +16,8 @@ interface iAppProps {
 
 export function MessageInputForm({ channelId }: iAppProps) {
     const queryClient = useQueryClient();
+
+    const [editorKey, setEditorKey] = useState(0);
 
     const form = useForm({
         resolver: zodResolver(createMessageSchema),
@@ -31,7 +34,14 @@ export function MessageInputForm({ channelId }: iAppProps) {
                     queryKey: orpc.message.list.key()
                 })
 
-                return toast.success("Tin nhắn được tạo thành công")
+                form.reset({
+                    channelId,
+                    content: "",
+                });
+
+                setEditorKey((k) => k + 1);
+
+                return toast.success("Tin nhắn được gửi")
             },
             onError: () => {
                 return toast.error("Đã có lỗi xảy ra")
@@ -53,6 +63,7 @@ export function MessageInputForm({ channelId }: iAppProps) {
                         <FormItem>
                             <FormControl>
                                 <MessageComposer
+                                    key={editorKey}
                                     value={field.value}
                                     onChange={field.onChange}
                                     onSubmit={() => onSubmit(form.getValues())}
