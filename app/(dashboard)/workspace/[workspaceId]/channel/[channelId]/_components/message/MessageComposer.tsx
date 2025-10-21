@@ -13,6 +13,19 @@ interface iAppProps {
     upload: UseAttachmentUploadType;
 }
 
+/**
+ * Renders a message composer UI with a rich-text editor, send control, attachment control, and image upload modal.
+ *
+ * The editor is controlled by `value` and `onChange`. The send button invokes `onSubmit` and is disabled when `isSubmitting` is true.
+ * The footer shows an attachment chip when `upload.stagedUrl` is set, otherwise it shows a button that opens the upload modal.
+ *
+ * @param value - Current editor content
+ * @param onChange - Called with the next editor content
+ * @param onSubmit - Called when the send button is clicked
+ * @param isSubmitting - When true, disables the send button
+ * @param upload - Attachment upload state and actions (controls staged URL, modal open state, upload handling, and clear)
+ * @returns The composed message input UI as a JSX element
+ */
 export function MessageComposer({ value, onChange, onSubmit, isSubmitting, upload }: iAppProps) {
 
     return (

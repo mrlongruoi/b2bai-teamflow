@@ -3,6 +3,12 @@ import { generateHTML, type JSONContent } from "@tiptap/react";
 
 type SerializableContent = JSONContent | string | null | undefined;
 
+/**
+ * Convert rich-text JSON content (or its JSON string representation) into an HTML string.
+ *
+ * @param jsonContent - The content to convert. If falsy, empty, invalid JSON, missing a top-level `type`, or conversion fails, the function returns an empty string. If a string is provided it will be trimmed and parsed as JSON before conversion.
+ * @returns `""` when input is empty, invalid, or conversion fails; otherwise the generated HTML string
+ */
 export function convertJsonToHtml(jsonContent: SerializableContent): string {
   if (!jsonContent) return "";
 

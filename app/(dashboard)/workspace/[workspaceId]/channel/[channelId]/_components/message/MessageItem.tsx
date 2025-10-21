@@ -7,6 +7,17 @@ interface iAppProps {
     message: Message
 }
 
+/**
+ * Render a chat message item showing the author's avatar, name, localized timestamp, rich text content, and an optional image attachment.
+ *
+ * @param message - Message object containing display data:
+ *   - `authorAvatar` and `authorEmail` for avatar resolution
+ *   - `authorName` to display the sender's name
+ *   - `createdAt` formatted to Vietnamese date and 24-hour time
+ *   - `content` passed to SafeContent for rich-text rendering
+ *   - `imageUrl` (optional) shown as an attachment when present
+ * @returns A JSX element representing the formatted message item
+ */
 export function MessageItem({ message }: iAppProps) {
 
     return (

@@ -15,6 +15,14 @@ interface iAppProps {
     channelId: string;
 }
 
+/**
+ * Renders a controlled message input form for a specific channel.
+ *
+ * The form validates input, includes any staged attachment when submitting, and sends messages via a mutation. On successful send the message list cache is invalidated, the form and staged upload are cleared, the composer is reset, and a success toast is shown; on error an error toast is shown.
+ *
+ * @param channelId - The ID of the channel where submitted messages will be posted
+ * @returns The JSX element for the message input form wired to validation, attachment upload, and submit handling
+ */
 export function MessageInputForm({ channelId }: iAppProps) {
     const queryClient = useQueryClient();
 

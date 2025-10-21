@@ -7,6 +7,13 @@ interface AttachmentChipProps {
     onRemove: () => void;
 }
 
+/**
+ * Renders an attachment thumbnail that reveals a destructive remove button on hover.
+ *
+ * @param url - Source URL of the attachment image to display.
+ * @param onRemove - Callback invoked when the remove button is clicked.
+ * @returns The attachment chip JSX element with a hover overlay and remove action.
+ */
 export function AttachmentChip({ url, onRemove }: AttachmentChipProps) {
 
     return (
