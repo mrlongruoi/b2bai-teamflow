@@ -9,6 +9,7 @@ import { createMessageSchema, CreateMessageSchemaType } from "@/app/schemas/mess
 import { MessageComposer } from "./MessageComposer";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { orpc } from "@/lib/orpc";
+import { useAttachmentUpload } from "@/hooks/use-attachment-upload";
 
 interface iAppProps {
     channelId: string;
@@ -18,6 +19,8 @@ export function MessageInputForm({ channelId }: iAppProps) {
     const queryClient = useQueryClient();
 
     const [editorKey, setEditorKey] = useState(0);
+
+    const upload = useAttachmentUpload();
 
     const form = useForm({
         resolver: zodResolver(createMessageSchema),
@@ -39,6 +42,8 @@ export function MessageInputForm({ channelId }: iAppProps) {
                     content: "",
                 });
 
+                upload.clear();
+
                 setEditorKey((k) => k + 1);
 
                 return toast.success("Tin nhắn được gửi")
@@ -50,7 +55,10 @@ export function MessageInputForm({ channelId }: iAppProps) {
     )
 
     function onSubmit(data: CreateMessageSchemaType) {
-        createMessageMutation.mutate(data)
+        createMessageMutation.mutate({
+            ...data,
+            imageUrl: upload.stagedUrl ?? undefined,
+        })
     }
 
     return (
@@ -68,6 +76,7 @@ export function MessageInputForm({ channelId }: iAppProps) {
                                     onChange={field.onChange}
                                     onSubmit={() => onSubmit(form.getValues())}
                                     isSubmitting={createMessageMutation.isPending}
+                                    upload={upload}
                                 />
                             </FormControl>
                             <FormMessage />

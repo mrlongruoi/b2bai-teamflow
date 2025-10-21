@@ -4,7 +4,7 @@ import parse from "html-react-parser";
 import { convertJsonToHtml } from "@/lib/json-to-html";
 
 interface iAppProps {
-    content: JSONContent;
+    content: JSONContent | string | null | undefined;
     className?: string;
 }
 
