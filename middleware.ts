@@ -17,6 +17,12 @@ const aj = arcjet({
   ],
 });
 
+/**
+ * Ensures requests to "/workspace" are scoped to the authenticated user's organization by redirecting to "/workspace/{orgCode}" when needed.
+ *
+ * @param req - The incoming NextRequest, which may be augmented with `kindeAuth` (`user` and/or `token`) containing `org_code`.
+ * @returns A NextResponse that redirects to `/workspace/{orgCode}` when the current path starts with `/workspace` but does not include the derived org code, otherwise a regular `NextResponse.next()`.
+ */
 async function existingMiddleware(req: NextRequest) {
   const anyReq = req as {
     nextUrl: NextRequest["nextUrl"];
