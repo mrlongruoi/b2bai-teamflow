@@ -10,6 +10,15 @@ interface EmtyStateProps {
     href: string;
 }
 
+/**
+ * Render an empty-state UI with a title, description, and a primary action link.
+ *
+ * @param title - The main heading displayed in the empty state
+ * @param description - Supporting descriptive text shown below the title
+ * @param buttonText - Label for the action link shown as a button
+ * @param href - Destination URL for the action link
+ * @returns A JSX element representing the empty state layout
+ */
 export function EmptyState({ title, description, buttonText, href }: EmtyStateProps) {
 
     return (
