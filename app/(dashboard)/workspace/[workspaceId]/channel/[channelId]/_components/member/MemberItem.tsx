@@ -7,6 +7,16 @@ interface MemberItemProps {
     member: organization_user;
 }
 
+/**
+ * Renders a clickable member row with avatar, name, role badge, and email.
+ *
+ * The avatar displays the user's picture when available and shows the first
+ * letter of the user's full name as a fallback. The right side shows the
+ * member's full name, a "Quản trị viên" role badge, and the member's email.
+ *
+ * @param member - The organization user to render inside the row
+ * @returns A React element representing a clickable member list item
+ */
 export function MemberItem({ member }: MemberItemProps) {
 
     return (

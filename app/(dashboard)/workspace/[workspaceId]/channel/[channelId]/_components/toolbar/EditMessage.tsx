@@ -15,6 +15,18 @@ interface EditMessageProps {
     onSave: () => void;
 }
 
+/**
+ * Renders a form to edit an existing message and applies the update to the React Query cache on success.
+ *
+ * The form is validated with `updateMessageSchema`. Submitting triggers the update mutation; on success the
+ * message is replaced in the cached paginated message list for the message's channel, a success toast is shown,
+ * and `onSave` is called. On error, an error toast is shown.
+ *
+ * @param message - The message to edit (provides initial form values and channel id for cache updates)
+ * @param onCancel - Callback invoked when the user cancels editing
+ * @param onSave - Callback invoked after a successful save
+ * @returns A JSX element containing the edit form UI
+ */
 export function EditMessage({ message, onCancel, onSave }: EditMessageProps) {
     const queryClient = useQueryClient();
 
