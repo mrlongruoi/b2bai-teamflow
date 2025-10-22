@@ -1,13 +1,13 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
 import { useParams } from "next/navigation";
+import { useEffect, useMemo, useRef, useState } from "react";
+import { ChevronDown, Loader2 } from "lucide-react";
 import { useInfiniteQuery, useSuspenseQuery } from "@tanstack/react-query"
 import { orpc } from "@/lib/orpc"
 import { MessageItem } from "./message/MessageItem"
 import { Button } from "@/components/ui/button";
 import { EmptyState } from "@/components/general/EmtyState";
-import { ChevronDown, Loader2 } from "lucide-react";
 
 export function MessageList() {
     const { channelId } = useParams<{ channelId: string }>();
@@ -172,6 +172,7 @@ export function MessageList() {
 
         bottomRef.current?.scrollIntoView({
             block: "end",
+            behavior: "smooth",
         });
 
         el.scrollTop = el.scrollHeight;

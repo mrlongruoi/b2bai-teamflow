@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form"
 import { useEffect, useState } from "react";
 import { useParams } from "next/navigation"
 import { useAttachmentUpload } from "@/hooks/use-attachment-upload";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { InfiniteData, useMutation, useQueryClient } from "@tanstack/react-query";
 import { orpc } from "@/lib/orpc";
 import { MessageComposer } from "../message/MessageComposer";
 import { Form, FormControl, FormField, FormItem } from "@/components/ui/form";
@@ -14,6 +14,7 @@ import { toast } from "sonner";
 import { Message } from "@/lib/generated/prisma";
 import { KindeUser } from "@kinde-oss/kinde-auth-nextjs";
 import { getAvatar } from "@/lib/get-avatar";
+import { MessageListItem } from "@/lib/types";
 
 interface ThreadReplyFormProps {
     threadId: string;
@@ -51,6 +52,13 @@ export function ThreadReplyForm({ threadId, user }: ThreadReplyFormProps) {
                     }
                 })
 
+                type MessagePage = {
+                    items: Array<MessageListItem>,
+                    nextCursor?: string,
+                }
+
+                type InfiniteMessages = InfiniteData<MessagePage>
+
                 await queryClient.cancelQueries({ queryKey: listOptions.queryKey });
 
                 const previous = queryClient.getQueryData(listOptions.queryKey);
@@ -77,6 +85,29 @@ export function ThreadReplyForm({ threadId, user }: ThreadReplyFormProps) {
                         messages: [...old.messages, optimistic],
                     }
                 });
+
+                // optimistacally bump reliesCount in main message list for the parent message
+                queryClient.setQueryData<InfiniteMessages>(
+                    ["message.list", channelId],
+                    (old) => {
+                        if (!old) return old;
+
+                        const pages = old.pages.map((page) => ({
+                            ...page,
+                            items: page.items.map((m) =>
+                                m.id === threadId ? {
+                                    ...m,
+                                    repliesCount: m.repliesCount + 1,
+                                }
+                                    : m)
+                        }));
+
+                        return {
+                            ...old,
+                            pages,
+                        }
+                    }
+                )
 
                 return {
                     listOptions,
@@ -137,6 +168,7 @@ export function ThreadReplyForm({ threadId, user }: ThreadReplyFormProps) {
                                     upload={upload}
                                     key={editorKey}
                                     onSubmit={() => onSubmit(form.getValues())}
+                                    isSubmitting={createMessageMutation.isPending}
                                 />
                             </FormControl>
                         </FormItem>

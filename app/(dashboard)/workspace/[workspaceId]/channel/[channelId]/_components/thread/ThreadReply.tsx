@@ -35,7 +35,22 @@ export function ThreadReply({ message }: ThreadReplyProps) {
                     </span>
                 </div>
 
-                <SafeContent className="text-sm break-words prose dark:prose-invert max-w-none marker:text-primary" content={message.content} />
+                <SafeContent 
+                    className="text-sm break-words prose dark:prose-invert max-w-none marker:text-primary" 
+                    content={message.content} 
+                />
+
+                {message.imageUrl && (
+                    <div className="mt-2">
+                        <Image
+                            src={message.imageUrl}
+                            alt="Message Attachment"
+                            width={512}
+                            height={512}
+                            className="rounded-md max-h-[320px] w-auto object-contain"
+                        />
+                    </div>
+                )}
             </div>
         </div>
     )
