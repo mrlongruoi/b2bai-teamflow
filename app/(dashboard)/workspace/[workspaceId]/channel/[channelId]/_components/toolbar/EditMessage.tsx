@@ -15,6 +15,16 @@ interface EditMessageProps {
     onSave: () => void;
 }
 
+/**
+ * Render a form for editing an existing message and submitting updates.
+ *
+ * On submit, sends the updated content to the server, updates the message list cache, shows a success or error toast, and invokes `onSave` after a successful update. The cancel button invokes `onCancel`.
+ *
+ * @param message - The message object to edit (pre-fills the form).
+ * @param onCancel - Called when the user cancels editing.
+ * @param onSave - Called after the message is successfully updated.
+ * @returns The JSX form element used to edit and submit the message.
+ */
 export function EditMessage({ message, onCancel, onSave }: EditMessageProps) {
     const queryClient = useQueryClient();
 
