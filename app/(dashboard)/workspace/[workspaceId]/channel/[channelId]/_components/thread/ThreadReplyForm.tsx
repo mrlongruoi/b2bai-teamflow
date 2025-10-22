@@ -20,6 +20,12 @@ interface ThreadReplyFormProps {
     user: KindeUser<Record<string, unknown>>;
 }
 
+/**
+ * Render a reply form that composes and submits a message to the specified thread, performing optimistic UI updates and keeping the form state and attachments in sync.
+ *
+ * @param threadId - The ID of the parent message (thread) to which the reply will be posted.
+ * @param user - The currently authenticated user; used to populate author metadata for optimistic updates.
+ * @returns The React element for the thread reply form.
 export function ThreadReplyForm({ threadId, user }: ThreadReplyFormProps) {
     const { channelId } = useParams<{ channelId: string }>()
 
