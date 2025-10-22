@@ -13,6 +13,15 @@ interface ThreadSidebarProps {
     user: KindeUser<Record<string, unknown>>;
 }
 
+/**
+ * Renders the thread sidebar for the currently selected thread.
+ *
+ * Displays a header with a close action, the parent message (author avatar, name, timestamp, and content),
+ * a list of thread replies, and a persistent reply form at the bottom.
+ *
+ * @param user - The authenticated user object to pass to the reply form.
+ * @returns A React element containing the thread header, parent message, replies list, and reply form.
+ */
 export function ThreadSidebar({ user }: ThreadSidebarProps) {
     const { selectedThreadId, closeThread } = useThread();
 
