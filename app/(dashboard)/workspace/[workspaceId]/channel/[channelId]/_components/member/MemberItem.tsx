@@ -7,6 +7,12 @@ interface MemberItemProps {
     member: organization_user;
 }
 
+/**
+ * Renders a single member row containing an avatar, display name, fixed role badge, and email.
+ *
+ * @param member - The organization user whose avatar, full name, and email will be displayed.
+ * @returns The JSX element for the member row.
+ */
 export function MemberItem({ member }: MemberItemProps) {
 
     return (

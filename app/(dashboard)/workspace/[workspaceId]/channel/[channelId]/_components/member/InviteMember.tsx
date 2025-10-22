@@ -11,6 +11,14 @@ import { Input } from "@/components/ui/input";
 import { useMutation } from "@tanstack/react-query";
 import { orpc } from "@/lib/orpc";
 
+/**
+ * Renders a modal dialog with a form to invite a workspace member by name and email.
+ *
+ * The form validates input with the `inviteMemberSchema` (Zod), sends the invitation via the workspace invite mutation, and displays toast feedback:
+ * on success it shows a success toast, resets the form, and closes the dialog; on error it shows an error toast with the failure message.
+ *
+ * @returns The component's JSX element rendering the invite dialog and trigger button.
+ */
 export default function InviteMember() {
     const [Open, setOpen] = useState(false);
 

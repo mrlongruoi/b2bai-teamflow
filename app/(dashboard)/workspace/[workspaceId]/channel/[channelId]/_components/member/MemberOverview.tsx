@@ -8,6 +8,13 @@ import { orpc } from "@/lib/orpc";
 import { MemberItem } from "./MemberItem";
 import { Skeleton } from "@/components/ui/skeleton";
 
+/**
+ * Displays a popover listing workspace members with a searchable filter.
+ *
+ * Renders a button that opens a popover containing a header, a search input, and a scrollable members list. While member data is loading it shows skeleton placeholders; if no members match the search it shows an empty-state message; if the data fetch fails it renders an error heading with the error message.
+ *
+ * @returns The React element for the member overview popover.
+ */
 export function MemberOverview() {
     const [Open, setOpen] = useState(false);
 

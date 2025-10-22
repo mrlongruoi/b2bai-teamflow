@@ -9,6 +9,13 @@ import { Button } from "@/components/ui/button";
 import { EmptyState } from "@/components/general/EmtyState";
 import { ChevronDown, Loader2 } from "lucide-react";
 
+/**
+ * Render an infinite-scroll message list for the current channel.
+ *
+ * The component loads paginated messages, initially scrolls to the bottom, and preserves scroll position when older messages are prepended. It keeps the view pinned to the bottom on content growth (e.g., images) when already at the bottom, auto-scrolls to show new messages if the user is near the bottom, and shows an empty state, a loading indicator for fetching earlier messages, and a "scroll to bottom" button when not at the bottom.
+ *
+ * @returns A React element containing the message list UI.
+ */
 export function MessageList() {
     const { channelId } = useParams<{ channelId: string }>();
     const [hasInitialScrolled, setHasInitialScrolled] = useState(false);
