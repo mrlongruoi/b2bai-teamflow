@@ -6,6 +6,12 @@ interface ThreadReplyProps {
     message: Message;
 }
 
+/**
+ * Render a single thread reply with author avatar, metadata, rich text content, and an optional image attachment.
+ *
+ * @param message - Message object containing authorName, authorAvatar, content, createdAt, and optional imageUrl
+ * @returns A JSX element representing the rendered reply
+ */
 export function ThreadReply({ message }: ThreadReplyProps) {
 
     return (

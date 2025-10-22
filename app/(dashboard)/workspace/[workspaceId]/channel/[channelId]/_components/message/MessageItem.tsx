@@ -15,6 +15,16 @@ interface iAppProps {
     currentUserId: string;
 }
 
+/**
+ * Render a single message row with avatar, author/timestamp, content, optional attachment,
+ * a reply/thread control, and an inline edit workflow.
+ *
+ * The reply button opens the message thread and prefetches the thread list on hover.
+ *
+ * @param message - The message to render (author, content, timestamps, attachments, reply count)
+ * @param currentUserId - The current user's ID; used to determine whether edit actions are available
+ * @returns A React element representing the message item with its UI and interactive controls
+ */
 export function MessageItem({ message, currentUserId }: iAppProps) {
     const [isEditing, setIsEditing] = useState(false);
 

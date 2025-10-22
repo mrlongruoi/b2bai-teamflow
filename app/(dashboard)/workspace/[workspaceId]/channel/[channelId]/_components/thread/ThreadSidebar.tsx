@@ -15,6 +15,12 @@ interface ThreadSidebarProps {
     user: KindeUser<Record<string, unknown>>;
 }
 
+/**
+ * Renders a conversation thread sidebar showing the parent message, its replies, and a reply form, and manages scroll behavior (auto-scroll on new messages, pin-to-bottom on content growth, and a "scroll to bottom" control).
+ *
+ * @param user - The current user object used to populate the reply form
+ * @returns The rendered thread sidebar element
+ */
 export function ThreadSidebar({ user }: ThreadSidebarProps) {
     const { selectedThreadId, closeThread } = useThread();
 

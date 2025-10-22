@@ -1,5 +1,10 @@
 import { Skeleton } from "@/components/ui/skeleton";
 
+/**
+ * Render a skeleton UI for a thread sidebar to display while thread content and replies are loading.
+ *
+ * @returns A React element containing the sidebar skeleton structure (header, thread header, replies list, and reply form placeholder).
+ */
 export function ThreadSidebarSkeleton() {
 
     return (
