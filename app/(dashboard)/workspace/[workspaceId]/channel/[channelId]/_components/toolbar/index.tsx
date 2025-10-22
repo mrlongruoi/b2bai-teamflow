@@ -7,6 +7,14 @@ interface toolbarProps {
     onEdit: () => void;
 }
 
+/**
+ * Render a compact hover toolbar for a specific message with action buttons.
+ *
+ * @param messageId - The ID of the message this toolbar is associated with
+ * @param canEdit - If `true`, show an edit button for the message
+ * @param onEdit - Callback invoked when the edit button is clicked
+ * @returns The JSX element representing the message hover toolbar
+ */
 export function MessageHoverToolbar({ messageId, canEdit, onEdit }: toolbarProps) {
 
     return (

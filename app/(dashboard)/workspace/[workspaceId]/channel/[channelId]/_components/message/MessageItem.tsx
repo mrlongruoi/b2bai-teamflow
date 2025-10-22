@@ -11,6 +11,13 @@ interface iAppProps {
     currentUserId: string;
 }
 
+/**
+ * Renders a single chat message with author metadata, content, optional image attachment, and inline editing controls when permitted.
+ *
+ * @param message - Message data to display (author info, content, timestamps, optional image)
+ * @param currentUserId - ID of the current user used to determine whether the edit action is allowed
+ * @returns The JSX element representing the message item
+ */
 export function MessageItem({ message, currentUserId }: iAppProps) {
     const [isEditing, setIsEditing] = useState(false);
 
