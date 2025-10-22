@@ -9,6 +9,13 @@ import { MessageItem } from "./message/MessageItem"
 import { Button } from "@/components/ui/button";
 import { EmptyState } from "@/components/general/EmtyState";
 
+/**
+ * Render an infinite-scrolling chat message list for the current channel with automatic bottom scrolling and bottom-anchored updates.
+ *
+ * Renders messages fetched for the route's channel, loads older pages when scrolled near the top, auto-scrolls to the bottom on initial load and when new messages arrive while the view is near the bottom, keeps the view pinned during late content growth (e.g., images), shows an empty state when there are no messages, displays a loading indicator while fetching older pages, and exposes a floating button to jump to the bottom.
+ *
+ * @returns A JSX element that renders the message list UI
+ */
 export function MessageList() {
     const { channelId } = useParams<{ channelId: string }>();
 

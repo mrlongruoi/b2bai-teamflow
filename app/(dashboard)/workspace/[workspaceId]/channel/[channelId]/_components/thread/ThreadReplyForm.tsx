@@ -21,6 +21,15 @@ interface ThreadReplyFormProps {
     user: KindeUser<Record<string, unknown>>;
 }
 
+/**
+ * Renders a reply form bound to a thread that handles message composition, attachment staging, optimistic updates, and submission.
+ *
+ * The component manages an upload staging area, validates input against the create message schema, performs an optimistic cache update when creating a reply, resets the editor and staged upload on success, and shows success/error toasts.
+ *
+ * @param props.threadId - The ID of the parent thread/message being replied to.
+ * @param props.user - The current authenticated user used as the reply author.
+ * @returns The form UI for composing and submitting a thread reply.
+ */
 export function ThreadReplyForm({ threadId, user }: ThreadReplyFormProps) {
     const { channelId } = useParams<{ channelId: string }>()
 
