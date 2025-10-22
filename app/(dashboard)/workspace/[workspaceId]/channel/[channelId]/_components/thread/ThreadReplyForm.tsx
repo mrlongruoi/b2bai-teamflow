@@ -16,6 +16,17 @@ interface ThreadReplyFormProps {
     threadId: string;
 }
 
+/**
+ * Render a form for composing and submitting a reply to a specific thread.
+ *
+ * The component binds a controlled message editor to a form, associates the message with
+ * the provided `threadId` (kept in sync when the prop changes), and reads `channelId`
+ * from the route. On successful submission the form is reset, staged attachments are cleared,
+ * the editor is remounted, and a success toast is shown; on failure an error toast is shown.
+ *
+ * @param threadId - Identifier of the thread to which the submitted message will be posted
+ * @returns The thread reply form React element
+ */
 export function ThreadReplyForm({ threadId }: ThreadReplyFormProps) {
     const { channelId } = useParams<{ channelId: string }>()
 

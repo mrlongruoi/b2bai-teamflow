@@ -8,6 +8,13 @@ import { ThreadReplyForm } from "./ThreadReplyForm";
 import { Button } from "@/components/ui/button";
 import { SafeContent } from "@/components/rich-text-editor/SafeContent";
 
+/**
+ * Renders a right-hand sidebar showing the selected thread's parent message, its replies, and a reply form.
+ *
+ * The panel includes a header with a close action, a parent post block (author, timestamp, content), a list of replies, and a composer for new replies. Content is shown only when thread data is available.
+ *
+ * @returns The sidebar element containing the thread view.
+ */
 export function ThreadSidebar() {
     const { selectedThreadId, closeThread } = useThread();
 

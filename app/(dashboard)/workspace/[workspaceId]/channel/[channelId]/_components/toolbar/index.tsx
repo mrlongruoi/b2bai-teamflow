@@ -8,6 +8,16 @@ interface toolbarProps {
     onEdit: () => void;
 }
 
+/**
+ * Render a hover toolbar for a message that exposes edit and thread actions.
+ *
+ * The toolbar appears on hover and positions itself relative to the message; when `canEdit` is true it shows an edit button that calls `onEdit`, and it always shows a thread button that toggles the thread for `messageId`.
+ *
+ * @param messageId - Identifier of the message used when toggling the thread view
+ * @param canEdit - When true, shows an edit button
+ * @param onEdit - Callback invoked when the edit button is clicked
+ * @returns A JSX element representing the positioned hover toolbar with action buttons
+ */
 export function MessageHoverToolbar({ messageId, canEdit, onEdit }: toolbarProps) {
     const { toggleThread } = useThread();
 

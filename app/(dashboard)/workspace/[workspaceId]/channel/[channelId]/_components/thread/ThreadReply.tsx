@@ -6,6 +6,14 @@ interface ThreadReplyProps {
     message: Message;
 }
 
+/**
+ * Render a single thread reply UI for a given message.
+ *
+ * Displays the author's avatar and name, a localized timestamp (Vietnamese 'vi-VN' with hour:minute in 12-hour format and short month/day), and the message content rendered as safe rich text.
+ *
+ * @param message - The message to display in the reply (author avatar, author name, createdAt, and content are used).
+ * @returns A JSX element containing the formatted thread reply.
+ */
 export function ThreadReply({ message }: ThreadReplyProps) {
 
     return (
