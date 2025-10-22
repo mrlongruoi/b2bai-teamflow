@@ -7,8 +7,13 @@ import { ThreadReply } from "./ThreadReply";
 import { ThreadReplyForm } from "./ThreadReplyForm";
 import { Button } from "@/components/ui/button";
 import { SafeContent } from "@/components/rich-text-editor/SafeContent";
+import { KindeUser } from "@kinde-oss/kinde-auth-nextjs";
 
-export function ThreadSidebar() {
+interface ThreadSidebarProps {
+    user: KindeUser<Record<string, unknown>>;
+}
+
+export function ThreadSidebar({ user }: ThreadSidebarProps) {
     const { selectedThreadId, closeThread } = useThread();
 
     const { data, isLoading } = useQuery(
@@ -51,7 +56,7 @@ export function ThreadSidebar() {
                                     alt="author image"
                                     width={32}
                                     height={32}
-                                    className="size-8 rounded-full shink-0"
+                                    className="size-8 rounded-full shrink-0"
                                 />
 
                                 <div className="flex-1 space-y-1 min-w-0">
@@ -102,6 +107,7 @@ export function ThreadSidebar() {
             <div className="border-t p-4">
                 <ThreadReplyForm
                     threadId={selectedThreadId!}
+                    user={user}
                 />
             </div>
         </div>
