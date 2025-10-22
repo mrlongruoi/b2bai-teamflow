@@ -67,8 +67,8 @@ export function CreateNewChannel() {
         <Dialog open={open} onOpenChange={setOpen}>
             <DialogTrigger asChild>
                 <Button
-                    variant="outline"
-                    className="w-full"
+                    variant="outline" 
+                    className="w-full dark:invert-20"
                 >
                     <Plus className="size-4" />
                     Thêm kênh

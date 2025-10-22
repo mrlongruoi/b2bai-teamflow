@@ -108,7 +108,7 @@ export const HeroHeader = () => {
                                                     variant: "outline",
                                                 })}
                                             >
-                                                <span>Đăng Xuất</span>
+                                                <span className="dark:invert-20">Đăng Xuất</span>
                                             </LogoutLink>
                                         </>
                                     ) : (
