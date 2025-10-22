@@ -23,6 +23,15 @@ type MessagePage = { items: Message[]; nextCursor?: string; };
 
 type InfiniteMessages = InfiniteData<MessagePage>;
 
+/**
+ * Render a message composition form that supports optimistic message creation, attachment uploads, and validation.
+ *
+ * This component wires form state, attachment upload handling, and a create-message mutation to provide an inline composer with optimistic UI updates and error handling for a specific channel.
+ *
+ * @param channelId - Identifier of the channel where the message will be posted.
+ * @param user - The current authenticated user; used as author metadata for optimistic messages.
+ * @returns A React element containing the message input form bound to validation, upload, and the create-message mutation.
+ */
 export function MessageInputForm({ channelId, user }: iAppProps) {
     const queryClient = useQueryClient();
 
