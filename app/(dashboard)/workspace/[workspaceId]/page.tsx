@@ -1,8 +1,6 @@
 import { client } from "@/lib/orpc"
 import { redirect } from "next/navigation";
 import { GrChannel } from "react-icons/gr";
-import { ArrowUpRightIcon } from "lucide-react"
-import { Button } from "@/components/ui/button"
 import {
   Empty,
   EmptyContent,
@@ -33,11 +31,13 @@ const WorkspaceIdPage = async ({ params }: iAppProps) => {
           <EmptyMedia variant="icon">
             <GrChannel />
           </EmptyMedia>
+
           <EmptyTitle>Chưa có kênh nào!</EmptyTitle>
           <EmptyDescription>
             Tạo kênh đầu tiên của bạn để bắt đầu!
           </EmptyDescription>
         </EmptyHeader>
+        
         <EmptyContent className="max-w-xs mx-auto">
           <CreateNewChannel />
         </EmptyContent>

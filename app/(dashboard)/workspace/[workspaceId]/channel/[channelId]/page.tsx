@@ -8,9 +8,13 @@ import { useQuery } from "@tanstack/react-query";
 import { orpc } from "@/lib/orpc";
 import { KindeUser } from "@kinde-oss/kinde-auth-nextjs";
 import { Skeleton } from "@/components/ui/skeleton";
+import { ThreadSidebar } from "./_components/thread/ThreadSidebar";
+import { ThreadProvider, useThread } from "@/providers/ThreadProvider";
 
 const ChannelPageMain = () => {
     const { channelId } = useParams<{ channelId: string }>();
+
+    const { isThreadOpen } = useThread();
 
     const { data, error, isLoading } = useQuery(
         orpc.channel.get.queryOptions({
@@ -58,8 +62,22 @@ const ChannelPageMain = () => {
                     />
                 </div>
             </div>
+
+            {isThreadOpen && (
+                <ThreadSidebar />
+            )}
         </div>
     )
 }
 
-export default ChannelPageMain
+const ThisIsChannelPage = () => {
+
+    return (
+        <ThreadProvider>
+            <ChannelPageMain />
+        </ThreadProvider>
+    )
+}
+
+export default ThisIsChannelPage;
+

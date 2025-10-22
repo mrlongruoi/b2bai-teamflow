@@ -22,15 +22,19 @@ model Channel {
 }
 
 model Message {
-  id           String   @id @default(uuid())
-  content      String
-  imageUrl     String?
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
-  authorId     String // kinde user id
-  authorEmail  String // user email
-  authorName   String // display name
-  authorAvatar String // avatar url
-  Channel      Channel? @relation(fields: [channelId], references: [id])
-  channelId    String?
+  id            String    @id @default(uuid())
+  content       String
+  imageUrl      String?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  authorId      String // kinde user id
+  authorEmail   String // user email
+  authorName    String // display name
+  authorAvatar  String // avatar url
+  Channel       Channel?  @relation(fields: [channelId], references: [id])
+  channelId     String?
+  // thread relation
+  parentMessage Message?  @relation("MessageThread", fields: [threadId], references: [id], onDelete: Cascade)
+  threadId      String?
+  replies       Message[] @relation("MessageThread")
 }

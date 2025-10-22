@@ -92,7 +92,7 @@ export function EditMessage({ message, onCancel, onSave }: EditMessageProps) {
                                                 type="submit"
                                                 size="sm"
                                             >
-                                                {updateMutation.isError ? "Đang lưu..." : "Lưu tin nhắn"}
+                                                {updateMutation.isPending ? "Đang lưu..." : "Lưu tin nhắn"}
                                             </Button>
                                         </div>
                                     }
