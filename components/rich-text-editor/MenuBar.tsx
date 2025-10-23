@@ -4,6 +4,8 @@ import { Toggle } from "../ui/toggle";
 import { cn } from "@/lib/utils";
 import { Button } from "../ui/button";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "../ui/tooltip";
+import { ComposeAssistant } from "./ComposeAssistant";
+import { markdownToJson } from "@/lib/markdonw-to-json";
 
 interface MenuBarProps {
     editor: Editor | null;
@@ -25,12 +27,23 @@ export function MenuBar({ editor }: MenuBarProps) {
                 isOrderedList: editor.isActive("orderedList"),
                 canUndo: editor.can().undo(),
                 canRedo: editor.can().redo(),
+                currentContent: editor.getJSON(),
             }
         }
     })
 
     if (!editor) {
         return null;
+    }
+
+    const handleAcceptCompose = (markdown: string) => {
+        try {
+            const json = markdownToJson(markdown);
+
+            editor.commands.setContent(json);
+        } catch {
+            console.log('đã có lỗi xảy ra')
+        }
     }
 
     return (
@@ -190,6 +203,15 @@ export function MenuBar({ editor }: MenuBarProps) {
 
                         <TooltipContent>Chuyển tiếp</TooltipContent>
                     </Tooltip>
+                </div>
+
+                <div className="w-px h-6 bg-border mx-2"></div>
+
+                <div className="flex flex-wrap gap-1">
+                    <ComposeAssistant
+                        content={JSON.stringify(editorState?.currentContent)}
+                        onAccept={handleAcceptCompose}
+                    />
                 </div>
             </TooltipProvider>
         </div>
