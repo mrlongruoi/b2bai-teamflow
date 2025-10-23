@@ -7,7 +7,7 @@ interface AttachmentChipProps {
     onRemove: () => void;
 }
 
-export function AttachmentChip({ url, onRemove }: AttachmentChipProps) {
+export function AttachmentChip({ url, onRemove }: Readonly<AttachmentChipProps>) {
 
     return (
         <div className="group relative overflow-hidden rounded-md bg-muted size-12">

@@ -15,7 +15,7 @@ interface EditMessageProps {
     onSave: () => void;
 }
 
-export function EditMessage({ message, onCancel, onSave }: EditMessageProps) {
+export function EditMessage({ message, onCancel, onSave }: Readonly<EditMessageProps>) {
     const queryClient = useQueryClient();
 
     const form = useForm({

@@ -7,7 +7,7 @@ import { WorkspaceMemberList } from "./_components/WorkspaceMemberList"
 import { getQueryClient, HydrateClient } from "@/lib/query/hydration"
 import { orpc } from "@/lib/orpc"
 
-const ChannelListLayout = async ({ children }: { children: React.ReactNode, className?: string }) => {
+const ChannelListLayout = async ({ children, className }: { children: React.ReactNode, className?: string }) => {
   const queryClient = getQueryClient();
 
   await queryClient.prefetchQuery(

@@ -11,11 +11,11 @@ import {
 } from "@/components/ui/empty"
 import { CreateNewChannel } from "./_components/CreateNewChannel";
 
-interface iAppProps {
+interface WorkspaceIdPageProps {
   params: Promise<{ workspaceId: string }>
 }
 
-const WorkspaceIdPage = async ({ params }: iAppProps) => {
+const WorkspaceIdPage = async ({ params }: WorkspaceIdPageProps) => {
   const { workspaceId } = await params;
 
   const { channels } = await client.channel.list();

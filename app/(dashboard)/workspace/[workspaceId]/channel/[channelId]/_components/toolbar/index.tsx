@@ -2,13 +2,13 @@ import { MessageSquareText, Pencil } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useThread } from "@/providers/ThreadProvider";
 
-interface toolbarProps {
+interface ToolBarProps {
     messageId: string;
     canEdit: boolean;
     onEdit: () => void;
 }
 
-export function MessageHoverToolbar({ messageId, canEdit, onEdit }: toolbarProps) {
+export function MessageHoverToolbar({ messageId, canEdit, onEdit }: Readonly<ToolBarProps>) {
     const { toggleThread } = useThread();
 
     return (

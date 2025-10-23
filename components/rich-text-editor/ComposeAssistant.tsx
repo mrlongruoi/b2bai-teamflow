@@ -13,7 +13,7 @@ interface ComposeAssistantProps {
     onAccept?: (markdown: string) => void;
 }
 
-export function ComposeAssistant({ content, onAccept }: ComposeAssistantProps) {
+export function ComposeAssistant({ content, onAccept }: Readonly<ComposeAssistantProps>) {
     const [open, setOpen] = useState(false);
 
     const contentRef = useRef(content);

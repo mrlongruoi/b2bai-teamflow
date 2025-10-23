@@ -11,7 +11,7 @@ interface MenuBarProps {
     editor: Editor | null;
 }
 
-export function MenuBar({ editor }: MenuBarProps) {
+export function MenuBar({ editor }: Readonly<MenuBarProps>) {
     const editorState = useEditorState({
         editor,
         selector: ({ editor }) => {

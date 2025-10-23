@@ -4,13 +4,13 @@ import { EditorContent, useEditor } from '@tiptap/react'
 import { editorExtensions } from './extensions';
 import { MenuBar } from './MenuBar';
 
-interface iAppProps {
+interface RichTextEditorProps {
     field: any;
     sendButton: React.ReactNode;
     footerLeft?: React.ReactNode;
 }
 
-export function RichTextEditor({ field, sendButton, footerLeft }: iAppProps) {
+export function RichTextEditor({ field, sendButton, footerLeft }: Readonly<RichTextEditorProps>) {
     const editor = useEditor({
         immediatelyRender: false,
         content: (() => {

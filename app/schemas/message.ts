@@ -25,5 +25,4 @@ export const GroupedReactionSchema = z.object({
 
 export type CreateMessageSchemaType = z.infer<typeof createMessageSchema>;
 export type UpdateMessageSchemaType = z.infer<typeof updateMessageSchema>;
-// export type ToggleReactionSchemaType = z.infer<typeof toggleReactionSchema>;
 export type GroupedReactionSchemaType = z.infer<typeof GroupedReactionSchema>;

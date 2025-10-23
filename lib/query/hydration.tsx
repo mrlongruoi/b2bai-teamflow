@@ -4,7 +4,7 @@ import { cache } from 'react'
 
 export const getQueryClient = cache(createQueryClient)
 
-export function HydrateClient(props: { children: React.ReactNode, client: QueryClient }) {
+export function HydrateClient(props: Readonly<{ children: React.ReactNode, client: QueryClient }>) {
   return (
     <HydrationBoundary state={dehydrate(props.client)}>
       {props.children}

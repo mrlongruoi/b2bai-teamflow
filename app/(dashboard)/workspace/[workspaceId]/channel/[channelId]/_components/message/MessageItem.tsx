@@ -13,12 +13,12 @@ import { EditMessage } from "../toolbar/EditMessage";
 import { SafeContent } from "@/components/rich-text-editor/SafeContent";
 import { ReactionsBar } from "../reaction/ReactionsBar";
 
-interface iAppProps {
+interface MessageItemProps {
     message: MessageListItem;
     currentUserId: string;
 }
 
-export function MessageItem({ message, currentUserId }: iAppProps) {
+export function MessageItem({ message, currentUserId }: Readonly<MessageItemProps>) {
     const [isEditing, setIsEditing] = useState(false);
 
     const { openThread } = useThread();

@@ -20,7 +20,7 @@ interface ThreadReplyFormProps {
     user: KindeUser<Record<string, unknown>>;
 }
 
-export function ThreadReplyForm({ threadId, user }: ThreadReplyFormProps) {
+export function ThreadReplyForm({ threadId, user }: Readonly<ThreadReplyFormProps>) {
     const { channelId } = useParams<{ channelId: string }>()
 
     const upload = useAttachmentUpload();
