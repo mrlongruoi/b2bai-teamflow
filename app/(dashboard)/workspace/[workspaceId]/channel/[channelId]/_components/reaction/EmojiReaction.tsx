@@ -8,6 +8,12 @@ interface EmojiReactionProps {
     onSelect: (emoji: string) => void;
 }
 
+/**
+ * Render a ghost icon button that opens a popover emoji picker and invokes a callback when an emoji is selected.
+ *
+ * @param onSelect - Callback invoked with the selected emoji character
+ * @returns A React element rendering the emoji reaction button and its popover emoji picker
+ */
 export function EmojiReaction({ onSelect }: EmojiReactionProps) {
     const [open, setOpen] = useState(false);
 

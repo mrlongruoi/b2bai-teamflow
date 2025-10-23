@@ -8,6 +8,13 @@ interface ThreadReplyProps {
     selectedThreadId: string;
 }
 
+/**
+ * Render a single thread reply row with avatar, author, timestamp, content, optional attachment image, and reactions.
+ *
+ * @param message - The reply data containing author, content, timestamps, optional image, and reactions.
+ * @param selectedThreadId - The thread ID used as the reactions context for this reply.
+ * @returns A JSX element representing the rendered thread reply.
+ */
 export function ThreadReply({ message, selectedThreadId }: ThreadReplyProps) {
 
     return (

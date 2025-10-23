@@ -24,6 +24,17 @@ type MessagePage = {
 
 type InfiniteReplies = InfiniteData<MessagePage>
 
+/**
+ * Render reaction buttons and an emoji picker for a message and handle optimistic reaction toggles.
+ *
+ * Handles toggling a reaction via a mutation that optimistically updates cached data for either a thread
+ * or a channel message list, and shows success or error toasts based on the outcome.
+ *
+ * @param context - Optional context object that selects which cache to update:
+ *   - `{ type: 'thread', threadId: string }` to update a thread's parent or messages
+ *   - `{ type: 'list', channelId: string }` (or undefined) to update the channel message list
+ * @returns The JSX element containing reaction buttons and an emoji picker for the specified message
+ */
 export function ReactionsBar({ messageId, reactions, context }: ReactionsBarProps) {
     const { channelId } = useParams<{ channelId: string }>();
 
