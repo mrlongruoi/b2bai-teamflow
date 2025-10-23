@@ -45,7 +45,7 @@ export function ThreadSidebarSkeleton() {
                         {/* reply skeleton */}
                         {Array.from({ length: 3 }).map((_, i) => (
                             <div className="flex space-x-3 px-2" key={i}>
-                                <Skeleton className="size-8 rounded--full shrink-0" />
+                                <Skeleton className="size-8 rounded-full shrink-0" />
                                 <div className="flex-1 space-y-1">
                                     <div className="flex items-center space-x-2">
                                         <Skeleton className="h-3 w-16" />

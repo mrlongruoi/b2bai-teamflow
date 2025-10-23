@@ -1,3 +1,5 @@
+// "use client";
+
 import Image from "next/image";
 import { useCallback, useState } from "react";
 import { MessageSquare } from "lucide-react";
@@ -9,6 +11,7 @@ import { getAvatar } from "@/lib/get-avatar";
 import { MessageHoverToolbar } from "../toolbar";
 import { EditMessage } from "../toolbar/EditMessage";
 import { SafeContent } from "@/components/rich-text-editor/SafeContent";
+import { ReactionsBar } from "../reaction/ReactionsBar";
 
 interface iAppProps {
     message: MessageListItem;
@@ -86,17 +89,24 @@ export function MessageItem({ message, currentUserId }: iAppProps) {
                             </div>
                         )}
 
-                        {message.repliesCount > 0 && (
+                        {/* reactions */}
+                        <ReactionsBar 
+                            messageId={message.id}
+                            reactions={message.reactions}
+                            context={{type: 'list', channelId: message.channelId!}}
+                        />
+
+                        {message.replyCount > 0 && (
                             <button
                                 type="button"
-                                className="mt-1 inline-flex items-center gap-1 text-xs text-shadow-muted-foreground hover:text-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-border cursor-pointer"
+                                className="mt-1 inline-flex items-center gap-1 text-xs text-muted-foreground hover:text-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-border cursor-pointer"
                                 onClick={() => openThread(message.id)}
                                 onMouseEnter={prefetchThread}
                             >
                                 <MessageSquare className="size-3.5" />
                                 <span>
-                                    {message.repliesCount}
-                                    {message.repliesCount === 1 ? 'hồi đáp' : 'câu trả lời'}
+                                    {message.replyCount}{" "}
+                                    {message.replyCount === 1 ? 'hồi đáp' : 'câu trả lời'}
                                 </span>
                                 <span className="opacity-0 group-hover:opacity-100 transition-opacity">
                                     Xem Thread

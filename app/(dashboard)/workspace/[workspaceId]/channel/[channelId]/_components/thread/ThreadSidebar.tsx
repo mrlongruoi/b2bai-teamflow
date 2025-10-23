@@ -1,3 +1,5 @@
+// 'use client';
+
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { ChevronDown, MessageSquare, X } from "lucide-react";
@@ -208,6 +210,7 @@ export function ThreadSidebar({ user }: ThreadSidebarProps) {
                                         <ThreadReply
                                             key={reply.id}
                                             message={reply}
+                                            selectedThreadId={selectedThreadId!}
                                         />
                                     ))}
                                 </div>

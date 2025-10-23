@@ -11,7 +11,6 @@ import { MessageComposer } from "../message/MessageComposer";
 import { Form, FormControl, FormField, FormItem } from "@/components/ui/form";
 import { createMessageSchema, CreateMessageSchemaType } from "@/app/schemas/message"
 import { toast } from "sonner";
-import { Message } from "@/lib/generated/prisma";
 import { KindeUser } from "@kinde-oss/kinde-auth-nextjs";
 import { getAvatar } from "@/lib/get-avatar";
 import { MessageListItem } from "@/lib/types";
@@ -63,7 +62,7 @@ export function ThreadReplyForm({ threadId, user }: ThreadReplyFormProps) {
 
                 const previous = queryClient.getQueryData(listOptions.queryKey);
 
-                const optimistic: Message = {
+                const optimistic: MessageListItem = {
                     id: `optimistic:${crypto.randomUUID()}`,
                     content: data.content,
                     createdAt: new Date(),
@@ -75,6 +74,8 @@ export function ThreadReplyForm({ threadId, user }: ThreadReplyFormProps) {
                     channelId: data.channelId,
                     threadId: data.threadId!,
                     imageUrl: data.imageUrl ?? null,
+                    replyCount: 0,
+                    reactions: [],
                 };
 
                 queryClient.setQueryData(listOptions.queryKey, (old) => {
@@ -97,7 +98,7 @@ export function ThreadReplyForm({ threadId, user }: ThreadReplyFormProps) {
                             items: page.items.map((m) =>
                                 m.id === threadId ? {
                                     ...m,
-                                    repliesCount: m.repliesCount + 1,
+                                    replyCount: m.replyCount + 1,
                                 }
                                     : m)
                         }));
