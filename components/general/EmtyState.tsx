@@ -10,6 +10,15 @@ interface EmptyStateProps {
     href: string;
 }
 
+/**
+ * Renders a standardized empty state UI with a header icon, title, description, and an action link.
+ *
+ * @param title - Heading text displayed in the empty state
+ * @param description - Supporting description text displayed under the title
+ * @param buttonText - Label shown inside the action link button
+ * @param href - Destination URL for the action link
+ * @returns A React element representing the empty state layout
+ */
 export function EmptyState({ title, description, buttonText, href }: Readonly<EmptyStateProps>) {
 
     return (

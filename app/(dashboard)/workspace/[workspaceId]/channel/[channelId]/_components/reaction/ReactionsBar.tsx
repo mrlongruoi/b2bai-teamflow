@@ -24,6 +24,16 @@ type MessagePage = {
 
 type InfiniteReplies = InfiniteData<MessagePage>
 
+/**
+ * Renders a bar of reaction buttons for a message and handles toggling reactions with optimistic cache updates.
+ *
+ * Performs optimistic updates to the query cache and shows a success or error toast based on the mutation result.
+ *
+ * @param messageId - ID of the message whose reactions are displayed
+ * @param reactions - Array of grouped reaction objects (each includes `emoji`, `count`, and `reactedByMe`)
+ * @param context - Optional context describing where the message lives: either `{ type: 'thread', threadId: string }` or `{ type: 'list', channelId: string }`
+ * @returns The rendered reaction bar element
+ */
 export function ReactionsBar({ messageId, reactions, context }: Readonly<ReactionsBarProps>) {
     const { channelId } = useParams<{ channelId: string }>();
 

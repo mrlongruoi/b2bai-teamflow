@@ -8,6 +8,15 @@ interface ImageUploadModalProps {
     onUploaded: (url: string) => void;
 }
 
+/**
+ * Renders a modal dialog that lets the user upload an image and reports the uploaded image URL.
+ *
+ * Displays a success toast on successful upload or an error toast on failure.
+ *
+ * @param onOpenChange - Callback invoked when the modal open state changes with the new boolean state.
+ * @param onUploaded - Callback invoked after a successful upload with the uploaded image URL.
+ * @returns The dialog element containing the image upload dropzone and associated handlers.
+ */
 export function ImageUploadModal({ open, onOpenChange, onUploaded }: Readonly<ImageUploadModalProps>) {
 
     return (

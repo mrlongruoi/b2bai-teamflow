@@ -10,6 +10,17 @@ interface RichTextEditorProps {
     footerLeft?: React.ReactNode;
 }
 
+/**
+ * Render a TipTap-based rich text editor wired to a field-like value/onChange interface.
+ *
+ * The editor initializes from `field.value` (parsed as JSON when present) and calls `field.onChange`
+ * with the editor document serialized as a JSON string whenever the content updates.
+ *
+ * @param field - Object containing `value` (stringified editor JSON) and an optional `onChange` callback invoked with the new stringified editor JSON
+ * @param sendButton - UI element rendered on the right side of the footer (typically a send/submit control)
+ * @param footerLeft - Optional UI element rendered on the left side of the footer
+ * @returns The React element tree for the rich text editor with toolbar, editable area, and footer
+ */
 export function RichTextEditor({ field, sendButton, footerLeft }: Readonly<RichTextEditorProps>) {
     const editor = useEditor({
         immediatelyRender: false,

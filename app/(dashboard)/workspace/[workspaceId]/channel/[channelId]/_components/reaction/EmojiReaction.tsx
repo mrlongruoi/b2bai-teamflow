@@ -8,6 +8,12 @@ interface EmojiReactionProps {
     onSelect: (emoji: string) => void;
 }
 
+/**
+ * Renders a button that opens an emoji picker and calls the provided callback when an emoji is selected.
+ *
+ * @param onSelect - Callback invoked with the selected emoji character.
+ * @returns The emoji reaction button and popover UI.
+ */
 export function EmojiReaction({ onSelect }: Readonly<EmojiReactionProps>) {
     const [open, setOpen] = useState(false);
 

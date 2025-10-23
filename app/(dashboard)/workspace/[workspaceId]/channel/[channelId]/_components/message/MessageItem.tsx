@@ -18,6 +18,15 @@ interface MessageItemProps {
     currentUserId: string;
 }
 
+/**
+ * Render a single message row including avatar, author/timestamp, content, optional image, reactions, and thread navigation, with inline edit support for the author.
+ *
+ * Renders the message author avatar and name, formatted Vietnamese timestamp, the message content (or an edit form when editing), an attached image if present, a reactions bar, and a thread button when replies exist. Prefetches thread data on hover and exposes edit actions when the current user is the author.
+ *
+ * @param message - The message item to render (content, author, timestamps, attachments, reactions, and thread metadata).
+ * @param currentUserId - The id of the currently authenticated user used to determine edit permissions.
+ * @returns A React element representing the message item UI.
+ */
 export function MessageItem({ message, currentUserId }: Readonly<MessageItemProps>) {
     const [isEditing, setIsEditing] = useState(false);
 

@@ -15,6 +15,16 @@ interface EditMessageProps {
     onSave: () => void;
 }
 
+/**
+ * Render an edit form for a channel message and handle saving or cancelling.
+ *
+ * Provides a controlled form bound to the message content. When submitted, it sends an update mutation, updates the cached paginated message list for the message's channel, shows a success or error toast, and invokes `onSave` on success. `onCancel` is invoked when the user cancels editing.
+ *
+ * @param message - The message to edit (used to populate default form values and identify which cached message to update)
+ * @param onCancel - Callback invoked when editing is cancelled
+ * @param onSave - Callback invoked after a successful save
+ * @returns A JSX element containing the edit form UI
+ */
 export function EditMessage({ message, onCancel, onSave }: Readonly<EditMessageProps>) {
     const queryClient = useQueryClient();
 
