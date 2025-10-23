@@ -1,5 +1,11 @@
 import z from "zod";
 
+/**
+ * Normalize a channel name into a lowercase, dash-separated alphanumeric identifier.
+ *
+ * @param name - The original channel name to normalize.
+ * @returns The normalized name containing only lowercase letters, digits, and single hyphens with no leading or trailing hyphens.
+ */
 export function transformChannelName(name: string): string {
   return name
     .toLowerCase()

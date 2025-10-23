@@ -13,6 +13,16 @@ interface MessageComposerProps {
     upload: UseAttachmentUploadType;
 }
 
+/**
+ * Renders a message composer UI with a controlled rich text editor, submit button, and attachment controls.
+ *
+ * @param value - Current editor content
+ * @param onChange - Callback invoked with the new editor content
+ * @param onSubmit - Callback invoked when the send button is clicked
+ * @param isSubmitting - When true, disables the send button to prevent duplicate submissions
+ * @param upload - Attachment upload controls and state (e.g., `stagedUrl`, `isOpen`, `setIsOpen`, `onUploaded`, `clear`)
+ * @returns A JSX element that displays the composer, manages attachment staging, and integrates an image/file upload modal
+ */
 export function MessageComposer({ value, onChange, onSubmit, isSubmitting, upload }: Readonly<MessageComposerProps>) {
 
     return (

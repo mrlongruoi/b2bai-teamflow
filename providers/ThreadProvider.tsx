@@ -12,6 +12,12 @@ interface ThreadContextType {
 
 const ThreadContext = createContext<ThreadContextType | undefined>(undefined);
 
+/**
+ * Provides ThreadContext to descendants and manages the currently selected thread and its open/closed state.
+ *
+ * @param children - The React nodes to render inside the provider.
+ * @returns The context provider element that supplies thread state and control functions (`openThread`, `closeThread`, `toggleThread`, `selectedThreadId`, `isThreadOpen`) to its descendants.
+ */
 export function ThreadProvider({ children }: Readonly<{ children: ReactNode }>) {
     const [selectedThreadId, setSelectedThreadId] = useState<string | null>(null);
 

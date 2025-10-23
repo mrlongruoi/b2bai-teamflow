@@ -9,6 +9,18 @@ import { MessageItem } from "./message/MessageItem"
 import { Button } from "@/components/ui/button";
 import { EmptyState } from "@/components/general/EmtyState";
 
+/**
+ * Render a scrollable, paginated message list for the current channel with automatic bottom-pin behavior.
+ *
+ * Displays messages fetched via an infinite query in chronological order (oldest at top, newest at bottom).
+ * On first load the view scrolls to the bottom; when the viewport is near the bottom new incoming messages
+ * keep the view pinned. The component loads earlier pages when scrolled near the top, preserves scroll
+ * position after prepending pages, observes size/DOM/image changes to maintain bottom pinning, and exposes
+ * a floating button to jump to the latest message. Renders an empty state when there are no messages and
+ * a transient overlay while previous pages are being fetched.
+ *
+ * @returns A React element containing the channel message list UI.
+ */
 export function MessageList() {
     const { channelId } = useParams<{ channelId: string }>();
 

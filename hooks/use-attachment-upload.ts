@@ -2,6 +2,17 @@
 
 import { useCallback, useMemo, useState } from "react";
 
+/**
+ * Manages UI state for an attachment upload flow and exposes helpers to interact with it.
+ *
+ * @returns An object containing:
+ * - `isOpen` — whether the upload UI is open
+ * - `setIsOpen` — setter to open or close the upload UI
+ * - `onUploaded` — callback that accepts an uploaded file URL and updates staged state, stops uploading, and closes the UI
+ * - `stagedUrl` — the currently staged attachment URL, or `null` if none
+ * - `isUploading` — whether an upload is in progress
+ * - `clear` — resets the staged URL and uploading state
+ */
 export function useAttachmentUpload() {
   const [isOpen, setIsOpen] = useState(false);
 
