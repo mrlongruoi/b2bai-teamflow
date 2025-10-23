@@ -104,9 +104,9 @@ function AnimatedGroup({
   className,
   variants,
   preset,
-  as = 'div',
-  asChild = 'div',
-}: AnimatedGroupProps) {
+  as = "div",
+  asChild = "div",
+}: Readonly<AnimatedGroupProps>) {
   const selectedVariants = {
     item: addDefaultVariants(preset ? presetVariants[preset] : {}),
     container: addDefaultVariants(defaultContainerVariants),
@@ -114,27 +114,45 @@ function AnimatedGroup({
   const containerVariants = variants?.container || selectedVariants.container;
   const itemVariants = variants?.item || selectedVariants.item;
 
-  const MotionComponent = React.useMemo(
-    () => motion.create(as),
-    [as]
+  const MotionComponent = React.useMemo(() => motion.create(as), [as]);
+  const MotionChild = React.useMemo(() => motion.create(asChild), [asChild]);
+  const renderedChildren = React.useMemo(
+    () => React.Children.toArray(children),
+    [children],
   );
-  const MotionChild = React.useMemo(
-    () => motion.create(asChild),
-    [asChild]
+
+  const renderMotionChild = React.useCallback(
+    (child: React.ReactNode) => {
+      if (React.isValidElement(child)) {
+        return (
+          <MotionChild key={child.key ?? undefined} variants={itemVariants}>
+            {child}
+          </MotionChild>
+        );
+      }
+
+      const fallbackKey =
+        typeof child === "string" || typeof child === "number"
+          ? `primitive-${child}`
+          : `primitive-${typeof child}`;
+
+      return (
+        <MotionChild key={fallbackKey} variants={itemVariants}>
+          {child}
+        </MotionChild>
+      );
+    },
+    [MotionChild, itemVariants],
   );
 
   return (
     <MotionComponent
-      initial='hidden'
-      animate='visible'
+      initial="hidden"
+      animate="visible"
       variants={containerVariants}
       className={className}
     >
-      {React.Children.map(children, (child, index) => (
-        <MotionChild key={index} variants={itemVariants}>
-          {child}
-        </MotionChild>
-      ))}
+      {renderedChildren.map(renderMotionChild)}
     </MotionComponent>
   );
 }

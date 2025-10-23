@@ -114,42 +114,62 @@ const presetVariants: Record<
 const AnimationComponent: React.FC<{
   segment: string;
   variants: Variants;
-  per: 'line' | 'word' | 'char';
+  per: "line" | "word" | "char";
   segmentWrapperClassName?: string;
 }> = React.memo(({ segment, variants, per, segmentWrapperClassName }) => {
-  const content =
-    per === 'line' ? (
-      <motion.span variants={variants} className='block'>
+  const charSegments = React.useMemo(() => {
+    if (per !== "char") {
+      return [];
+    }
+
+    const counts = new Map<string, number>();
+    return segment.split("").map((char) => {
+      const occurrence = (counts.get(char) ?? 0) + 1;
+      counts.set(char, occurrence);
+      return { char, key: `${char}-${occurrence}` };
+    });
+  }, [per, segment]);
+
+  let content: React.ReactNode;
+
+  if (per === "line") {
+    content = (
+      <motion.span variants={variants} className="block">
         {segment}
       </motion.span>
-    ) : per === 'word' ? (
+    );
+  } else if (per === "word") {
+    content = (
       <motion.span
-        aria-hidden='true'
+        aria-hidden="true"
         variants={variants}
-        className='inline-block whitespace-pre'
+        className="inline-block whitespace-pre"
       >
         {segment}
       </motion.span>
-    ) : (
-      <motion.span className='inline-block whitespace-pre'>
-        {segment.split('').map((char, charIndex) => (
+    );
+  } else {
+    content = (
+      <motion.span className="inline-block whitespace-pre">
+        {charSegments.map(({ char, key }) => (
           <motion.span
-            key={`char-${charIndex}`}
-            aria-hidden='true'
+            key={key}
+            aria-hidden="true"
             variants={variants}
-            className='inline-block whitespace-pre'
+            className="inline-block whitespace-pre"
           >
             {char}
           </motion.span>
         ))}
       </motion.span>
     );
+  }
 
   if (!segmentWrapperClassName) {
     return content;
   }
 
-  const defaultWrapperClassName = per === 'line' ? 'block' : 'inline-block';
+  const defaultWrapperClassName = per === "line" ? "block" : "inline-block";
 
   return (
     <span className={cn(defaultWrapperClassName, segmentWrapperClassName)}>
@@ -206,24 +226,26 @@ const createVariantsWithTransition = (
   };
 };
 
-export function TextEffect({
-  children,
-  per = 'word',
-  as = 'p',
-  variants,
-  className,
-  preset = 'fade',
-  delay = 0,
-  speedReveal = 1,
-  speedSegment = 1,
-  trigger = true,
-  onAnimationComplete,
-  onAnimationStart,
-  segmentWrapperClassName,
-  containerTransition,
-  segmentTransition,
-  style,
-}: TextEffectProps) {
+export function TextEffect(
+  {
+    children,
+    per = "word",
+    as = "p",
+    variants,
+    className,
+    preset = "fade",
+    delay = 0,
+    speedReveal = 1,
+    speedSegment = 1,
+    trigger = true,
+    onAnimationComplete,
+    onAnimationStart,
+    segmentWrapperClassName,
+    containerTransition,
+    segmentTransition,
+    style,
+  }: Readonly<TextEffectProps>,
+) {
   const segments = splitText(children, per);
   const MotionTag = motion[as as keyof typeof motion] as typeof motion.div;
 
@@ -277,7 +299,7 @@ export function TextEffect({
           onAnimationStart={onAnimationStart}
           style={style}
         >
-          {per !== 'line' ? <span className='sr-only'>{children}</span> : null}
+          {per === "line" ? null : <span className="sr-only">{children}</span>}
           {segments.map((segment, index) => (
             <AnimationComponent
               key={`${per}-${index}-${segment}`}

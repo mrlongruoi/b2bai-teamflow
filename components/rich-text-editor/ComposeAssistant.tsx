@@ -47,9 +47,9 @@ export function ComposeAssistant({ content, onAccept }: Readonly<ComposeAssistan
         },
     })
 
-    const lastAssistan = messages.findLast((m) => m.role === 'assistant');
+    const lastAssistant = messages.findLast((m) => m.role === 'assistant');
 
-    const composeText = lastAssistan?.parts
+    const composeText = lastAssistant?.parts
       .filter((p) => p.type === "text")
       .map((p) => p.text)
       .join("\n\n") ?? "";
@@ -65,7 +65,7 @@ export function ComposeAssistant({ content, onAccept }: Readonly<ComposeAssistan
             onClick={() => {
               clearError();
               setMessages([]);
-              sendMessage({ text: "Tóm tắt Thread" });
+              sendMessage({ text: "Viết lại" });
             }}
           >
             Thử lại
@@ -120,7 +120,7 @@ export function ComposeAssistant({ content, onAccept }: Readonly<ComposeAssistan
                 <Button
                     type="button"
                     size="sm"
-                    className="relative overflow-hidden rounded-full bg-gradient-to-r from-violet-600 to-fuchsia-600 text-white shadow-md hover:shadow-lg focus-visible:ring-2 focus-visible:ring-ring"
+                    className="relative overflow-hidden rounded-full bg-linear-to-r from-violet-600 to-fuchsia-600 text-white shadow-md hover:shadow-lg focus-visible:ring-2 focus-visible:ring-ring"
                 >
                     <span className="flex items-center gap-1.5">
                         <Sparkles className="size-3.5" />
@@ -130,11 +130,11 @@ export function ComposeAssistant({ content, onAccept }: Readonly<ComposeAssistan
             </PopoverTrigger>
 
             <PopoverContent
-                className="w-[25rem] p-0"
+                className="w-100 p-0"
             >
                 <div className="flex items-center justify-between px-4 py-3 border-b">
                     <div className="flex items-center gap-2">
-                        <span className="relative inline-flex items-center justify-center rounded-full bg-gradient-to-r from-violet-600 to-fuchsia-600 py-1.5 px-4 gap-1.5">
+                        <span className="relative inline-flex items-center justify-center rounded-full bg-linear-to-r from-violet-600 to-fuchsia-600 py-1.5 px-4 gap-1.5">
                             <Sparkles className="size-3.5 text-white" />
                             <span className="text-sm font-medium text-white">Trợ lý soạn thảo (Xem trước)</span>
                         </span>

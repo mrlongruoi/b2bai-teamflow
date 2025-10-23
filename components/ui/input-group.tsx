@@ -12,7 +12,6 @@ function InputGroup({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
       data-slot="input-group"
-      role="group"
       className={cn(
         "group/input-group border-input dark:bg-input/30 relative flex w-full items-center rounded-md border shadow-xs transition-[color,box-shadow] outline-none",
         "h-9 min-w-0 has-[>textarea]:h-auto",
@@ -60,23 +59,35 @@ const inputGroupAddonVariants = cva(
 function InputGroupAddon({
   className,
   align = "inline-start",
+  type = "button",
   ...props
-}: React.ComponentProps<"div"> & VariantProps<typeof inputGroupAddonVariants>) {
+}: React.ComponentProps<"button"> & VariantProps<typeof inputGroupAddonVariants>) {
+  const focusAssociatedInput = (container: HTMLElement | null) => {
+    const input = container?.parentElement?.querySelector("input");
+    input?.focus();
+  };
+
+  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    const target = event.target as HTMLElement;
+    if (
+      target !== event.currentTarget &&
+      target.closest("button, a, input, textarea, select, [role='button']")
+    ) {
+      return;
+    }
+    focusAssociatedInput(event.currentTarget);
+  };
+
   return (
-    <div
-      role="group"
+    <button
+      type={type}
       data-slot="input-group-addon"
       data-align={align}
       className={cn(inputGroupAddonVariants({ align }), className)}
-      onClick={(e) => {
-        if ((e.target as HTMLElement).closest("button")) {
-          return
-        }
-        e.currentTarget.parentElement?.querySelector("input")?.focus()
-      }}
+      onClick={handleClick}
       {...props}
     />
-  )
+  );
 }
 
 const inputGroupButtonVariants = cva(

@@ -8,7 +8,7 @@ const THREAD_REPLY_SKELETON_KEYS = [
 
 export function ThreadSidebarSkeleton() {
 	return (
-		<div className="w-[30rem] border-l flex flex-col h-full">
+		<div className="w-120 border-l flex flex-col h-full">
 			<div className="border-b h-14 px-4 flex items-center justify-between">
 				<div className="flex items-center gap-x-2">
 					<Skeleton className="size-4" />

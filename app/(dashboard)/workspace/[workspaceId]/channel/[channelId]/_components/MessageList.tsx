@@ -210,7 +210,7 @@ export function MessageList() {
 
             {isFetchingNextPage && (
                 <div className="pointer-events-none absolute top-0 left-0 right-0 z-20 flex items-center justify-center py-2">
-                    <div className="flex items-center gap-2 rounded-md bg-gradient-to-b from-white/80 to-transparent dark:from-neutral-900/80 backdrop-blur px-3 py-1">
+                    <div className="flex items-center gap-2 rounded-md bg-linear-to-r from-white/80 to-transparent dark:from-neutral-900/80 backdrop-blur px-3 py-1">
                         <Loader2 className="size-4 animate-spin text-muted-foreground" />
                         <span>Tải tin nhắn trước...</span>
                     </div>

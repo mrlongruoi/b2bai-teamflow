@@ -26,7 +26,7 @@ const WorkspaceIdPage = async ({ params }: WorkspaceIdPageProps) => {
 
   return (
     <div className="p-16 flex flex-1">
-      <Empty className="border border-dashed from-muted/50 to-background h-full bg-gradient-to-b from-30%">
+      <Empty className="border border-dashed from-muted/50 to-background h-full bg-linear-to-r from-30%">
         <EmptyHeader>
           <EmptyMedia variant="icon">
             <GrChannel />

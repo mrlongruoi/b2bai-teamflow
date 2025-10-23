@@ -58,12 +58,12 @@ function EmojiPickerEmoji({
   emoji,
   className,
   ...props
-}: EmojiPickerListEmojiProps) {
+}: Readonly<EmojiPickerListEmojiProps>) {
   return (
     <button
       {...props}
       className={cn(
-        "data-[active]:bg-accent flex size-7 items-center justify-center rounded-sm text-base",
+        "data-active:bg-accent flex size-7 items-center justify-center rounded-sm text-base",
         className
       )}
       data-slot="emoji-picker-emoji"
@@ -76,7 +76,7 @@ function EmojiPickerEmoji({
 function EmojiPickerCategoryHeader({
   category,
   ...props
-}: EmojiPickerListCategoryHeaderProps) {
+}: Readonly<EmojiPickerListCategoryHeaderProps>) {
   return (
     <div
       {...props}

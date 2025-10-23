@@ -38,7 +38,7 @@ export function ThreadReply({ message, selectedThreadId }: Readonly<ThreadReplyP
                 </div>
 
                 <SafeContent
-                    className="text-sm break-words prose dark:prose-invert max-w-none marker:text-primary"
+                    className="text-sm wrap-break-word prose dark:prose-invert max-w-none marker:text-primary"
                     content={message.content}
                 />
 
@@ -49,7 +49,7 @@ export function ThreadReply({ message, selectedThreadId }: Readonly<ThreadReplyP
                             alt="Message Attachment"
                             width={512}
                             height={512}
-                            className="rounded-md max-h-[320px] w-auto object-contain"
+                            className="rounded-md max-h-80 w-auto object-contain"
                         />
                     </div>
                 )}
