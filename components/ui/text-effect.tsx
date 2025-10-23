@@ -226,6 +226,27 @@ const createVariantsWithTransition = (
   };
 };
 
+/**
+ * Render animated text by splitting `children` into segments (lines, words, or characters) and applying configurable animation presets and timing.
+ *
+ * @param children - Text content to animate.
+ * @param per - How to split text into segments: `"line"`, `"word"`, or `"char"`.
+ * @param as - HTML tag to use as the motion container (for example `"p"`, `"div"`, `"span"`).
+ * @param variants - Optional Framer Motion variants to override container/item animations.
+ * @param preset - Named animation preset to use when `variants` are not provided (e.g., `"fade"`, `"slide"`, `"blur"`, `"scale"`).
+ * @param delay - Initial delay (in seconds) before the container's child animations start.
+ * @param speedReveal - Multiplier for per-segment stagger timing (values >1 speed up reveal, <1 slow it).
+ * @param speedSegment - Multiplier for individual segment animation durations (values >1 shorten duration, <1 lengthen it).
+ * @param trigger - If `true`, the animation is rendered; if `false`, nothing is rendered.
+ * @param onAnimationStart - Optional callback invoked when the container animation starts.
+ * @param onAnimationComplete - Optional callback invoked when the container animation completes.
+ * @param segmentWrapperClassName - Optional class applied to each segment's wrapper element.
+ * @param containerTransition - Optional transition overrides merged into the container's computed transition.
+ * @param segmentTransition - Optional transition overrides merged into each segment/item transition.
+ * @param className - Optional class applied to the motion container.
+ * @param style - Optional inline styles applied to the motion container.
+ * @returns A React element that animates the provided text according to the specified splitting, preset/variants, and timing options.
+ */
 export function TextEffect(
   {
     children,

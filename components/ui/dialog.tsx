@@ -6,6 +6,12 @@ import { XIcon } from "lucide-react"
 
 import { cn } from "@/lib/utils"
 
+/**
+ * Renders a Dialog root element that wraps Radix UI's DialogPrimitive.Root and adds a `data-slot` attribute.
+ *
+ * @param props - Props forwarded to DialogPrimitive.Root.
+ * @returns The rendered Dialog root element with `data-slot="dialog"`.
+ */
 function Dialog({
   ...props
 }: Readonly<React.ComponentProps<typeof DialogPrimitive.Root>>) {
@@ -18,6 +24,12 @@ function DialogTrigger({
   return <DialogPrimitive.Trigger data-slot="dialog-trigger" {...props} />
 }
 
+/**
+ * Renders a dialog portal element and forwards all received props while adding data-slot="dialog-portal".
+ *
+ * @param props - Props forwarded to the underlying portal element.
+ * @returns The dialog portal element with forwarded props and a `data-slot="dialog-portal"` attribute.
+ */
 function DialogPortal({
   ...props
 }: Readonly<React.ComponentProps<typeof DialogPrimitive.Portal>>) {

@@ -42,6 +42,20 @@ function useCarousel() {
   return context
 }
 
+/**
+ * Render a carousel provider and container wired to an Embla Carousel instance.
+ *
+ * Initializes an Embla carousel, exposes navigation state and controls via context,
+ * and renders the container that houses carousel children.
+ *
+ * @param orientation - Preferred orientation for the carousel ("horizontal" or "vertical"); used to set the Embla axis when provided
+ * @param opts - Embla options merged with the resolved axis; pass any Embla configuration here
+ * @param plugins - Embla plugins to initialize with the carousel
+ * @param setApi - Optional callback invoked with the Embla API instance once available
+ * @param className - Additional class names applied to the carousel container
+ * @param children - Elements that form the carousel content (items and controls)
+ * @returns The Carousel context provider wrapping the carousel container element
+ */
 function Carousel({
   orientation = "horizontal",
   opts,
@@ -166,6 +180,13 @@ function CarouselContent({ className, ...props }: React.ComponentProps<"div">) {
   )
 }
 
+/**
+ * Renders a single carousel slide container that adapts layout based on carousel orientation.
+ *
+ * The element includes `aria-roledescription="slide"` and a `data-slot="carousel-item"` attribute.
+ *
+ * @returns The slide container element with orientation-specific padding (`pl-4` for horizontal, `pt-4` for vertical`)
+ */
 function CarouselItem({ className, ...props }: React.ComponentProps<"div">) {
   const { orientation } = useCarousel()
 

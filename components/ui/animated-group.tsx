@@ -99,6 +99,17 @@ const addDefaultVariants = (variants: Variants) => ({
   visible: { ...defaultItemVariants.visible, ...variants.visible },
 });
 
+/**
+ * Renders a motion-enabled container that applies coordinated enter animations to its children.
+ *
+ * The container uses `container` variants and each child is wrapped with an item motion element applying `item` variants.
+ *
+ * @param variants - Optional override for container and item `Variants`; when omitted, presets and defaults are used.
+ * @param preset - Optional named preset that selects a predefined item animation (e.g., "fade", "slide", "scale", "blur", "zoom", "flip", "bounce", "rotate", "swing").
+ * @param as - Element type used for the outer motion container (defaults to `"div"`).
+ * @param asChild - Element type used to wrap each child with a motion element (defaults to `"div"`).
+ * @returns The rendered React element: a motion container with each child wrapped by a motion item that applies item variants.
+ */
 function AnimatedGroup({
   children,
   className,

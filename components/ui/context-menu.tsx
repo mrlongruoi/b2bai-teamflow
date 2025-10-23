@@ -6,6 +6,12 @@ import { CheckIcon, ChevronRightIcon, CircleIcon } from "lucide-react"
 
 import { cn } from "@/lib/utils"
 
+/**
+ * Renders a context menu root element and forwards all provided props.
+ *
+ * @param props - Props that are passed through to the underlying context menu root element.
+ * @returns The rendered context menu root element.
+ */
 function ContextMenu({
   ...props
 }: Readonly<React.ComponentProps<typeof ContextMenuPrimitive.Root>>) {
@@ -28,6 +34,12 @@ function ContextMenuGroup({
   )
 }
 
+/**
+ * Renders a Radix ContextMenu Portal and forwards all received props to it.
+ *
+ * @param props - Props forwarded to the underlying `ContextMenuPrimitive.Portal`
+ * @returns A portal element with `data-slot="context-menu-portal"`
+ */
 function ContextMenuPortal({
   ...props
 }: Readonly<React.ComponentProps<typeof ContextMenuPrimitive.Portal>>) {
@@ -36,6 +48,11 @@ function ContextMenuPortal({
   )
 }
 
+/**
+ * Renders a Radix UI Context Menu Sub with a fixed data-slot and forwards all props.
+ *
+ * @returns A `ContextMenuPrimitive.Sub` element with `data-slot="context-menu-sub"` and the provided props forwarded.
+ */
 function ContextMenuSub({
   ...props
 }: Readonly<React.ComponentProps<typeof ContextMenuPrimitive.Sub>>) {
@@ -53,6 +70,12 @@ function ContextMenuRadioGroup({
   )
 }
 
+/**
+ * Render a context menu sub-trigger that displays its children and a right-aligned chevron, optionally applying inset padding.
+ *
+ * @param inset - When true, apply inset left padding to align the trigger with other indented items
+ * @returns The rendered ContextMenu SubTrigger element
+ */
 function ContextMenuSubTrigger({
   className,
   inset,
@@ -77,6 +100,15 @@ function ContextMenuSubTrigger({
   )
 }
 
+/**
+ * Renders a styled context-menu subcontent panel with default classes and forwards all props.
+ *
+ * The element includes a data-slot of "context-menu-sub-content", applies positioning,
+ * animation, sizing, and visual styling, and forwards any additional props to the underlying
+ * Radix SubContent component.
+ *
+ * @returns The rendered ContextMenu SubContent element with applied classes and forwarded props.
+ */
 function ContextMenuSubContent({
   className,
   ...props
@@ -93,6 +125,12 @@ function ContextMenuSubContent({
   )
 }
 
+/**
+ * Renders the context menu content element with default animations, sizing, and placement inside a portal.
+ *
+ * @param className - Additional CSS classes applied to the content element
+ * @returns The context menu content React element
+ */
 function ContextMenuContent({
   className,
   ...props
@@ -111,6 +149,14 @@ function ContextMenuContent({
   )
 }
 
+/**
+ * Renders a styled context menu item element with state- and variant-aware attributes.
+ *
+ * @param className - Additional CSS class names to merge with the component's default styles
+ * @param inset - When `true`, applies inset padding to visually indent the item
+ * @param variant - Visual variant of the item; `"destructive"` applies destructive styling, `"default"` applies standard styling
+ * @returns The rendered context menu item element
+ */
 function ContextMenuItem({
   className,
   inset,
@@ -134,6 +180,12 @@ function ContextMenuItem({
   )
 }
 
+/**
+ * Renders a checkbox-style item for the context menu with a positioned check indicator.
+ *
+ * @param checked - Whether the checkbox item is checked.
+ * @returns The rendered context menu checkbox item element.
+ */
 function ContextMenuCheckboxItem({
   className,
   children,
@@ -160,6 +212,15 @@ function ContextMenuCheckboxItem({
   )
 }
 
+/**
+ * Renders a context menu radio item with a positioned radio indicator and styling.
+ *
+ * Renders a Radix `RadioItem` configured for the context menu: applies the component's styling classes,
+ * sets `data-slot="context-menu-radio-item"`, includes a left-positioned `ItemIndicator` containing a `CircleIcon`,
+ * and renders the provided children.
+ *
+ * @returns A JSX element representing the context menu radio item.
+ */
 function ContextMenuRadioItem({
   className,
   children,
@@ -184,6 +245,13 @@ function ContextMenuRadioItem({
   )
 }
 
+/**
+ * Render a context menu label element with optional inset padding.
+ *
+ * @param inset - When `true`, applies additional left padding to indicate an inset label.
+ * @param className - Additional CSS classes to apply to the label.
+ * @returns The rendered context menu label element.
+ */
 function ContextMenuLabel({
   className,
   inset,

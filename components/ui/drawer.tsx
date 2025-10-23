@@ -17,6 +17,12 @@ function DrawerTrigger({
   return <DrawerPrimitive.Trigger data-slot="drawer-trigger" {...props} />
 }
 
+/**
+ * Wraps the Vaul Drawer Portal primitive and ensures the element has `data-slot="drawer-portal"`.
+ *
+ * @param props - Props forwarded to the underlying `DrawerPrimitive.Portal`
+ * @returns A portal element that forwards all received props to `DrawerPrimitive.Portal` with the `data-slot="drawer-portal"` attribute
+ */
 function DrawerPortal({
   ...props
 }: Readonly<React.ComponentProps<typeof DrawerPrimitive.Portal>>) {

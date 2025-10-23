@@ -1,5 +1,13 @@
 import { cn } from "@/lib/utils"
 
+/**
+ * Renders a styled kbd element representing a keyboard key.
+ *
+ * Applies base keyboard styling, merges any provided `className`, and forwards remaining props to the rendered element. The element includes `data-slot="kbd"` to enable contextual styling (e.g., tooltip variants).
+ *
+ * @param className - Additional class names to append to the component's computed classes
+ * @returns A React element for a styled keyboard key
+ */
 function Kbd({ className, ...props }: React.ComponentProps<"kbd">) {
   return (
     <kbd

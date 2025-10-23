@@ -21,6 +21,15 @@ const buttonGroupVariants = cva(
   }
 )
 
+/**
+ * Renders a styled container for grouping related controls with configurable orientation.
+ *
+ * The container applies variant-driven styling and exposes data attributes for slotting and orientation.
+ *
+ * @param className - Additional CSS class names to merge with the component's variant classes
+ * @param orientation - Layout orientation for the group; controls visual connection of child items (e.g., "horizontal" or "vertical")
+ * @returns The rendered div element that serves as the button group container
+ */
 function ButtonGroup({
   className,
   orientation,
@@ -56,6 +65,13 @@ function ButtonGroupText({
   )
 }
 
+/**
+ * Renders a styled Separator to use as a divider inside a ButtonGroup.
+ *
+ * @param className - Additional CSS class names to merge with the component's base styles.
+ * @param orientation - Orientation of the separator; defaults to `"vertical"`.
+ * @returns A Separator element configured for use as a button-group divider.
+ */
 function ButtonGroupSeparator({
   className,
   orientation = "vertical",

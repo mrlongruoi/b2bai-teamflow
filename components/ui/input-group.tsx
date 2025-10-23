@@ -8,6 +8,11 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 
+/**
+ * Renders a styled wrapper that groups input controls and addons, applying variant-driven layout and focus/error styles.
+ *
+ * @returns A div element with `data-slot="input-group"` that forwards received props and composes variant-based classes for alignment, focus, and error states.
+ */
 function InputGroup({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
@@ -56,6 +61,13 @@ const inputGroupAddonVariants = cva(
   }
 )
 
+/**
+ * Renders an input-group addon button that can focus the associated input when activated.
+ *
+ * @param align - Position of the addon relative to the input; controls layout and ordering. Defaults to `"inline-start"`.
+ * @param type - HTML button `type` attribute. Defaults to `"button"`.
+ * @returns The addon button element with `data-slot="input-group-addon"`, `data-align`, variant styling, and forwarded props.
+ */
 function InputGroupAddon({
   className,
   align = "inline-start",

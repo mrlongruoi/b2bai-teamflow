@@ -13,6 +13,15 @@ interface ComposeAssistantProps {
     onAccept?: (markdown: string) => void;
 }
 
+/**
+ * Renders an AI-powered drafting popover that generates suggested rewritten content from the provided input.
+ *
+ * When opened, the component requests a composition based on `content` and displays streaming or final results.
+ * The user can accept the generated markdown (invoking `onAccept`) or dismiss the draft; streaming can be stopped.
+ *
+ * @param content - Source text provided as context for the assistant to rewrite or draft from
+ * @param onAccept - Optional callback invoked with the generated markdown when the user accepts the suggestion
+ */
 export function ComposeAssistant({ content, onAccept }: Readonly<ComposeAssistantProps>) {
     const [open, setOpen] = useState(false);
 

@@ -53,6 +53,21 @@ function useSidebar() {
   return context
 }
 
+/**
+ * Provides sidebar state and controls to descendants and renders the sidebar wrapper.
+ *
+ * This component supplies a SidebarContext with open state, mobile open state, setters,
+ * and a toggle helper; it also persists desktop open state to a cookie and registers
+ * a global keyboard shortcut (Cmd/Ctrl + b) to toggle the sidebar.
+ *
+ * @param defaultOpen - Initial open state when uncontrolled (defaults to `true`)
+ * @param open - Controlled open state; when provided, the component acts as controlled
+ * @param onOpenChange - Callback invoked when the open state changes (receives the new open boolean)
+ * @param className - Additional CSS class names applied to the outer wrapper
+ * @param style - Inline styles applied to the outer wrapper; CSS variables for sidebar widths are merged
+ * @param children - Rendered children placed inside the provider and wrapper
+ * @returns The provider and wrapper element that supplies sidebar context and renders its children
+ */
 function SidebarProvider({
   defaultOpen = true,
   open: openProp,
@@ -279,6 +294,13 @@ function SidebarTrigger({
   )
 }
 
+/**
+ * Renders the sidebar rail toggle button positioned alongside the sidebar.
+ *
+ * The button is visually hidden on narrow viewports, includes an accessible label and title of "Toggle Sidebar", and invokes the sidebar toggle action when clicked.
+ *
+ * @returns The button element that toggles the sidebar visibility.
+ */
 function SidebarRail({ className, ...props }: React.ComponentProps<"button">) {
   const { toggleSidebar } = useSidebar()
 

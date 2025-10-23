@@ -18,6 +18,13 @@ interface MessageItemProps {
     currentUserId: string;
 }
 
+/**
+ * Render a chat message item showing author info, timestamp, content, optional attachment, reactions, and thread controls.
+ *
+ * The component supports inline editing, opens the thread view when requested, and prefetches thread data on hover.
+ *
+ * @returns The rendered message list item element
+ */
 export function MessageItem({ message, currentUserId }: Readonly<MessageItemProps>) {
     const [isEditing, setIsEditing] = useState(false);
 

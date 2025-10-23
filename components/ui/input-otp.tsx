@@ -35,6 +35,15 @@ function InputOTPGroup({ className, ...props }: React.ComponentProps<"div">) {
   )
 }
 
+/**
+ * Renders a single OTP input slot connected to the OTP input context.
+ *
+ * Reads the slot state at `index` from the OTPInputContext and renders the slot's character,
+ * a blinking fake caret when `hasFakeCaret` is true, and data attributes reflecting active state.
+ *
+ * @param index - The zero-based position of the slot within the OTP input
+ * @returns The DOM element for the OTP slot with applied styling, data attributes, and optional caret
+ */
 function InputOTPSlot({
   index,
   className,
@@ -65,6 +74,12 @@ function InputOTPSlot({
   )
 }
 
+/**
+ * Renders a styled horizontal separator for OTP input slots.
+ *
+ * @param className - Additional class names to apply to the separator element
+ * @returns An `hr` element used as the visual separator between OTP slots
+ */
 function InputOTPSeparator({
   className,
   ...props

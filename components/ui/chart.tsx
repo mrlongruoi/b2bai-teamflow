@@ -34,6 +34,14 @@ function useChart() {
   return context
 }
 
+/**
+ * Provides chart configuration via context and renders a themed, responsive chart container.
+ *
+ * @param config - Mapping of series keys to their display metadata (labels, icons) and color or theme color values; used to generate scoped CSS variables for the chart.
+ * @param children - Content rendered inside a Recharts ResponsiveContainer (chart primitives such as axes, series, and tooltips).
+ * @param id - Optional identifier used to scope the chart's generated CSS (a stable id is derived if omitted).
+ * @returns The rendered div element that wraps ChartStyle and a Recharts ResponsiveContainer containing `children`.
+ */
 function ChartContainer({
   id,
   className,
@@ -105,6 +113,22 @@ ${colorConfig
 
 const ChartTooltip = RechartsPrimitive.Tooltip
 
+/**
+ * Render styled tooltip content for Recharts that uses the chart's configured labels, icons, and colors.
+ *
+ * Renders nothing when the tooltip is inactive or there is no payload. When active, displays an optional header label and a list of payload items with optional custom icons, colored indicators (dot, line, dashed), formatted values, and configured display labels.
+ *
+ * @param hideLabel - If true, suppresses the header label for the tooltip.
+ * @param hideIndicator - If true, suppresses the color indicator for each payload item when no custom icon is provided.
+ * @param indicator - Visual style for the item indicator: `"dot"`, `"line"`, or `"dashed"`.
+ * @param nameKey - Key to use from each payload item to look up the series configuration and label; falls back to `item.name`, `item.dataKey`, or `"value"`.
+ * @param labelKey - Key to use when resolving the tooltip header label; if provided, it overrides automatic label resolution.
+ * @param labelFormatter - Optional function to format or replace the computed tooltip header label. Receives the computed label value and the full payload.
+ * @param formatter - Optional render function for an individual payload item; when provided and an item value exists, it is used in place of the default item rendering.
+ * @param color - Optional override color used for indicators when an explicit color is desired instead of the payload or configured color.
+ *
+ * @returns The tooltip content element or `null` when the tooltip is inactive or has no payload.
+ */
 function ChartTooltipContent({
   active,
   payload,

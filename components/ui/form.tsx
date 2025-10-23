@@ -80,6 +80,11 @@ const FormItemContext = React.createContext<FormItemContextValue>(
   {} as FormItemContextValue
 )
 
+/**
+ * Provides a form item container that generates a stable id and supplies it via FormItemContext.
+ *
+ * @returns The rendered div element that wraps its children and exposes the generated id through context.
+ */
 function FormItem({ className, ...props }: React.ComponentProps<"div">) {
   const id = React.useId()
   const contextValue = React.useMemo(() => ({ id }), [id])
@@ -112,6 +117,13 @@ function FormLabel({
   )
 }
 
+/**
+ * Renders a form control Slot that links to the surrounding form item, description, and validation message.
+ *
+ * The rendered element receives an `id` tied to the form item, `aria-invalid` set when the field has an error, and `aria-describedby` referencing the description and, when present, the validation message.
+ *
+ * @returns The Slot element configured as a form control with ARIA attributes reflecting the field state
+ */
 function FormControl({ ...props }: React.ComponentProps<typeof Slot>) {
   const { error, formItemId, formDescriptionId, formMessageId } = useFormField()
 

@@ -5,6 +5,11 @@ import { cva, type VariantProps } from "class-variance-authority"
 import { cn } from "@/lib/utils"
 import { Separator } from "@/components/ui/separator"
 
+/**
+ * Renders a vertical container used to group item components and expose a slot.
+ *
+ * @returns A div element with `data-slot="item-group"`, flex column layout classes, and any passed props applied.
+ */
 function ItemGroup({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div

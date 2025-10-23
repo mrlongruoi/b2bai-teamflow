@@ -5,6 +5,12 @@ import * as TooltipPrimitive from "@radix-ui/react-tooltip"
 
 import { cn } from "@/lib/utils"
 
+/**
+ * Provides a Radix Tooltip provider with a configurable open delay and forwards remaining provider props.
+ *
+ * @param delayDuration - Delay in milliseconds before the tooltip opens (default: 0)
+ * @returns The rendered Tooltip provider element with the configured `delayDuration` and forwarded props
+ */
 function TooltipProvider({
   delayDuration = 0,
   ...props
@@ -18,6 +24,12 @@ function TooltipProvider({
   )
 }
 
+/**
+ * Wraps a TooltipPrimitive.Root inside a TooltipProvider and forwards all received props to the root.
+ *
+ * @param props - Props to pass through to TooltipPrimitive.Root
+ * @returns The rendered TooltipPrimitive.Root wrapped by a TooltipProvider
+ */
 function Tooltip({
   ...props
 }: Readonly<React.ComponentProps<typeof TooltipPrimitive.Root>>) {

@@ -41,6 +41,12 @@ function FieldLegend({
   )
 }
 
+/**
+ * Renders a container div for grouping related form fields.
+ *
+ * @param className - Additional CSS classes merged with the component's default class list
+ * @returns A div element with `data-slot="field-group"` and composed utility classes for layout and responsive gaps
+ */
 function FieldGroup({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
@@ -78,6 +84,12 @@ const fieldVariants = cva(
   }
 )
 
+/**
+ * Renders a field container element that applies orientation-based layout classes.
+ *
+ * @param orientation - Layout orientation for the field ("vertical" or "horizontal"); controls the `data-orientation` attribute and which variant classes are applied
+ * @returns A `div` element serving as the field container with `data-slot="field"` and `data-orientation` set to the provided orientation
+ */
 function Field({
   className,
   orientation = "vertical",
@@ -106,6 +118,13 @@ function FieldContent({ className, ...props }: React.ComponentProps<"div">) {
   )
 }
 
+/**
+ * Renders a Label configured as a field label for form layouts and applies the component's slot and styling.
+ *
+ * @param className - Additional CSS class names to merge with the component's default classes
+ * @param props - Remaining props are forwarded to the underlying Label component
+ * @returns The rendered Label element with data-slot="field-label" and composed styling
+ */
 function FieldLabel({
   className,
   ...props
@@ -137,6 +156,14 @@ function FieldTitle({ className, ...props }: React.ComponentProps<"div">) {
   )
 }
 
+/**
+ * Renders a paragraph used as the field's descriptive text.
+ *
+ * Merges incoming `className` with the component's default utility classes and forwards all other props to the underlying `<p>` element.
+ *
+ * @param className - Additional CSS class names to apply to the paragraph
+ * @returns A `<p>` element with `data-slot="field-description"` containing the provided children and composed styling
+ */
 function FieldDescription({ className, ...props }: React.ComponentProps<"p">) {
   return (
     <p
@@ -182,6 +209,14 @@ function FieldSeparator({
   )
 }
 
+/**
+ * Render validation error messages for a field.
+ *
+ * If `children` is provided it is used as the content. Otherwise, displays a single error message when `errors` contains one error with a `message`, or a bulleted list of messages when multiple errors are present. Renders nothing when there is no content to show.
+ *
+ * @param errors - Optional array of error objects; each object may contain a `message` string. Errors without a `message` are omitted from the rendered output.
+ * @returns A `div` with `role="alert"` containing the error content, or `null` when there is no content.
+ */
 function FieldError({
   className,
   children,
