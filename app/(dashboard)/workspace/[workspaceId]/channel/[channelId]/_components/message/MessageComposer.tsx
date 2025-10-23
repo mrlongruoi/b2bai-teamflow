@@ -13,6 +13,18 @@ interface MessageComposerProps {
     upload: UseAttachmentUploadType;
 }
 
+/**
+ * Renders a message composition UI with a rich text editor, send control, and attachment/upload support.
+ *
+ * The send button is disabled when `isSubmitting` is true. If `upload.stagedUrl` is present an attachment chip is shown and can be removed via `upload.clear`; otherwise an attach button opens the upload modal via `upload.setOpen(true)`. The image/file upload modal is controlled by `upload.isOpen` and forwards uploaded URLs to `upload.onUploaded`.
+ *
+ * @param value - Current rich text content
+ * @param onChange - Called with updated content when the editor changes
+ * @param onSubmit - Called when the send button is clicked
+ * @param isSubmitting - When true, disables the send button
+ * @param upload - Attachment upload state and handlers (controls staged URL, open state, and upload callbacks)
+ * @returns The MessageComposer React element
+ */
 export function MessageComposer({ value, onChange, onSubmit, isSubmitting, upload }: Readonly<MessageComposerProps>) {
 
     return (

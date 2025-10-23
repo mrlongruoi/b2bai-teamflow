@@ -6,6 +6,12 @@ interface ChannelHeaderProps {
     channelName: string | undefined;
 }
 
+/**
+ * Render the channel header with the channel title and member/theme controls.
+ *
+ * @param channelName - The channel's display name; if undefined, only the prefix `# ` is displayed
+ * @returns The header element containing the channel title (prefixed with `# `) and controls for member overview, inviting members, and theme toggling
+ */
 export function ChannelHeader({ channelName }: Readonly<ChannelHeaderProps>) {
 
     return (

@@ -12,6 +12,12 @@ interface ThreadContextType {
 
 const ThreadContext = createContext<ThreadContextType | undefined>(undefined);
 
+/**
+ * Provides thread selection state and control functions to descendant components.
+ *
+ * @param children - The React nodes that will receive the thread context
+ * @returns The React provider element that supplies thread context to its children
+ */
 export function ThreadProvider({ children }: Readonly<{ children: ReactNode }>) {
     const [selectedThreadId, setSelectedThreadId] = useState<string | null>(null);
 

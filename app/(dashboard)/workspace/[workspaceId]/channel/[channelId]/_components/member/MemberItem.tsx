@@ -7,6 +7,12 @@ interface MemberItemProps {
     member: organization_user;
 }
 
+/**
+ * Render a clickable member row that displays the member's avatar, name, admin badge, and email.
+ *
+ * @param member - The organization_user to display. `member.email` must be defined; `member.full_name` is used for the display name and avatar fallback initial.
+ * @returns The rendered JSX element representing the member row.
+ */
 export function MemberItem({ member }: Readonly<MemberItemProps>) {
 
     return (

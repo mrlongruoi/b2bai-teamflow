@@ -11,6 +11,12 @@ interface MenuBarProps {
     editor: Editor | null;
 }
 
+/**
+ * Render the rich-text editor toolbar with formatting, list, undo/redo, and AI compose controls.
+ *
+ * @param editor - The TipTap `Editor` instance or `null`. When provided, toolbar controls query and execute commands on this editor.
+ * @returns The toolbar React element containing formatting toggles, list controls, undo/redo buttons, and a ComposeAssistant; returns `null` when `editor` is `null`.
+ */
 export function MenuBar({ editor }: Readonly<MenuBarProps>) {
     const editorState = useEditorState({
         editor,
