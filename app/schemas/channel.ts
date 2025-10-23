@@ -3,15 +3,10 @@ import z from "zod";
 export function transformChannelName(name: string): string {
   return name
     .toLowerCase()
-    .replace(/\s+/g, "-") // replace spaces with dashes
-    .replace(/[^a-z0-9-]/g, "") // remove special characters (keep only letters, numbers, and dashes)
-    .replace(/-+/g, "-") // replace multiple consecutive dashed with single dash
-    .replace(/^-|-$/g, ""); // remove leading/trailing dashes
-
-  // .replaceAll(/\s+/g, "-")
-  // .replaceAll(/[^a-z0-9-]/g, "")
-  // .replaceAll(/-+/g, "-")
-  // .replaceAll(/^-|-$/g, "");
+    .replaceAll(/\s+/g, "-")
+    .replaceAll(/[^a-z0-9-]/g, "")
+    .replaceAll(/-+/g, "-")
+    .replaceAll(/(^-)|(-$)/g, "");
 }
 
 export const ChannelNameSchema = z.object({

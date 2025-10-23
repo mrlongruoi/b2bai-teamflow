@@ -3,7 +3,7 @@
 import { useCallback, useMemo, useState } from "react";
 
 export function useAttachmentUpload() {
-  const [isOpen, setOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
   const [stagedUrl, setStagedUrl] = useState<null | string>(null);
 
@@ -12,7 +12,7 @@ export function useAttachmentUpload() {
   const onUploaded = useCallback((url: string) => {
     setStagedUrl(url);
     setIsUploading(false);
-    setOpen(false);
+    setIsOpen(false);
   }, []);
 
   const clear = useCallback(() => {
@@ -23,13 +23,13 @@ export function useAttachmentUpload() {
   return useMemo(
     () => ({
       isOpen,
-      setOpen,
+      setIsOpen,
       onUploaded,
       stagedUrl,
       isUploading,
-      clear
+      clear,
     }),
-    [isOpen, setOpen, onUploaded, stagedUrl, isUploading, clear]
+    [isOpen, setIsOpen, onUploaded, stagedUrl, isUploading, clear],
   );
 }
 

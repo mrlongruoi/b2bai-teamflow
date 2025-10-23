@@ -203,7 +203,7 @@ export const listMessages = base
     }));
 
     const nextCursor =
-      messages.length === limit ? messages[messages.length - 1].id : undefined;
+      messages.length === limit ? messages.at(-1)?.id : undefined;
 
     return {
       items: items,

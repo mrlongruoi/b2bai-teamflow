@@ -32,7 +32,7 @@ export function MessageComposer({ value, onChange, onSubmit, isSubmitting, uploa
                     upload.stagedUrl ? (
                         <AttachmentChip url={upload.stagedUrl} onRemove={upload.clear} />
                     ) : (
-                        <Button className="dark:invert-20" onClick={() => upload.setOpen(true)} type="button" size="sm" variant="outline" >
+                        <Button className="dark:invert-20" onClick={() => upload.setIsOpen(true)} type="button" size="sm" variant="outline" >
                             <FileIcon className="size-4 mr-1" />
                             Đính kèm File
                         </Button>
@@ -43,7 +43,7 @@ export function MessageComposer({ value, onChange, onSubmit, isSubmitting, uploa
             <ImageUploadModal
                 onUploaded={(url) => upload.onUploaded(url)}
                 open={upload.isOpen}
-                onOpenChange={upload.setOpen}
+                onOpenChange={upload.setIsOpen}
             />
         </>
     )

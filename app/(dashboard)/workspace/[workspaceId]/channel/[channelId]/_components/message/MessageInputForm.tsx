@@ -14,7 +14,7 @@ import { Message } from "@/lib/generated/prisma";
 import { KindeUser } from "@kinde-oss/kinde-auth-nextjs";
 import { getAvatar } from "@/lib/get-avatar";
 
-interface iAppProps {
+interface MessageInputFormProps {
     channelId: string;
     user: KindeUser<Record<string, unknown>>;
 }
@@ -23,7 +23,7 @@ type MessagePage = { items: Message[]; nextCursor?: string; };
 
 type InfiniteMessages = InfiniteData<MessagePage>;
 
-export function MessageInputForm({ channelId, user }: iAppProps) {
+export function MessageInputForm({ channelId, user }: Readonly<MessageInputFormProps>) {
     const queryClient = useQueryClient();
 
     const [editorKey, setEditorKey] = useState(0);
@@ -38,15 +38,65 @@ export function MessageInputForm({ channelId, user }: iAppProps) {
         },
     })
 
+    const insertOptimisticMessage = (
+        old: InfiniteMessages | undefined,
+        optimisticMessage: InfiniteMessages["pages"][number]["items"][number],
+    ): InfiniteMessages => {
+        if (!old) {
+            return {
+                pages: [
+                    {
+                        items: [optimisticMessage],
+                        nextCursor: undefined,
+                    },
+                ],
+                pageParams: [undefined],
+            };
+        }
+
+        const [firstPage = { items: [], nextCursor: undefined }, ...otherPages] = old.pages;
+        const updatedFirstPage = {
+            ...firstPage,
+            items: [optimisticMessage, ...firstPage.items],
+        };
+
+        return {
+            ...old,
+            pages: [updatedFirstPage, ...otherPages],
+        };
+    };
+
+    const replaceMessageById = (
+        old: InfiniteMessages,
+        targetId: string,
+        message: InfiniteMessages["pages"][number]["items"][number],
+    ): InfiniteMessages => {
+        const nextPages = old.pages.map((page) => {
+            const updatedItems = page.items.map((item) =>
+                item.id === targetId ? { ...message } : item,
+            );
+
+            return {
+                ...page,
+                items: updatedItems,
+            };
+        });
+
+        return {
+            ...old,
+            pages: nextPages,
+        };
+    };
+
     const createMessageMutation = useMutation(
         orpc.message.create.mutationOptions({
             onMutate: async (data) => {
                 await queryClient.cancelQueries({
-                    queryKey: ['message.list', channelId],
+                    queryKey: ["message.list", channelId],
                 });
 
                 const previousData = queryClient.getQueryData<InfiniteMessages>([
-                    'message.list',
+                    "message.list",
                     channelId,
                 ]);
 
@@ -60,64 +110,34 @@ export function MessageInputForm({ channelId, user }: iAppProps) {
                     updatedAt: new Date(),
                     authorId: user.id,
                     authorEmail: user.email!,
-                    authorName: user.given_name ?? 'John Doe',
+                    authorName: user.given_name ?? "John Doe",
                     authorAvatar: getAvatar(user.picture, user.email!),
-                    channelId: channelId,
+                    channelId,
+                    threadId: null,
                 };
 
-                queryClient.setQueryData<InfiniteMessages>(['message.list', channelId], (old) => {
-                    if (!old) {
-                        return {
-                            pages: [
-                                {
-                                    items: [optimisticMessage],
-                                    nextCursor: undefined,
-                                },
-                            ],
-                            pageParams: [undefined],
-                        } satisfies InfiniteMessages;
-                    }
-
-                    const firstPage = old.pages[0] ?? {
-                        items: [],
-                        nextCursor: undefined,
-                    }
-
-                    const updatedFirstPage: MessagePage = {
-                        ...firstPage,
-                        items: [optimisticMessage, ...firstPage.items],
-                    }
-
-                    return {
-                        ...old,
-                        pages: [updatedFirstPage, ...old.pages.slice(1)],
-                    }
-                })
+                queryClient.setQueryData<InfiniteMessages>(
+                    ["message.list", channelId],
+                    (old) => insertOptimisticMessage(old, optimisticMessage),
+                );
 
                 return {
                     previousData,
                     tempId,
-                }
+                };
             },
             onSuccess: (data, _variables, context) => {
+                const tempId = context?.tempId;
+
                 queryClient.setQueryData<InfiniteMessages>(
-                    ['message.list', channelId],
-
+                    ["message.list", channelId],
                     (old) => {
-                        if (!old) return old;
+                        if (!old || !tempId) {
+                            return old;
+                        }
 
-                        const updatedPages = old.pages.map((page) => ({
-                            ...page,
-                            items: page.items.map((m) => m.id === context.tempId ? {
-                                ...data,
-                            } : m),
-                        }))
-
-                        return {
-                            ...old,
-                            pages: updatedPages,
-                        };
-                    }
+                        return replaceMessageById(old, tempId, data);
+                    },
                 );
 
                 form.reset({ channelId, content: "" });
@@ -126,18 +146,18 @@ export function MessageInputForm({ channelId, user }: iAppProps) {
 
                 setEditorKey((k) => k + 1);
 
-                return toast.success("Tin nhắn được gửi")
+                return toast.success("Tin nhắn được gửi");
             },
             onError: (_err, _variables, context) => {
                 if (context?.previousData) {
                     queryClient.setQueryData<InfiniteMessages>(
-                        ['message.list', channelId],
-                        context.previousData
+                        ["message.list", channelId],
+                        context.previousData,
                     );
                 }
 
                 return toast.error("Đã có lỗi xảy ra.");
-            }
+            },
         })
     )
 
