@@ -54,6 +54,14 @@ function EmojiPickerRow({ children, ...props }: EmojiPickerListRowProps) {
   );
 }
 
+/**
+ * Render a button for a single emoji in the picker.
+ *
+ * @param emoji - The emoji object to render; its `emoji` glyph is displayed inside the button.
+ * @param className - Additional CSS class names appended to the button's default styling.
+ * @param props - Additional props forwarded to the underlying button element.
+ * @returns The JSX element for the emoji button.
+ */
 function EmojiPickerEmoji({
   emoji,
   className,
@@ -73,6 +81,12 @@ function EmojiPickerEmoji({
   );
 }
 
+/**
+ * Render a category header label for the emoji list.
+ *
+ * @param category - The category descriptor whose `label` will be displayed
+ * @returns The header element displaying the category's label
+ */
 function EmojiPickerCategoryHeader({
   category,
   ...props

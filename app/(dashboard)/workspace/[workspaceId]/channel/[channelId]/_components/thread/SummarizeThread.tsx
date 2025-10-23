@@ -12,6 +12,16 @@ interface SummarizeThreadProps {
     messageId: string;
 }
 
+/**
+ * Renders a popover control that generates and displays an AI summary for a thread message.
+ *
+ * Opens a UI popover with a "Tóm tắt" trigger; opening triggers a summary request when no assistant response exists
+ * and the chat status is ready. While streaming it shows loading skeletons and exposes a stop button; on error it
+ * shows the error with a retry action; closing the popover cancels streaming, clears errors, and resets messages.
+ *
+ * @param messageId - The identifier of the message/thread to summarize
+ * @returns A Popover-based UI element that lets the user request and view an AI-generated thread summary
+ */
 export function SummarizeThread({ messageId }: Readonly<SummarizeThreadProps>) {
     const [open, setOpen] = useState(false);
 

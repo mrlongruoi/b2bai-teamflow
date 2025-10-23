@@ -6,6 +6,12 @@ import * as AlertDialogPrimitive from "@radix-ui/react-alert-dialog"
 import { cn } from "@/lib/utils"
 import { buttonVariants } from "@/components/ui/button"
 
+/**
+ * Renders an AlertDialog root element with the `data-slot="alert-dialog"` attribute.
+ *
+ * @param props - Props to apply to the underlying AlertDialog root element
+ * @returns The AlertDialog root React element
+ */
 function AlertDialog({
   ...props
 }: Readonly<React.ComponentProps<typeof AlertDialogPrimitive.Root>>) {
@@ -20,6 +26,12 @@ function AlertDialogTrigger({
   )
 }
 
+/**
+ * Renders a Radix UI Portal configured as the alert dialog portal.
+ *
+ * @param props - Props forwarded to the underlying Radix `Portal` component.
+ * @returns The alert dialog portal element with a `data-slot="alert-dialog-portal"` attribute.
+ */
 function AlertDialogPortal({
   ...props
 }: Readonly<React.ComponentProps<typeof AlertDialogPrimitive.Portal>>) {

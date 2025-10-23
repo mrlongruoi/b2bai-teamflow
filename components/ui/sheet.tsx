@@ -6,6 +6,11 @@ import { XIcon } from "lucide-react"
 
 import { cn } from "@/lib/utils"
 
+/**
+ * Wraps Radix Sheet's Root and attaches a `data-slot="sheet"` attribute for consistent slot-based composition.
+ *
+ * @returns A React element that renders Radix Sheet Root with the `data-slot="sheet"` attribute and any forwarded props.
+ */
 function Sheet({ ...props }: Readonly<React.ComponentProps<typeof SheetPrimitive.Root>>) {
   return <SheetPrimitive.Root data-slot="sheet" {...props} />
 }
@@ -22,6 +27,13 @@ function SheetClose({
   return <SheetPrimitive.Close data-slot="sheet-close" {...props} />
 }
 
+/**
+ * Portal container for sheet content.
+ *
+ * Renders a Radix Sheet Portal and forwards all props while adding the `data-slot="sheet-portal"` attribute.
+ *
+ * @returns A React element representing the sheet's portal wrapper
+ */
 function SheetPortal({
   ...props
 }: Readonly<React.ComponentProps<typeof SheetPrimitive.Portal>>) {

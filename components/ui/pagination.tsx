@@ -42,6 +42,18 @@ type PaginationLinkProps = {
 } & Pick<React.ComponentProps<typeof Button>, "size"> &
   React.ComponentProps<"a">
 
+/**
+ * Renders an anchor element styled as a pagination control.
+ *
+ * The anchor receives `aria-current="page"` when `isActive` is true. Its inner content is
+ * `children` when provided; otherwise a visually hidden label is used from `aria-label`
+ * or the default text "Pagination link".
+ *
+ * @param isActive - Whether this link represents the current page
+ * @param size - Visual size variant forwarded to the button styling (defaults to `"icon"`)
+ * @param children - Visible content for the link; when omitted a screen-reader-only label is used
+ * @returns The rendered pagination anchor element
+ */
 function PaginationLink({
   className,
   isActive,

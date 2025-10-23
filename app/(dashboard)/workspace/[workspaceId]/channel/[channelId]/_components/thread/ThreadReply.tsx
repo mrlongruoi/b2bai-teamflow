@@ -8,6 +8,13 @@ interface ThreadReplyProps {
     selectedThreadId: string;
 }
 
+/**
+ * Render a thread reply item showing the author's avatar, name, timestamp, content, optional attachment image, and a reactions bar.
+ *
+ * @param message - Message data to display (author, content, timestamps, optional image, reactions).
+ * @param selectedThreadId - ID of the parent thread used as the reactions context.
+ * @returns The JSX element representing the rendered thread reply.
+ */
 export function ThreadReply({ message, selectedThreadId }: Readonly<ThreadReplyProps>) {
 
     return (

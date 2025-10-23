@@ -29,6 +29,20 @@ function Command({
   )
 }
 
+/**
+ * Render a modal command palette with an accessible header and an embedded command surface.
+ *
+ * Renders a Dialog that includes a visually hidden header (title and description) for screen readers
+ * and a DialogContent containing a styled Command surface that receives `children`. All other props
+ * are forwarded to the underlying Dialog.
+ *
+ * @param title - Visible title text used for accessibility (defaults to "Command Palette")
+ * @param description - Accessible description text shown to screen readers (defaults to "Search for a command to run...")
+ * @param children - Elements to render inside the Command surface (items, groups, input, etc.)
+ * @param className - Additional class names applied to the DialogContent wrapper
+ * @param showCloseButton - Whether the DialogContent should render a close button (defaults to `true`)
+ * @returns The Dialog-based command palette element
+ */
 function CommandDialog({
   title = "Command Palette",
   description = "Search for a command to run...",
@@ -110,6 +124,13 @@ function CommandEmpty({
   )
 }
 
+/**
+ * Renders a grouped section for the command palette with heading styles, padding, and overflow handling.
+ *
+ * @param className - Additional class names to merge with the component's default styling
+ * @param props - All other props are forwarded to the underlying `CommandPrimitive.Group`
+ * @returns A `CommandPrimitive.Group` element with `data-slot="command-group"` and composed styling
+ */
 function CommandGroup({
   className,
   ...props

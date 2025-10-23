@@ -18,6 +18,13 @@ interface ThreadSidebarProps {
     user: KindeUser<Record<string, unknown>>;
 }
 
+/**
+ * Render a thread sidebar that displays a parent message, its replies, and a reply form.
+ *
+ * Renders the thread header with actions (summarize, close), the parent message content, a list of replies, a scrollable message area with automatic pin-to-bottom behaviour and a manual scroll-to-bottom control, and a reply input bound to the provided `user`.
+ *
+ * @returns The sidebar UI for the currently selected thread.
+ */
 export function ThreadSidebar({ user }: Readonly<ThreadSidebarProps>) {
     const { selectedThreadId, closeThread } = useThread();
 

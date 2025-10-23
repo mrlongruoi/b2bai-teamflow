@@ -9,6 +9,16 @@ import { MessageItem } from "./message/MessageItem"
 import { Button } from "@/components/ui/button";
 import { EmptyState } from "@/components/general/EmtyState";
 
+/**
+ * Render a scrollable message list for a channel with infinite loading, pagination, and auto-scroll behavior.
+ *
+ * Displays messages for the current channel, automatically scrolls to the bottom on initial load and when
+ * new content appears while the view is at the bottom, preserves scroll position when older pages are loaded,
+ * and provides an empty state, an overlay indicator while fetching earlier messages, and a floating button to
+ * jump to the bottom when not already there.
+ *
+ * @returns The message list React element ready to be mounted in the UI.
+ */
 export function MessageList() {
     const { channelId } = useParams<{ channelId: string }>();
 

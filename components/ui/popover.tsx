@@ -5,6 +5,12 @@ import * as PopoverPrimitive from "@radix-ui/react-popover"
 
 import { cn } from "@/lib/utils"
 
+/**
+ * Renders a Radix Popover Root element and forwards all received props.
+ *
+ * @param props - Props to pass through to the underlying Radix Popover Root; they are applied unchanged and the root is rendered with a `data-slot="popover"` attribute.
+ * @returns A React element for the Popover root with forwarded props and `data-slot="popover"`.
+ */
 function Popover({
   ...props
 }: Readonly<React.ComponentProps<typeof PopoverPrimitive.Root>>) {

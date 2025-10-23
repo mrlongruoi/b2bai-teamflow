@@ -5,6 +5,12 @@ import * as HoverCardPrimitive from "@radix-ui/react-hover-card"
 
 import { cn } from "@/lib/utils"
 
+/**
+ * Renders a Radix HoverCard Root with a predefined data-slot and forwards all received props.
+ *
+ * @param props - Props to pass through to `HoverCardPrimitive.Root`
+ * @returns The rendered HoverCard Root element
+ */
 function HoverCard({
   ...props
 }: Readonly<React.ComponentProps<typeof HoverCardPrimitive.Root>>) {
