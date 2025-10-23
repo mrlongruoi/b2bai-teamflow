@@ -18,6 +18,12 @@ interface ThreadSidebarProps {
     user: KindeUser<Record<string, unknown>>;
 }
 
+/**
+ * Renders a thread-focused sidebar showing the original post, its replies, and a reply form.
+ *
+ * @param user - The current authenticated user used for composing replies and rendering user-specific UI
+ * @returns The ThreadSidebar UI element containing the parent message, replies list, scroll behavior, and reply form
+ */
 export function ThreadSidebar({ user }: ThreadSidebarProps) {
     const { selectedThreadId, closeThread } = useThread();
 

@@ -11,6 +11,15 @@ interface MenuBarProps {
     editor: Editor | null;
 }
 
+/**
+ * Renders a formatting toolbar tied to the provided editor instance.
+ *
+ * Renders controls for bold, italic, strikethrough, code block, lists, undo/redo, and a compose assistant;
+ * controls reflect and update the editor's current state. If `editor` is `null`, nothing is rendered.
+ *
+ * @param editor - The editor instance the toolbar reads from and commands; pass `null` to render nothing
+ * @returns The toolbar element tied to `editor`, or `null` when `editor` is `null`
+ */
 export function MenuBar({ editor }: MenuBarProps) {
     const editorState = useEditorState({
         editor,

@@ -13,6 +13,17 @@ interface ComposeAssistantProps {
     onAccept?: (markdown: string) => void;
 }
 
+/**
+ * Render a popover assistant that generates a draft from the provided content.
+ *
+ * The component opens a controlled popover UI which, when activated, streams a generated draft
+ * based on `content`, displays the latest assistant response (including partial/streaming output),
+ * shows loading and error states, and exposes actions to accept or reject the generated markdown.
+ *
+ * @param content - The source content used to generate the draft.
+ * @param onAccept - Optional callback invoked with the generated markdown when the user accepts.
+ * @returns A React element rendering the compose assistant popover with generation, streaming, retry, and accept/reject controls.
+ */
 export function ComposeAssistant({ content, onAccept }: ComposeAssistantProps) {
     const [open, setOpen] = useState(false);
 

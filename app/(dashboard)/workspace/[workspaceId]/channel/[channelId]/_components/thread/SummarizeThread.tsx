@@ -12,6 +12,16 @@ interface SummarizeThreadProps {
     messageId: string;
 }
 
+/**
+ * Provides a button that opens a popover to generate and preview an AI summary for a thread.
+ *
+ * When opened, the component requests a streamed summary for the thread identified by `messageId`,
+ * displays loading placeholders while the summary is being generated, shows the streamed summary when available,
+ * and surfaces errors with a retry option. Closing the popover stops any active stream, clears errors, and resets messages.
+ *
+ * @param messageId - The ID of the thread's root message to summarize.
+ * @returns A React element rendering the summarize-thread button and popover UI.
+ */
 export function SummarizeThread({ messageId }: SummarizeThreadProps) {
     const [open, setOpen] = useState(false);
 
