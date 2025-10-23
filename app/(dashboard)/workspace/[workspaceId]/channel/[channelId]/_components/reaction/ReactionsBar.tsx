@@ -24,6 +24,13 @@ type MessagePage = {
 
 type InfiniteReplies = InfiniteData<MessagePage>
 
+/**
+ * Render reaction buttons for a message and an add-reaction control.
+ *
+ * Renders a button for each grouped reaction and an EmojiReaction picker; clicking a reaction toggles the user's reaction with an optimistic update and shows a success or error toast.
+ *
+ * @returns A React element containing the reaction buttons and an add-reaction control.
+ */
 export function ReactionsBar({ messageId, reactions, context }: ReactionsBarProps) {
     const { channelId } = useParams<{ channelId: string }>();
 
