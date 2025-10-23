@@ -3,8 +3,8 @@ import { baseExtensions } from "@/components/rich-text-editor/extensions";
 
 function normalizewhiteSpace(markdown: string) {
   return markdown
-    .replace(/\s+$/gm, "") // trim trailing spaces per line
-    .replace(/\n{3,}/g, "\n\n") // collapse >2 blank lines
+    .replaceAll(/\s+$/gm, "") // trim trailing spaces per line
+    .replaceAll(/\n{3,}/g, "\n\n") // collapse >2 blank lines
     .trim();
 }
 

@@ -87,24 +87,18 @@ export const generateThreadSummary = base
 
     const parentText = await tipTapJsonToMarkdown(parent.content);
 
-    const lines = [];
-
-    lines.push(
-      `Thread Root - ${parent.authorName} - ${parent.createdAt.toISOString()}`
-    );
-    lines.push(parentText);
-
-    if (replies.length > 0) {
-      lines.push("\nReplies");
-
-      for (const r of replies) {
+    const replyLines = await Promise.all(
+      replies.map(async (r) => {
         const t = await tipTapJsonToMarkdown(r.content);
+        return `- ${r.authorName} - ${r.createdAt.toISOString()}: ${t}`;
+      })
+    );
 
-        lines.push(`- ${r.authorName} - ${r.createdAt.toISOString()}: ${t}`);
-      }
-    }
-
-    const compiled = lines.join("\n");
+    const compiled = [
+      `Thread Root - ${parent.authorName} - ${parent.createdAt.toISOString()}`,
+      parentText,
+      ...(replyLines.length > 0 ? ["\nReplies", ...replyLines] : []),
+    ].join("\n");
 
     const system = [
       "Bạn là trợ lý chuyên môn tóm tắt các chủ đề thảo luận giống Slack cho nhóm sản phẩm.",

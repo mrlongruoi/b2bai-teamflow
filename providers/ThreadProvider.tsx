@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, ReactNode, useContext, useState } from "react";
+import React, { createContext, ReactNode, useCallback, useContext, useMemo, useState } from "react";
 
 interface ThreadContextType {
     selectedThreadId: string | null;
@@ -17,31 +17,34 @@ export function ThreadProvider({ children }: Readonly<{ children: ReactNode }>) 
 
     const [isThreadOpen, setIsThreadOpen] = useState(false);
 
-    const openThread = (messageId: string) => {
+    const openThread = useCallback((messageId: string) => {
         setSelectedThreadId(messageId);
         setIsThreadOpen(true);
-    }
+    }, []);
 
-    const closeThread = () => {
+    const closeThread = useCallback(() => {
         setSelectedThreadId(null);
         setIsThreadOpen(false);
-    }
+    }, []);
 
-    const toggleThread = (messageId: string) => {
+    const toggleThread = useCallback((messageId: string) => {
         if (selectedThreadId === messageId && isThreadOpen) {
             closeThread();
         } else {
             openThread(messageId);
         }
-    }
+    }, [selectedThreadId, isThreadOpen, closeThread, openThread]);
 
-    const value: ThreadContextType = {
-        selectedThreadId,
-        openThread,
-        closeThread,
-        toggleThread,
-        isThreadOpen,
-    }
+    const value: ThreadContextType = useMemo(
+        () => ({
+            selectedThreadId,
+            openThread,
+            closeThread,
+            toggleThread,
+            isThreadOpen,
+        }),
+        [selectedThreadId, openThread, closeThread, toggleThread, isThreadOpen],
+    );
 
     return (
         <ThreadContext.Provider value={value}>

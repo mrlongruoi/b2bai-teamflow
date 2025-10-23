@@ -2,8 +2,10 @@ import { KindeOrganization } from "@kinde-oss/kinde-auth-nextjs";
 import { base } from "./base";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 
+type WorkspaceOrganization = KindeOrganization<Record<string, unknown> | null>;
+
 export const requiredWorkspaceMiddleware = base
-  .$context<{ workspace?: KindeOrganization<unknown | null> }>()
+  .$context<{ workspace?: WorkspaceOrganization }>()
   .middleware(async ({ context, next, errors }) => {
     const workspace = context.workspace ?? (await getWorkspace());
 
@@ -16,10 +18,8 @@ export const requiredWorkspaceMiddleware = base
     });
   });
 
-const getWorkspace = async () => {
-  const {getOrganization} = getKindeServerSession();
-
+const getWorkspace = async (): Promise<WorkspaceOrganization | null> => {
+  const { getOrganization } = getKindeServerSession();
   const organization = await getOrganization();
-
-  return organization;
+  return organization as WorkspaceOrganization | null;
 };

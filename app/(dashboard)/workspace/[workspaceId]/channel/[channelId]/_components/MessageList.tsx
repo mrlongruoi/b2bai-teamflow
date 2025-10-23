@@ -146,7 +146,10 @@ export function MessageList() {
     useEffect(() => {
         if (!items.length) return;
 
-        const lastId = items[items.length - 1].id;
+        const lastItem = items.at(-1);
+        if (!lastItem) return;
+
+        const lastId = lastItem.id;
 
         const preLastId = lastItemIdRef.current;
 

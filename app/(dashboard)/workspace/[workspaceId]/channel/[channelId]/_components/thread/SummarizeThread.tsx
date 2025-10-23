@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { JSX, useState } from "react";
 import { Sparkles } from "lucide-react";
 import { useChat } from "@ai-sdk/react"
 import { eventIteratorToStream } from "@orpc/client";
@@ -64,6 +64,52 @@ export function SummarizeThread({ messageId }: Readonly<SummarizeThreadProps>) {
         }
     }
 
+    let summaryContent: JSX.Element
+
+    if (error) {
+        summaryContent = (
+            <div className="">
+                <p className="text-red-500">
+                    {error.message}
+                </p>
+
+                <Button
+                    type="button"
+                    size="sm"
+                    onClick={() => {
+                        clearError()
+                        setMessages([])
+                        sendMessage({ text: 'Tóm tắt Thread' })
+                    }}
+                >
+                    Thử lại
+                </Button>
+            </div>
+        )
+    } else if (summaryText) {
+        summaryContent = (
+            <Response
+                parseIncompleteMarkdown={status !== 'ready'}
+            >
+                {summaryText}
+            </Response>
+        )
+    } else if (status === 'submitted' || status === 'streaming') {
+        summaryContent = (
+            <div className="space-y-2">
+                <Skeleton className="h-4 w-3/4" />
+                <Skeleton className="h-4 w-full" />
+                <Skeleton className="h-4 w-5/6" />
+            </div>
+        )
+    } else {
+        summaryContent = (
+            <div className="text-sm text-muted-foreground">
+                Bấm vào tóm tắt để tạo
+            </div>
+        )
+    }
+
     return (
         <Popover open={open} onOpenChange={handleOpenChange}>
             <PopoverTrigger asChild>
@@ -104,41 +150,7 @@ export function SummarizeThread({ messageId }: Readonly<SummarizeThreadProps>) {
                 </div>
 
                 <div className="px-4 py-3 max-h-80 overflow-y-auto">
-                    {error ? (
-                        <div className="">
-                            <p className="text-red-500">
-                                {error.message}
-                            </p>
-
-                            <Button
-                                type="button"
-                                size="sm"
-                                onClick={() => {
-                                    clearError()
-                                    setMessages([])
-                                    sendMessage({ text: 'Tóm tắt Thread' })
-                                }}
-                            >
-                                Thử lại
-                            </Button>
-                        </div>
-                    ) : summaryText ? (
-                        <Response
-                            parseIncompleteMarkdown={status !== 'ready'}
-                        >
-                            {summaryText}
-                        </Response>
-                    ) : status === 'submitted' || status === 'streaming' ? (
-                        <div className="space-y-2">
-                            <Skeleton className="h-4 w-3/4" />
-                            <Skeleton className="h-4 w-full" />
-                            <Skeleton className="h-4 w-5/6" />
-                        </div>
-                    ) : (
-                        <div className="text-sm text-muted-foreground">
-                            Bấm vào tóm tắt để tạo
-                        </div>
-                    )}
+                    {summaryContent}
                 </div>
             </PopoverContent>
         </Popover>

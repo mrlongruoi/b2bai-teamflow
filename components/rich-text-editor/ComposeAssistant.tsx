@@ -49,7 +49,50 @@ export function ComposeAssistant({ content, onAccept }: Readonly<ComposeAssistan
 
     const lastAssistan = messages.findLast((m) => m.role === 'assistant');
 
-    const composeText = lastAssistan?.parts.filter((p) => p.type === 'text').map((p) => p.text).join("\n\n") ?? "";
+    const composeText = lastAssistan?.parts
+      .filter((p) => p.type === "text")
+      .map((p) => p.text)
+      .join("\n\n") ?? "";
+
+    let popoverBodyContent: React.ReactNode;
+    if (error) {
+      popoverBodyContent = (
+        <div className="">
+          <p className="text-red-500">{error.message}</p>
+          <Button
+            type="button"
+            size="sm"
+            onClick={() => {
+              clearError();
+              setMessages([]);
+              sendMessage({ text: "Tóm tắt Thread" });
+            }}
+          >
+            Thử lại
+          </Button>
+        </div>
+      );
+    } else if (composeText) {
+      popoverBodyContent = (
+        <Response parseIncompleteMarkdown={status !== "ready"}>
+          {composeText}
+        </Response>
+      );
+    } else if (status === "submitted" || status === "streaming") {
+      popoverBodyContent = (
+        <div className="space-y-2">
+          <Skeleton className="h-4 w-3/4" />
+          <Skeleton className="h-4 w-full" />
+          <Skeleton className="h-4 w-5/6" />
+        </div>
+      );
+    } else {
+      popoverBodyContent = (
+        <div className="text-sm text-muted-foreground">
+          Nhấp vào soạn thảo để tạo
+        </div>
+      );
+    }
 
     function handleOpenChange(nextOpen: boolean) {
         setOpen(nextOpen);
@@ -110,41 +153,7 @@ export function ComposeAssistant({ content, onAccept }: Readonly<ComposeAssistan
                 </div>
 
                 <div className="px-4 py-3 max-h-80 overflow-y-auto">
-                    {error ? (
-                        <div className="">
-                            <p className="text-red-500">
-                                {error.message}
-                            </p>
-
-                            <Button
-                                type="button"
-                                size="sm"
-                                onClick={() => {
-                                    clearError()
-                                    setMessages([])
-                                    sendMessage({ text: 'Tóm tắt Thread' })
-                                }}
-                            >
-                                Thử lại
-                            </Button>
-                        </div>
-                    ) : composeText ? (
-                        <Response
-                            parseIncompleteMarkdown={status !== 'ready'}
-                        >
-                            {composeText}
-                        </Response>
-                    ) : status === 'submitted' || status === 'streaming' ? (
-                        <div className="space-y-2">
-                            <Skeleton className="h-4 w-3/4" />
-                            <Skeleton className="h-4 w-full" />
-                            <Skeleton className="h-4 w-5/6" />
-                        </div>
-                    ) : (
-                        <div className="text-sm text-muted-foreground">
-                            Nhấp vào soạn thảo để tạo
-                        </div>
-                    )}
+                    {popoverBodyContent}
                 </div>
 
                 <div className="flex items-center justify-end gap-3 border-t px-3 py-2 bg-muted/30">

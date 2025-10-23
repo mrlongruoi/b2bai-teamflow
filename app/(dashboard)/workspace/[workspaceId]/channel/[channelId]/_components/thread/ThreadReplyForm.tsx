@@ -42,25 +42,69 @@ export function ThreadReplyForm({ threadId, user }: Readonly<ThreadReplyFormProp
         form.setValue("threadId", threadId);
     }, [threadId, form]); // add setValue?
 
+    type MessagePage = {
+        items: MessageListItem[];
+        nextCursor?: string;
+    };
+
+    type InfiniteMessages = InfiniteData<MessagePage>;
+
+    type ThreadListData = {
+      parent: MessageListItem;
+      messages: MessageListItem[];
+    };
+
+    const appendThreadMessage =
+      (optimistic: MessageListItem) =>
+      (old: ThreadListData | undefined): ThreadListData | undefined => {
+        if (!old) {
+          return old;
+        }
+
+        return {
+          ...old,
+          messages: [...old.messages, optimistic],
+        };
+      };
+
+    const bumpParentReplyCount =
+        (threadId: string) =>
+        (old: InfiniteMessages | undefined): InfiniteMessages | undefined => {
+            if (!old) {
+                return old;
+            }
+
+            const pages = old.pages.map((page) => {
+                const items = page.items.map((message) =>
+                    message.id === threadId
+                        ? { ...message, replyCount: message.replyCount + 1 }
+                        : message,
+                );
+
+                return {
+                    ...page,
+                    items,
+                };
+            });
+
+            return {
+                ...old,
+                pages,
+            };
+        };
+
     const createMessageMutation = useMutation(
         orpc.message.create.mutationOptions({
             onMutate: async (data) => {
                 const listOptions = orpc.message.thread.list.queryOptions({
                     input: {
                         messageId: threadId,
-                    }
-                })
-
-                type MessagePage = {
-                    items: Array<MessageListItem>,
-                    nextCursor?: string,
-                }
-
-                type InfiniteMessages = InfiniteData<MessagePage>
+                    },
+                });
 
                 await queryClient.cancelQueries({ queryKey: listOptions.queryKey });
 
-                const previous = queryClient.getQueryData(listOptions.queryKey);
+                const previous = queryClient.getQueryData<ThreadListData>(listOptions.queryKey);
 
                 const optimistic: MessageListItem = {
                     id: `optimistic:${crypto.randomUUID()}`,
@@ -78,42 +122,20 @@ export function ThreadReplyForm({ threadId, user }: Readonly<ThreadReplyFormProp
                     reactions: [],
                 };
 
-                queryClient.setQueryData(listOptions.queryKey, (old) => {
-                    if (!old) return old;
+                queryClient.setQueryData<ThreadListData>(
+                  listOptions.queryKey,
+                  appendThreadMessage(optimistic),
+                );
 
-                    return {
-                        ...old,
-                        messages: [...old.messages, optimistic],
-                    }
-                });
-
-                // optimistacally bump reliesCount in main message list for the parent message
                 queryClient.setQueryData<InfiniteMessages>(
                     ["message.list", channelId],
-                    (old) => {
-                        if (!old) return old;
-
-                        const pages = old.pages.map((page) => ({
-                            ...page,
-                            items: page.items.map((m) =>
-                                m.id === threadId ? {
-                                    ...m,
-                                    replyCount: m.replyCount + 1,
-                                }
-                                    : m)
-                        }));
-
-                        return {
-                            ...old,
-                            pages,
-                        }
-                    }
-                )
+                    bumpParentReplyCount(threadId),
+                );
 
                 return {
                     listOptions,
                     previous,
-                }
+                };
             },
             onSuccess: (_data, _vars, ctx) => {
                 queryClient.invalidateQueries({ queryKey: ctx.listOptions.queryKey });
@@ -128,21 +150,20 @@ export function ThreadReplyForm({ threadId, user }: Readonly<ThreadReplyFormProp
 
                 setEditorKey((k) => k + 1);
 
-                return toast.success("Tin nhắn trả lời đã gửi")
+                return toast.success("Tin nhắn trả lời đã gửi");
             },
             onError: (_err, _vars, ctx) => {
-                if (!ctx) return;
+                if (!ctx) {
+                    return;
+                }
 
                 const { listOptions, previous } = ctx;
 
                 if (previous) {
-                    queryClient.setQueryData(
-                        listOptions.queryKey,
-                        previous,
-                    )
+                    queryClient.setQueryData(listOptions.queryKey, previous);
                 }
 
-                return toast.error("Đã có lỗi xảy ra.")
+                return toast.error("Đã có lỗi xảy ra.");
             },
         })
     )
