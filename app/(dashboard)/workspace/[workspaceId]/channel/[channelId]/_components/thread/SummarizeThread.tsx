@@ -116,7 +116,7 @@ export function SummarizeThread({ messageId }: Readonly<SummarizeThreadProps>) {
                 <Button
                     type="button"
                     size="sm"
-                    className="relative overflow-hidden rounded-full bg-gradient-to-r from-violet-600 to-fuchsia-600 text-white shadow-md hover:shadow-lg focus-visible:ring-2 focus-visible:ring-ring"
+                    className="relative overflow-hidden rounded-full bg-linear-to-r from-violet-600 to-fuchsia-600 text-white shadow-md hover:shadow-lg focus-visible:ring-2 focus-visible:ring-ring"
                 >
                     <span className="flex items-center gap-1.5">
                         <Sparkles className="size-3.5" />
@@ -126,12 +126,12 @@ export function SummarizeThread({ messageId }: Readonly<SummarizeThreadProps>) {
             </PopoverTrigger>
 
             <PopoverContent
-                className="w-[25rem] p-0"
+                className="w-100 p-0"
                 align="end"
             >
                 <div className="flex items-center justify-between px-4 py-3 border-b">
                     <div className="flex items-center gap-2">
-                        <span className="relative inline-flex items-center justify-center rounded-full bg-gradient-to-r from-violet-600 to-fuchsia-600 py-1.5 px-4 gap-1.5">
+                        <span className="relative inline-flex items-center justify-center rounded-full bg-linear-to-r from-violet-600 to-fuchsia-600 py-1.5 px-4 gap-1.5">
                             <Sparkles className="size-3.5 text-white" />
                             <span className="text-sm font-medium text-white">AI Tóm tắt(Xem trước)</span>
                         </span>

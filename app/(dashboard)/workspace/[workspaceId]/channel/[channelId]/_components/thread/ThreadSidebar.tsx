@@ -141,7 +141,7 @@ export function ThreadSidebar({ user }: Readonly<ThreadSidebarProps>) {
     }
 
     return (
-        <div className="w-[30rem] border-l flex flex-col h-full">
+        <div className="w-120 border-l flex flex-col h-full">
 
             {/* header */}
             <div className="border-b h-14 px-4 flex items-center justify-between">
@@ -197,7 +197,7 @@ export function ThreadSidebar({ user }: Readonly<ThreadSidebarProps>) {
                                         </div>
 
                                         <SafeContent
-                                            className="text-sm break-words prose dark:prose-invert max-w-none"
+                                            className="text-sm wrap-break-words prose dark:prose-invert max-w-none"
                                             content={data.parent.content}
                                         />
                                     </div>
