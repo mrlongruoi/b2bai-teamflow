@@ -6,6 +6,13 @@ const THREAD_REPLY_SKELETON_KEYS = [
 	"thread-reply-skeleton-3",
 ];
 
+/**
+ * Renders a skeleton-based sidebar used as a loading placeholder for a thread view.
+ *
+ * The skeleton includes a header, a thread header block, a list of reply placeholders, and a reply form placeholder.
+ *
+ * @returns A JSX element rendering the thread sidebar skeleton structure
+ */
 export function ThreadSidebarSkeleton() {
 	return (
 		<div className="w-[30rem] border-l flex flex-col h-full">

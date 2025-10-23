@@ -13,6 +13,13 @@ interface ComposeAssistantProps {
     onAccept?: (markdown: string) => void;
 }
 
+/**
+ * Render a popover-based compose assistant that generates rewritten content from the provided input and allows the user to accept or reject the suggestion.
+ *
+ * @param content - The source text used to generate compose suggestions.
+ * @param onAccept - Optional callback invoked with the composed markdown when the user accepts the suggestion.
+ * @returns The React element for the compose assistant popover UI.
+ */
 export function ComposeAssistant({ content, onAccept }: Readonly<ComposeAssistantProps>) {
     const [open, setOpen] = useState(false);
 

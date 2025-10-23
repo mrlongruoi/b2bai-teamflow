@@ -12,6 +12,14 @@ interface SummarizeThreadProps {
     messageId: string;
 }
 
+/**
+ * Popover UI that generates and displays an AI summary for the thread identified by `messageId`.
+ *
+ * Opening the popover triggers a summary request if no assistant-generated summary exists; closing stops any in-progress generation and clears the summary state.
+ *
+ * @param messageId - The ID of the thread message to summarize.
+ * @returns The Popover-based UI element that controls summary generation and displays the summary, loading placeholders, or error state.
+ */
 export function SummarizeThread({ messageId }: Readonly<SummarizeThreadProps>) {
     const [open, setOpen] = useState(false);
 

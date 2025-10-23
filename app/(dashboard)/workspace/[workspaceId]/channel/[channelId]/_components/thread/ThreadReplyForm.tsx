@@ -20,6 +20,15 @@ interface ThreadReplyFormProps {
     user: KindeUser<Record<string, unknown>>;
 }
 
+/**
+ * Renders a reply form for a given thread that lets the current user compose and send a threaded message.
+ *
+ * The form is bound to validation schema and integrates an attachment uploader and a MessageComposer UI.
+ * Submissions perform optimistic updates to the thread message list and the parent thread's reply count,
+ * reconcile the cache on success, reset composer state and attachments, and show success or error toasts.
+ *
+ * @returns A JSX element rendering the thread reply form and composer, wired to mutation and cache update logic.
+ */
 export function ThreadReplyForm({ threadId, user }: Readonly<ThreadReplyFormProps>) {
     const { channelId } = useParams<{ channelId: string }>()
 

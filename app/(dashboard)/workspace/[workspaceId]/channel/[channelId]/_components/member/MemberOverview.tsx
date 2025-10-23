@@ -17,6 +17,13 @@ const SKELETON_PLACEHOLDER_KEYS = [
   "member-skeleton-6",
 ];
 
+/**
+ * Renders a Popover-based member overview UI that fetches workspace members and provides search, loading, and empty-state views.
+ *
+ * The component displays a trigger button labeled "Thành viên". When opened, the popover shows a header, a search input that filters members by name or email, a loading skeleton while members are being fetched, and either a list of members or an empty-state message when no matches exist. If member fetching fails, an error heading is rendered.
+ *
+ * @returns The JSX element for the member overview popover.
+ */
 export function MemberOverview() {
     const [Open, setOpen] = useState(false);
 

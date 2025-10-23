@@ -23,6 +23,17 @@ type MessagePage = { items: Message[]; nextCursor?: string; };
 
 type InfiniteMessages = InfiniteData<MessagePage>;
 
+/**
+ * Renders a message input form that handles creating messages with optimistic UI updates and attachment upload.
+ *
+ * The component manages form state, stages an optimistic message into the message list while the create
+ * mutation is pending, replaces the optimistic entry with the server response on success, and restores
+ * previous data on error. It also clears the upload state and resets the editor after a successful send.
+ *
+ * @param channelId - The ID of the channel to which created messages will be posted
+ * @param user - The current authenticated user used as the message author
+ * @returns The message input form React element
+ */
 export function MessageInputForm({ channelId, user }: Readonly<MessageInputFormProps>) {
     const queryClient = useQueryClient();
 
