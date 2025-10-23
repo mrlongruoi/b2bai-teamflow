@@ -12,6 +12,7 @@ import { ThreadReply } from "./ThreadReply";
 import { ThreadReplyForm } from "./ThreadReplyForm";
 import { Button } from "@/components/ui/button";
 import { ThreadSidebarSkeleton } from "./ThreadSidebarSkeleton";
+import { SummarizeThread } from "./SummarizeThread";
 
 interface ThreadSidebarProps {
     user: KindeUser<Record<string, unknown>>;
@@ -150,6 +151,10 @@ export function ThreadSidebar({ user }: ThreadSidebarProps) {
                 </div>
 
                 <div className="flex items-center gap-2">
+                    <SummarizeThread 
+                        messageId={selectedThreadId!}
+                    />
+
                     <Button
                         onClick={closeThread}
                         variant="outline"
