@@ -8,7 +8,7 @@ interface EmojiReactionProps {
     onSelect: (emoji: string) => void;
 }
 
-export function EmojiReaction({ onSelect }: EmojiReactionProps) {
+export function EmojiReaction({ onSelect }: Readonly<EmojiReactionProps>) {
     const [open, setOpen] = useState(false);
 
     const handleEmojiSelect = (emoji: string) => {

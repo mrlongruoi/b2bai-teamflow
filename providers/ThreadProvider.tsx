@@ -12,7 +12,7 @@ interface ThreadContextType {
 
 const ThreadContext = createContext<ThreadContextType | undefined>(undefined);
 
-export function ThreadProvider({ children }: { children: ReactNode }) {
+export function ThreadProvider({ children }: Readonly<{ children: ReactNode }>) {
     const [selectedThreadId, setSelectedThreadId] = useState<string | null>(null);
 
     const [isThreadOpen, setIsThreadOpen] = useState(false);

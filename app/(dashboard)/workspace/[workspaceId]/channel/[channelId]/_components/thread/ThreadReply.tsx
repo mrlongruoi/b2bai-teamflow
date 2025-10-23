@@ -8,7 +8,7 @@ interface ThreadReplyProps {
     selectedThreadId: string;
 }
 
-export function ThreadReply({ message, selectedThreadId }: ThreadReplyProps) {
+export function ThreadReply({ message, selectedThreadId }: Readonly<ThreadReplyProps>) {
 
     return (
         <div className="flex space-x-3 p-3 hover:bg-muted/30 rounded-lg">

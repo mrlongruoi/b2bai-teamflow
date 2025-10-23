@@ -8,7 +8,7 @@ interface ImageUploadModalProps {
     onUploaded: (url: string) => void;
 }
 
-export function ImageUploadModal({ open, onOpenChange, onUploaded }: ImageUploadModalProps) {
+export function ImageUploadModal({ open, onOpenChange, onUploaded }: Readonly<ImageUploadModalProps>) {
 
     return (
         <Dialog open={open} onOpenChange={onOpenChange}>

@@ -5,7 +5,7 @@ import { ImageUploadModal } from "@/components/rich-text-editor/ImageUploadModal
 import { UseAttachmentUploadType } from "@/hooks/use-attachment-upload";
 import { AttachmentChip } from "./AttachmentChip";
 
-interface iAppProps {
+interface MessageComposerProps {
     value: string;
     onChange: (next: string) => void;
     onSubmit: () => void;
@@ -13,7 +13,7 @@ interface iAppProps {
     upload: UseAttachmentUploadType;
 }
 
-export function MessageComposer({ value, onChange, onSubmit, isSubmitting, upload }: iAppProps) {
+export function MessageComposer({ value, onChange, onSubmit, isSubmitting, upload }: Readonly<MessageComposerProps>) {
 
     return (
         <>

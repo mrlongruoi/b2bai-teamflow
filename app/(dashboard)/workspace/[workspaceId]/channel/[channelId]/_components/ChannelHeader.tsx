@@ -6,7 +6,7 @@ interface ChannelHeaderProps {
     channelName: string | undefined;
 }
 
-export function ChannelHeader({ channelName }: ChannelHeaderProps) {
+export function ChannelHeader({ channelName }: Readonly<ChannelHeaderProps>) {
 
     return (
         <div className="flex items-center justify-between h-14 px-4 border-b">

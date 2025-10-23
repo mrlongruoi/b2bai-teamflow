@@ -24,7 +24,7 @@ type MessagePage = {
 
 type InfiniteReplies = InfiniteData<MessagePage>
 
-export function ReactionsBar({ messageId, reactions, context }: ReactionsBarProps) {
+export function ReactionsBar({ messageId, reactions, context }: Readonly<ReactionsBarProps>) {
     const { channelId } = useParams<{ channelId: string }>();
 
     const queryClient = useQueryClient();

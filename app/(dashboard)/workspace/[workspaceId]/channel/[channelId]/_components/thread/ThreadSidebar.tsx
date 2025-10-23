@@ -18,7 +18,7 @@ interface ThreadSidebarProps {
     user: KindeUser<Record<string, unknown>>;
 }
 
-export function ThreadSidebar({ user }: ThreadSidebarProps) {
+export function ThreadSidebar({ user }: Readonly<ThreadSidebarProps>) {
     const { selectedThreadId, closeThread } = useThread();
 
     const scrollRef = useRef<HTMLDivElement | null>(null);

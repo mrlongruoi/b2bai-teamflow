@@ -12,7 +12,7 @@ interface SummarizeThreadProps {
     messageId: string;
 }
 
-export function SummarizeThread({ messageId }: SummarizeThreadProps) {
+export function SummarizeThread({ messageId }: Readonly<SummarizeThreadProps>) {
     const [open, setOpen] = useState(false);
 
     const {

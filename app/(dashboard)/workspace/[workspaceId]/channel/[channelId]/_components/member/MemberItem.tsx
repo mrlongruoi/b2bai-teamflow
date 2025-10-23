@@ -7,7 +7,7 @@ interface MemberItemProps {
     member: organization_user;
 }
 
-export function MemberItem({ member }: MemberItemProps) {
+export function MemberItem({ member }: Readonly<MemberItemProps>) {
 
     return (
         <div className="px-3 py-2 hover:bg-accent cursor-pointer transition-colors">
