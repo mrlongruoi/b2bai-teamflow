@@ -18,6 +18,17 @@ interface iAppProps {
     currentUserId: string;
 }
 
+/**
+ * Renders a message item including avatar, author, timestamp, content, optional attachment image,
+ * reactions, a thread preview button when there are replies, and a hover toolbar with edit support.
+ *
+ * The component supports in-place editing for the message author, prefetches thread data on hover,
+ * and opens the thread view when the thread button is clicked.
+ *
+ * @param message - The message data to display (author, timestamps, content, attachments, reactions, reply count, etc.)
+ * @param currentUserId - The ID of the current user used to determine edit permissions
+ * @returns The rendered JSX element for the message item
+ */
 export function MessageItem({ message, currentUserId }: iAppProps) {
     const [isEditing, setIsEditing] = useState(false);
 

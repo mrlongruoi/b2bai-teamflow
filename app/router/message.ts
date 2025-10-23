@@ -17,6 +17,13 @@ import { standardSecurityMiddleware } from "../middlewares/arcjet/standard";
 import { readSecurityMiddleware } from "../middlewares/arcjet/read";
 import { MessageListItem } from "@/lib/types";
 
+/**
+ * Aggregate a list of reactions into groups by emoji, including counts and whether the given user reacted.
+ *
+ * @param reactions - Array of reaction records, each containing `emoji` and the reactor's `userId`
+ * @param userId - The current user's id used to mark `reactedByMe`
+ * @returns An array of grouped reaction objects with `emoji`, `count`, and `reactedByMe` (`true` if the specified user reacted to that emoji, `false` otherwise)
+ */
 function groupReactions(
   reactions: { emoji: string; userId: string }[],
   userId: string

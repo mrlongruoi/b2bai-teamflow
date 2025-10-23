@@ -17,6 +17,14 @@ interface ThreadSidebarProps {
     user: KindeUser<Record<string, unknown>>;
 }
 
+/**
+ * Renders a thread sidebar showing the original post, its replies, and a reply form.
+ *
+ * Displays the original message header and content, a scrollable list of replies, a button to close the sidebar, and a form to submit new replies. Keeps the reply list pinned to the bottom when the user is at the end and auto-scrolls on new or late-loading content.
+ *
+ * @param user - The current authenticated user (used when rendering the reply form)
+ * @returns The thread sidebar React element
+ */
 export function ThreadSidebar({ user }: ThreadSidebarProps) {
     const { selectedThreadId, closeThread } = useThread();
 

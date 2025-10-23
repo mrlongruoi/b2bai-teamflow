@@ -11,6 +11,12 @@ import type * as React from "react";
 
 import { cn } from "@/lib/utils";
 
+/**
+ * Wraps frimousse's EmojiPickerPrimitive.Root with project-themed classes and a data-slot attribute.
+ *
+ * @param className - Additional CSS classes to append to the default picker styles
+ * @returns The configured EmojiPickerPrimitive.Root element
+ */
 function EmojiPicker({
   className,
   ...props
@@ -27,6 +33,11 @@ function EmojiPicker({
   );
 }
 
+/**
+ * Render the emoji picker search input with a leading search icon.
+ *
+ * @returns A JSX element containing a styled search input and a leading search icon wrapped in a container with data-slot="emoji-picker-search-wrapper".
+ */
 function EmojiPickerSearch({
   className,
   ...props
@@ -46,6 +57,11 @@ function EmojiPickerSearch({
   );
 }
 
+/**
+ * Row container for emoji items in the emoji picker's list.
+ *
+ * Renders a wrapper element that provides spacing and exposes the `data-slot="emoji-picker-row"` target for styling or slotting.
+ */
 function EmojiPickerRow({ children, ...props }: EmojiPickerListRowProps) {
   return (
     <div {...props} className="scroll-my-1 px-1" data-slot="emoji-picker-row">
@@ -54,6 +70,13 @@ function EmojiPickerRow({ children, ...props }: EmojiPickerListRowProps) {
   );
 }
 
+/**
+ * Renders a styled button for a single emoji glyph used in the emoji list.
+ *
+ * @param emoji - The emoji data object whose `emoji` glyph will be displayed.
+ * @param className - Additional CSS classes to apply to the button.
+ * @returns The button element that displays the emoji glyph and reflects active state styling.
+ */
 function EmojiPickerEmoji({
   emoji,
   className,
@@ -73,6 +96,12 @@ function EmojiPickerEmoji({
   );
 }
 
+/**
+ * Render a category header that displays the category's label for the emoji picker.
+ *
+ * @param category - The category whose `label` will be displayed in the header
+ * @returns A div element containing the category's label styled as a category header
+ */
 function EmojiPickerCategoryHeader({
   category,
   ...props
@@ -88,6 +117,12 @@ function EmojiPickerCategoryHeader({
   );
 }
 
+/**
+ * Renders the emoji picker viewport with built-in loading, empty, and list states using themed subcomponents.
+ *
+ * @param className - Optional additional CSS class names applied to the viewport container
+ * @returns The viewport element that contains the loading indicator, empty-state message, and the emoji list mapped to custom subcomponents
+ */
 function EmojiPickerContent({
   className,
   ...props
@@ -123,6 +158,11 @@ function EmojiPickerContent({
   );
 }
 
+/**
+ * Render the emoji picker footer that displays the active emoji and its label or a prompt when none is selected.
+ *
+ * @returns The footer element containing the active emoji glyph and its label, or a placeholder prompt when no emoji is active.
+ */
 function EmojiPickerFooter({
   className,
   ...props
